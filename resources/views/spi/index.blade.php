@@ -15,6 +15,22 @@
                     <div class="wrapper wrapper-content animated fadeIn">
                         <div class="row">
                             <div class="tabs-container">
+                                <form method="GET" action="{{ url('/filter') }}">
+                                    @csrf
+                                    <div class="row mt-10 mb-10">
+                                        <div class="col-md-offset-5 col-md-3">
+                                            <label>Start Date:</label>
+                                            <input type="date" class="form-control" name="start_date">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>End Date:</label>
+                                            <input type="date" class="form-control" name="end_date">
+                                        </div>
+                                        <div class="col-md-1" style="margin-top: 22px">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </form>
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#tab-1">List</a></li>
                                     <li class=""><a data-toggle="tab" href="#tab-2">For Approval</a></li>
@@ -22,12 +38,16 @@
                                 <div class="tab-content">
                                     <div id="tab-1" class="tab-pane active">
                                         <div class="panel-body">
+                                            <div align="right">
+                                                <a href="{{ route('export_spi_pdf') }}" class="btn btn-primary">Export PDF</a>
+                                            </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">
                                                     <thead>
                                                         <tr>
                                                             <th>Seller's Name</th>
                                                             <th>Destination (Plant)</th>
+                                                            <th>PES</th>
                                                             <th>Origin</th>
                                                             <th>Offer Quantity</th>
                                                             <th>Buying Quantity</th>
@@ -38,6 +58,7 @@
                                                             <th>Price + Expenses</th>
                                                             <th>Agreed Moisture Content</th>
                                                             <th>Delivery Schedule</th>
+                                                            <th>Terms of Payment</th>
                                                             <th>Calcium Gel Strength (CaGS)</th>
                                                             <th>Chips Yield</th>
                                                             <th>Powder Yield</th>
@@ -54,16 +75,18 @@
                                                             <tr>
                                                                 <td>{{$spi->name}}</td>
                                                                 <td>{{$spi->destination}}</td>
+                                                                <td>{{$spi->pes}}</td>
                                                                 <td>{{$spi->origin}}</td>
                                                                 <td>{{$spi->offer_quantity}}</td>
                                                                 <td>{{$spi->buying_quantity}}</td>
                                                                 <td>{{$spi->uom}}</td>
-                                                                <td>{{$spi->original_price}}</td>
+                                                                <td>{{$spi->original_price ?$spi->original_price : 'Non-nego'}}</td>
                                                                 <td>{{$spi->buying_price}}</td>
-                                                                <td>{{$spi->expenses}}</td>
+                                                                <td>{{$spi->expenses ? $spi->expenses : '-'}}</td>
                                                                 <td>{{$spi->price_expense}}</td>
                                                                 <td>{{$spi->moisture_content}}</td>
                                                                 <td>{{$spi->delivery_schedule}}</td>
+                                                                <td>{{$spi->terms_payment}}</td>
                                                                 <td>{{$spi->potassium}}</td>
                                                                 <td>{{$spi->chips_yield}}</td>
                                                                 <td>{{$spi->powder_yield}}%</td>
@@ -91,6 +114,7 @@
                                                                 <th><input id="checkAll" type="checkbox" class="form-check-input"></th>
                                                                 <th>Seller's Name</th>
                                                                 <th>Destination (Plant)</th>
+                                                                <th>PES</th>
                                                                 <th>Origin</th>
                                                                 <th>Offer Quantity</th>
                                                                 <th>Buying Quantity</th>
@@ -101,6 +125,7 @@
                                                                 <th>Price + Expenses</th>
                                                                 <th>Agreed Moisture Content</th>
                                                                 <th>Delivery Schedule</th>
+                                                                <th>Terms of Payment</th>
                                                                 <th>Calcium Gel Strength (CaGS)</th>
                                                                 <th>Chips Yield</th>
                                                                 <th>Powder Yield</th>
@@ -110,6 +135,8 @@
                                                                 <th>Cost to Produce (Powder in USD)</th>
                                                                 <th>Price + CTP (Budget in USD)</th>
                                                                 <th>Remarks</th>
+                                                                <th>Comments</th>
+                                                                <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -120,16 +147,18 @@
                                                                     </td>
                                                                     <td>{{$spi->name}}</td>
                                                                     <td>{{$spi->destination}}</td>
+                                                                    <td>{{$spi->pes}}</td>
                                                                     <td>{{$spi->origin}}</td>
                                                                     <td>{{$spi->offer_quantity}}</td>
                                                                     <td>{{$spi->buying_quantity}}</td>
                                                                     <td>{{$spi->uom}}</td>
-                                                                    <td>{{$spi->original_price}}</td>
+                                                                    <td>{{$spi->original_price ? $spi->original_price : 'Non-nego'}}</td>
                                                                     <td>{{$spi->buying_price}}</td>
-                                                                    <td>{{$spi->expenses}}</td>
+                                                                    <td>{{$spi->expenses ? $spi->expenses : '-'}}</td>
                                                                     <td>{{$spi->price_expense}}</td>
                                                                     <td>{{$spi->moisture_content}}</td>
                                                                     <td>{{$spi->delivery_schedule}}</td>
+                                                                    <td>{{$spi->terms_payment}}</td>
                                                                     <td>{{$spi->potassium}}</td>
                                                                     <td>{{$spi->chips_yield}}</td>
                                                                     <td>{{$spi->powder_yield}}%</td>
@@ -139,6 +168,8 @@
                                                                     <td>{{$spi->cost_produce}}</td>
                                                                     <td>{{$spi->price_ctp}}</td>
                                                                     <td>{{$spi->remarks}}</td>
+                                                                    <td>{{$spi->comments}}</td>
+                                                                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_comments{{$spi->id}}">Add Comments<a href="{{url('add_comments/'.$spi->id)}}"></a></button></td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -159,7 +190,35 @@
         </div>
     </div>
 </div>
-
+@foreach($spis as $spi)
+<div class="modal fade" id="add_comments{{$spi->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{{url('add_comments/'.$spi->id)}}" method="POST">
+    @csrf
+    <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add Comments</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 mb-10">
+                            <label>Comments</label>
+                            <input name="comments" class="form-control" type="text" >
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@endforeach
 @endsection
 @section('footer')
 <!-- DataTables -->
@@ -252,13 +311,6 @@
         $('.dataTables-example').DataTable({
             pageLength: 25,
             responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
-                {extend: 'csv', title: 'COTT List'},
-                {extend: 'excel', title: 'COTT List'},
-                {extend: 'pdf', title: 'COTT List'},
-            ]
-
         });
 
     });

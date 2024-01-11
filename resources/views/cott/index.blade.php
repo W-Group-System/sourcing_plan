@@ -39,7 +39,7 @@
                                     <div id="tab-1" class="tab-pane active">
                                         <div class="panel-body">
                                             <div align="right">
-                                                <a href="{{ route('export_cott_pdf') }}" class="btn btn-primary">Export PDF</a>
+                                                <a href="{{ route('export_cott_pdf')}}" class="btn btn-primary">Export PDF</a>
                                             </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">

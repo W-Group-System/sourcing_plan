@@ -6,6 +6,7 @@ use App\Supplier;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
+use Carbon\Carbon;
 
 class CottController extends Controller
 {
@@ -81,8 +82,6 @@ class CottController extends Controller
         return back();
     }
 
-    
-
     public function filter(Request $request) 
     {
         $start_date = $request->start_date;
@@ -100,8 +99,39 @@ class CottController extends Controller
         $cotts = Cott::all();
         $pdf = PDF::loadView('cott.export', [
             'cotts' => $cotts
-        ])->setPaper('a4', 'landscape');
+        ])->setPaper('legal', 'landscape');
 
-        return $pdf->download('cott.pdf');
+        return $pdf->stream('cott.pdf');
     }
+
+    // public function filter(Request $request) 
+    // {
+    //     $start_date = Carbon::parse($request->start_date)->startOfDay();
+    //     $end_date = Carbon::parse($request->end_date)->endOfDay();
+
+    //     $cotts = Cott::where('created_at', '>=', $start_date)
+    //                     ->where('created_at', '<=', $end_date)
+    //                     ->get();
+        
+    //     return view('cott.index', compact('cotts'));  
+    // }
+
+    // public function export_cott_pdf(Request $request)
+    // {
+    //     $start_date = Carbon::parse($request->start_date)->startOfDay();
+    //     $end_date = Carbon::parse($request->end_date)->endOfDay();
+
+    //     $cotts = Cott::where('created_at', '>=', $start_date)
+    //                 ->where('created_at', '<=', $end_date)
+    //                 ->get();
+
+    //     $pdf = PDF::loadView('cott.export', [
+    //         'cotts' => $cotts,
+    //         'start_date' => $start_date,
+    //         'end_date' => $end_date,
+    //     ])->setPaper('legal', 'landscape');
+
+    //     return $pdf->stream('cott.pdf');
+    // }
+
 }

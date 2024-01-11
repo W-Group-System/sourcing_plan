@@ -35,6 +35,9 @@ Route::get('/spi', 'SpiController@index');
 Route::get('spi/create', 'SpiController@create');
 Route::post('spi/submitData', 'SpiController@submitData');
 Route::post('spi/updateStatus', 'SpiController@updateStatus');
+Route::post('add_comments/{id}', 'SpiController@addComments');
+Route::get('/filterSpi', 'SpiController@filterSpi');
+Route::get('/export_spi_pdf', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
 
 Route::get('/user', 'UserController@index');
 Route::post('new_user', 'UserController@create');

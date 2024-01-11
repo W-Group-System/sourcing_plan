@@ -6,6 +6,7 @@ use App\Spi;
 use App\Supplier;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class SpiController extends Controller
 {
@@ -29,6 +30,7 @@ class SpiController extends Controller
             $data = new Spi();
             $data->name = $name;
             $data->destination = $request->destination[$key];
+            $data->pes = $request->pes[$key];
             $data->origin = $request->origin[$key];
             $data->offer_quantity = $request->offer_quantity[$key];
             $data->buying_quantity = $request->buying_quantity[$key];
@@ -39,6 +41,7 @@ class SpiController extends Controller
             $data->price_expense = $request->price_expense[$key];
             $data->moisture_content = $request->moisture_content[$key];
             $data->delivery_schedule = $request->delivery_schedule[$key];
+            $data->terms_payment = $request->terms_payment[$key];
             $data->potassium = $request->potassium[$key];
             $data->chips_yield = $request->chips_yield[$key];
             $data->powder_yield = $request->powder_yield[$key];
@@ -53,6 +56,38 @@ class SpiController extends Controller
         Alert::success('Success Title', 'Records Successfully Added');
         return back();
     }
+
+    public function addComments(Request $request, $id)
+    {
+        $data = SPI::find($id);
+        $data->comments = $request->input('comments');
+        $data->save();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
+
+    public function filter(Request $request) 
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        $spis = SPI::whereDate('created_at','>=',$start_date)
+                        ->whereDate('created_at','<=',$end_date)
+                        ->get();
+        
+        return view('spi.index', compact('spis'));  
+    }
+
+    public function export_spi_pdf()
+    {
+        $spis = SPI::all();
+        $pdf = PDF::loadView('spi.export', [
+            'spis' => $spis
+        ])->setPaper('legal', 'landscape');
+
+        return $pdf->stream('spi.pdf');
+    }
+
 
     public function updateStatus(Request $request)
     {

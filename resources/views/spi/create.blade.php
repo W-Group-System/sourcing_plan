@@ -21,6 +21,7 @@
                                         <th><a href="javascript:;" class="btn btn-primary addRow">+</th>
                                         <th>Seller's Name</th>
                                         <th>Destination (Plant)</th>
+                                        <th>PES</th>
                                         <th>Origin</th>
                                         <th>Offer Quantity</th>
                                         <th>Buying Quantity</th>
@@ -31,6 +32,7 @@
                                         <th>Price + Expenses</th>
                                         <th>Agreed Moisture Content</th>
                                         <th>Delivery Schedule</th>
+                                        <th>Terms of Payment</th>
                                         <th>Calcium Gel Strength (CaGS)</th>
                                         <th>Chips Yield</th>
                                         <th>Powder Yield</th>
@@ -55,6 +57,7 @@
                                             </select>
                                         </td>
                                         <td><input type="text" name="destination[]" id="destination" class="form-control adjust" required></td>
+                                        <td><input type="text" name="pes[]" id="pes" class="form-control adjust"></td>
                                         <td><input type="text" name="origin[]" id="origin" class="form-control adjust"></td>
                                         <td><input type="text" name="offer_quantity[]" id="offer_quantity" class="form-control adjust"></td>
                                         <td><input type="text" name="buying_quantity[]" id="buying_quantity" class="form-control adjust"></td>
@@ -72,6 +75,7 @@
                                             {{-- <input type="text" name="moisture_content[]" id="moisture_content" class="form-control adjust"> --}}
                                         </td>
                                         <td><input type="text" name="delivery_schedule[]" id="delivery_schedule" class="form-control adjust"></td>
+                                        <td><input type="text" name="terms_payment[]" id="terms_payment" class="form-control adjust"></td>
                                         <td><input type="text" name="potassium[]" id="potassium" class="form-control adjust"></td>
                                         <td><input type="text" name="chips_yield[]" id="chips_yield" class="form-control adjust chips_yield"></td>
                                         <td>
@@ -81,8 +85,8 @@
                                             </div>
                                         </td>
                                         <td><input type="text" name="price_yield[]" id="price_yield" class="form-control adjust price_yield" readonly></td>
-                                        <td><input type="text" name="forex_rate[]" id="forex_rate" class="form-control adjust"></td>
-                                        <td><input type="text" name="price_usd[]" id="price_usd" class="form-control adjust price_usd"></td>
+                                        <td><input type="text" name="forex_rate[]" id="forex_rate" class="form-control adjust forex_rate"></td>
+                                        <td><input type="text" name="price_usd[]" id="price_usd" class="form-control adjust price_usd" readonly></td>
                                         <td><input type="text" name="cost_produce[]" id="cost_produce" class="form-control adjust cost_produce"></td>
                                         <td><input type="text" name="price_ctp[]" id="price_ctp" class="form-control adjust price_ctp" readonly></td>
                                         <td><input type="text" name="remarks[]" id="remarks" class="form-control adjust"></td>
@@ -128,6 +132,7 @@
                 '</select>'+
             '</td>'+
             '<td><input type="text" name="destination[]" id="destination" class="form-control adjust"></td>'+
+            '<td><input type="text" name="pes[]" id="pes" class="form-control adjust"></td>'+
             '<td><input type="text" name="origin[]" id="origin" class="form-control adjust"></td>'+
             '<td><input type="text" name="offer_quantity[]" id="offer_quantity" class="form-control adjust"></td>'+
             '<td><input type="text" name="buying_quantity[]" id="buying_quantity" class="form-control adjust"></td>'+
@@ -145,6 +150,7 @@
                 // <input type="text" name="moisture_content[]" id="moisture_content" class="form-control adjust">
             '</td>'+
             '<td><input type="text" name="delivery_schedule[]" id="delivery_schedule" class="form-control adjust"></td>'+
+            '<td><input type="text" name="terms_payment[]" id="terms_payment" class="form-control adjust"></td>'+
             '<td><input type="text" name="potassium[]" id="potassium" class="form-control adjust"></td>'+
             '<td><input type="text" name="chips_yield[]" id="chips_yield" class="form-control adjust chips_yield"></td>'+
             '<td>'+
@@ -153,8 +159,8 @@
                 '</div>'+
             '</td>'+
             '<td><input type="text" name="price_yield[]" id="price_yield" class="form-control adjust price_yield" readonly></td>'+
-            '<td><input type="text" name="forex_rate[]" id="forex_rate" class="form-control adjust"></td>'+
-            '<td><input type="text" name="price_usd[]" id="price_usd" class="form-control adjust price_usd"></td>'+
+            '<td><input type="text" name="forex_rate[]" id="forex_rate" class="form-control adjust forex_rate"></td>'+
+            '<td><input type="text" name="price_usd[]" id="price_usd" class="form-control adjust price_usd" readonly></td>'+
             '<td><input type="text" name="cost_produce[]" id="cost_produce" class="form-control adjust cost_produce"></td>'+
             '<td><input type="text" name="price_ctp[]" id="price_ctp" class="form-control adjust price_ctp" readonly></td>'+
             '<td><input type="text" name="remarks[]" id="remarks" class="form-control adjust"></td>'+
@@ -162,7 +168,10 @@
 
         $('tbody').append(tr);
 
-        $('.selectpicker').selectpicker('refresh');
+        $('.selectpicker').selectpicker({
+            liveSearch: true,
+            maxOptions: 1
+        });
     });
 
     $('#tableEstimate tbody').on('click', '.deleteRow', function(){
@@ -187,13 +196,42 @@
     });
     
     // computation for price yield
+    // $("#tableEstimate tbody").on("change", ".chips_yield", function() {
+    //     var price_expense = parseFloat($(this).closest("tr").find(".price_expense").val()) || 0;
+    //     var powder_yield = parseFloat($(this).closest("tr").find(".powder_yield").val()) || 0;
+    //     var price_yield = $(this).closest("tr").find(".price_yield");
+       
+    //     price_yield.val(parseFloat(price_expense / powder_yield).toFixed(4));
+        
+    // })
     $("#tableEstimate tbody").on("change", ".chips_yield", function() {
         var price_expense = parseFloat($(this).closest("tr").find(".price_expense").val()) || 0;
         var powder_yield = parseFloat($(this).closest("tr").find(".powder_yield").val()) || 0;
         var price_yield = $(this).closest("tr").find(".price_yield");
-    
-        price_yield.val((price_expense / powder_yield).toFixed(4));
-    })
+
+        powder_yield = powder_yield / 100;
+        var calculatedValue = (price_expense / powder_yield).toFixed(2);
+
+        if (calculatedValue.indexOf('.') === -1) {
+            calculatedValue += '.';
+        } else {
+            var decimalPart = calculatedValue.split('.')[1];
+            var padding = 2 - decimalPart.length;
+            for (var i = 0; i < padding; i++) {
+                calculatedValue += '0';
+            }
+        }
+
+        price_yield.val(calculatedValue);
+    });
+
+    // computation for price in usd
+    $("#tableEstimate tbody").on("input", ".forex_rate", function() {
+        var price_yield = parseFloat($(this).closest("tr").find(".price_yield").val()) || 0;
+        var forex_rate = parseFloat($(this).closest("tr").find(".forex_rate").val()) || 0;
+        var price_usd = $(this).closest("tr").find(".price_usd");
+        price_usd.val((price_yield / forex_rate).toFixed(2));
+    });
 
     // computation for price ctp
     $("#tableEstimate tbody").on("input", ".price_usd, .cost_produce", function() {
@@ -202,7 +240,6 @@
         var price_ctp = $(this).closest("tr").find(".price_ctp");
         price_ctp.val((price_usd + cost_produce).toFixed(2));
     });
-
 
     function calc_total() {
         var sum = 0;

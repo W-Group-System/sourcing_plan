@@ -42,7 +42,7 @@
         <img alt="image" src="{{URL::asset('/images/wgroup.png')}}" style='width:120px;margin-bottom:-10px'>
         <h4>Sourcing Plan</h4>
     </div>
-    <h5 class="export-date">Date:</h5>
+    <h5>Date: </h5>
     <table class="table table-bordered table-responsive" id="table-cotts">
         <thead>
             <tr>
@@ -72,6 +72,10 @@
             </tr>
         </thead>
         <tbody>
+            @php
+                $totalOfferQuantity = 0;
+                $totalBuyingQuantity = 0; 
+            @endphp
             @if(count($cotts))
                 @foreach($cotts->where('approved',1) as $cott)
                     <tr>
@@ -99,18 +103,22 @@
                         <td>{{$cott->price_ctp}}</td>
                         <td>{{$cott->remarks}}</td>
                     </tr>
+                    @php
+                        $totalBuyingQuantity += $cott->buying_quantity; 
+                        $totalOfferQuantity += $cott->offer_quantity; 
+                    @endphp
                 @endforeach
             @else
             <tr>
-                <td colspan="24">No Cott Found</td>
+                <td colspan="24" align="center">No Cott Found</td>
             </tr>
         </tbody>
         @endif
         <tfoot>
             <tr>
                 <td colspan="4" align="right">Total:</td>
-                <td></td>
-                <td></td>
+                <td>{{$totalOfferQuantity}}</td>
+                <td>{{$totalBuyingQuantity}}</td>
                 <td colspan="17"></td>
             </tr>
         </tfoot>
