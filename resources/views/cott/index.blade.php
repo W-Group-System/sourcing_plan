@@ -19,8 +19,8 @@
                                     @csrf
                                     <div class="row mt-10 mb-10">
                                         <div class="col-md-offset-5 col-md-3">
-                                            <label>Start Date:</label>
-                                            <input type="date" class="form-control" name="start_date" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}">
+                                            <label for="start_date">Start Datesss:</label>
+                                            <input type="date" class="form-control" name="start_date" id="start_date" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}">
                                         </div>
                                         <div class="col-md-3">
                                             <label>End Date:</label>
@@ -332,12 +332,6 @@
             pageLength: 25,
             responsive: true,
             ordering: false,
-            // dom: '<"html5buttons"B>lTfgitp',
-            // buttons: [
-            //     {extend: 'csv', title: 'COTT List'},
-            //     {extend: 'excel', title: 'COTT List'},
-            //     {extend: 'pdf', title: 'COTT List'},
-            // ]
         });
 
     });
