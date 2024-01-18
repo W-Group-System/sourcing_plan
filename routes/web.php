@@ -27,17 +27,17 @@ Route::get('/cott', 'CottController@index');
 Route::get('cott/create', 'CottController@create');
 Route::post('/submitData', 'CottController@submitData');
 Route::post('updateStatus', 'CottController@updateStatus');
-Route::post('add_comments/{id}', 'CottController@addComments');
+Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
 Route::get('/filter', 'CottController@filter');
-Route::get('/export_cott_pdf', 'CottController@export_cott_pdf')->name('export_cott_pdf');
+Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_cott_pdf')->name('export_cott_pdf');
 
 Route::get('/spi', 'SpiController@index');
 Route::get('spi/create', 'SpiController@create');
 Route::post('spi/submitData', 'SpiController@submitData');
 Route::post('spi/updateStatus', 'SpiController@updateStatus');
-Route::post('add_comments/{id}', 'SpiController@addComments');
+Route::post('add_comments_spi/{id}', 'SpiController@addCommentsSpi');
 Route::get('/filterSpi', 'SpiController@filterSpi');
-Route::get('/export_spi_pdf', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
+Route::get('/export_spi_pdf/{start_date}/{end_date}', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
 
 Route::get('/user', 'UserController@index');
 Route::post('new_user', 'UserController@create');

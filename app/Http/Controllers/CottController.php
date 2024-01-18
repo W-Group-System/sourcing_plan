@@ -56,7 +56,7 @@ class CottController extends Controller
         Alert::success('Success Title', 'Records Successfully Added');
         return back();
     }
-    public function addComments(Request $request, $id)
+    public function addCommentsCott(Request $request, $id)
     {
         $cott = Cott::find($id);
         $cott->comments = $request->input('comments');
@@ -82,56 +82,36 @@ class CottController extends Controller
         return back();
     }
 
-    public function filter(Request $request) 
-    {
-        $start_date = $request->start_date;
-        $end_date = $request->end_date;
-
-        $cotts = Cott::whereDate('created_at','>=',$start_date)
+    public function dateFilter($start_date, $end_date) {
+        return Cott::whereDate('created_at','>=',$start_date)
                         ->whereDate('created_at','<=',$end_date)
                         ->get();
-        
-        return view('cott.index', compact('cotts'));  
     }
 
-    public function export_cott_pdf()
+    public function filter(Request $request) 
     {
-        $cotts = Cott::all();
+        $start_date = Carbon::parse($request->start_date)->startOfDay();
+        $end_date = Carbon::parse($request->end_date)->endOfDay();
+
+        $cotts = $this->dateFilter($start_date, $end_date);
+        
+        return view('cott.index', ['cotts' => $cotts, 'start_date' => $start_date, 'end_date' => $end_date]);  
+    }
+
+    public function export_cott_pdf(Request $request)
+    {
+        $start_date = Carbon::parse($request->start_date)->startOfDay();
+        $end_date = Carbon::parse($request->end_date)->endOfDay();
+
+        $cotts = $this->dateFilter($start_date, $end_date);
+        // $cotts = Cott::all();
         $pdf = PDF::loadView('cott.export', [
-            'cotts' => $cotts
+            'cotts' => $cotts,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
         ])->setPaper('legal', 'landscape');
 
-        return $pdf->stream('cott.pdf');
+        return $pdf->stream('cott.pdf', ['cotts' => $cotts, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
-
-    // public function filter(Request $request) 
-    // {
-    //     $start_date = Carbon::parse($request->start_date)->startOfDay();
-    //     $end_date = Carbon::parse($request->end_date)->endOfDay();
-
-    //     $cotts = Cott::where('created_at', '>=', $start_date)
-    //                     ->where('created_at', '<=', $end_date)
-    //                     ->get();
-        
-    //     return view('cott.index', compact('cotts'));  
-    // }
-
-    // public function export_cott_pdf(Request $request)
-    // {
-    //     $start_date = Carbon::parse($request->start_date)->startOfDay();
-    //     $end_date = Carbon::parse($request->end_date)->endOfDay();
-
-    //     $cotts = Cott::where('created_at', '>=', $start_date)
-    //                 ->where('created_at', '<=', $end_date)
-    //                 ->get();
-
-    //     $pdf = PDF::loadView('cott.export', [
-    //         'cotts' => $cotts,
-    //         'start_date' => $start_date,
-    //         'end_date' => $end_date,
-    //     ])->setPaper('legal', 'landscape');
-
-    //     return $pdf->stream('cott.pdf');
-    // }
 
 }

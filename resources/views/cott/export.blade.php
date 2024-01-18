@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cott List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
@@ -42,7 +41,7 @@
         <img alt="image" src="{{URL::asset('/images/wgroup.png')}}" style='width:120px;margin-bottom:-10px'>
         <h4>Sourcing Plan</h4>
     </div>
-    <h5>Date: </h5>
+    <h5>Date: {{ date('M d', strtotime($start_date)) }} - {{ date('d, Y', strtotime($end_date)) }}</h5>
     <table class="table table-bordered table-responsive" id="table-cotts">
         <thead>
             <tr>
@@ -126,92 +125,116 @@
     <table class="table table-borderless">
         <tbody>
             <tr>
-                <td style="width: 40%; padding:0%;">
+                <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="table-cotts">
                             <thead>
                                 <tr>
-                                    <th colspan="6" style="text-align: center";>Total Average Cost</th>
+                                    <th colspan="3" class="text-center">Total Average Cost</th>
                                 </tr>
                                 <tr>
-                                    <th width="15%">Item</th>
-                                    <th width="17%">Quantity (MT)</th>
-                                    <th width="18%">Cost</th>
-                                    <th width="15%">Item</th>
-                                    <th width="17%">Quantity (MT)</th>
-                                    <th width="18%"> Cost</th>
+                                    <th width="30%">Item</th>
+                                    <th width="34%">Quantity (MT)</th>
+                                    <th width="36%"> Cost</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $total = 0;
+                                    $cost_total = 0;
+                                @endphp
+                                @for($i=1;$i<=8;$i++)
                                 <tr>
-                                    <td>1-1</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-9</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>1-{{$i}}</td>
+                                    @php
+                                        $cotts_data = $cotts->where('approved',1);
+                                        if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        {
+                                            $total = $total + $cotts_data[$i-1]->buying_quantity;
+                                            $cost = $cotts_data[$i-1]->buying_quantity*$cotts_data[$i-1]->price_ctp;
+                                            $cost_total = $cost_total + $cost; 
+                                        }
+                                    @endphp
+                                    <td> 
+                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                            {{$total}} 
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                            <!-- {{number_format($cost_total/$total,2)}} -->
+                                            {{ sprintf("%.2f", $cost_total/$total) }}
+                                        @endif
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>1-2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-10</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1-3</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-11</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1-4</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-12</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1-5</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-13</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1-6</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-14</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1-7</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-15</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>1-8</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1-16</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                @endfor
                             </tbody>
                         </table>
                     </div> 
                 </td>
-                <td style="width: 60%; padding-left: 100px; border: 0px solid #FFF">
+                <td style="width: 20%; padding:0%;">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="table-cotts">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" class="text-center">Total Average Cost</th>
+                                </tr>
+                                <tr>
+                                    <th width="30%">Item</th>
+                                    <th width="34%">Quantity (MT)</th>
+                                    <th width="36%"> Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for($i=9;$i<=16;$i++)
+                                <tr>
+                                    <td>1-{{$i}}</td>
+                                    @php
+                                        $cotts_data = $cotts->where('approved',1);
+                                        if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        {
+                                            $total = $total + $cotts_data[$i-1]->buying_quantity;
+                                            $cost = $cotts_data[$i-1]->buying_quantity*$cotts_data[$i-1]->price_ctp;
+                                            $cost_total = $cost_total + $cost; 
+                                        }
+                                    @endphp
+                                    <td> 
+                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                            {{$total}} 
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                            <!-- {{number_format($cost_total/$total,2)}} -->
+                                            {{ sprintf("%.2f", $cost_total/$total) }}
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endfor
+                            </tbody>
+                        </table>
+                    </div> 
+                </td>
+                <td style="width: 60%; padding-left: 80px; border: 0px solid #FFF">
+                    @php
+                        $totals = [
+                            'CAR' => 0,
+                            'CCC' => 0,
+                            'PBI' => 0,
+                        ];
+                    @endphp
+                    @foreach($cotts->where('approved', 1) as $cott)
+                        @php
+                            if ($cott->destination == 'CCC') {
+                                $totals['CCC'] += $cott->buying_quantity;
+                            } elseif ($cott->destination == 'CAR') {
+                                $totals['CAR'] += $cott->buying_quantity ;
+                            } elseif ($cott->destination == 'CAR/PBI') {     
+                                $totals['CAR'] += $cott->buying_quantity / 2;
+                                $totals['PBI'] += $cott->buying_quantity / 2;
+                            }
+                        @endphp
+                    @endforeach                    
                     <table id="table-side">
                         <thead>
                             <tr>
@@ -222,19 +245,19 @@
                         <tbody>
                             <tr>
                                 <td>CAR</td>
-                                <td>MT</td>
+                                <td>{{$totals['CAR']}}&nbsp;MT</td>
                                 <td>CAR</td>
                                 <td>MT</td>
                             </tr>
                             <tr>
                                 <td>CCC</td>
-                                <td>MT</td>
+                                <td>{{$totals['CCC']}}&nbsp;MT</td>
                                 <td>CCC</td>
                                 <td>MT</td>
                             </tr>
                             <tr>
                                 <td>PBI</td>
-                                <td>MT</td>
+                                <td>{{$totals['PBI']}}&nbsp;MT</td>
                                 <td>PBI</td>
                                 <td>MT</td>
                             </tr>
@@ -242,7 +265,7 @@
                         <tfoot style="border-top: 1px solid black">
                             <tr>
                                 <td><b>Total</b></td>
-                                <td>MT</td>
+                                <td>{{ array_sum($totals) }}&nbsp;MT</td>
                                 <td><b>Total</b></td>
                                 <td>MT</td>
                             </tr>
@@ -255,7 +278,7 @@
             </tr>
         </tbody>
     </table>
-    <table style="margin-top: 20px;">
+    <table style="margin-top: 30px;" width="100%">
         <thead>
             <tr>
                 <td width="25%">Prepared By:</td>

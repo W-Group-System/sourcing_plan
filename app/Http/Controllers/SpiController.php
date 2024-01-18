@@ -6,6 +6,7 @@ use App\Spi;
 use App\Supplier;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 use PDF;
 
 class SpiController extends Controller
@@ -57,7 +58,7 @@ class SpiController extends Controller
         return back();
     }
 
-    public function addComments(Request $request, $id)
+    public function addCommentsSpi(Request $request, $id)
     {
         $data = SPI::find($id);
         $data->comments = $request->input('comments');
@@ -66,26 +67,40 @@ class SpiController extends Controller
         return back();
     }
 
-    public function filter(Request $request) 
+    public function dateFilter($start_date, $end_date) 
     {
-        $start_date = $request->start_date;
-        $end_date = $request->end_date;
-
-        $spis = SPI::whereDate('created_at','>=',$start_date)
-                        ->whereDate('created_at','<=',$end_date)
-                        ->get();
-        
-        return view('spi.index', compact('spis'));  
+        return SPI::whereDate('created_at','>=',$start_date)
+                    ->whereDate('created_at','<=',$end_date)
+                    ->orderBy('buying_quantity','asc')
+                    ->get();
     }
 
-    public function export_spi_pdf()
+    public function filterSpi(Request $request) 
     {
-        $spis = SPI::all();
+        $start_date = Carbon::parse($request->start_date)->startOfDay();
+        $end_date = Carbon::parse($request->end_date)->endOfDay();
+
+        $spis = $this->dateFilter($start_date, $end_date);
+        
+        // return view('spi.index', compact('spis'));  
+        return view('spi.index', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
+    }
+    
+    public function export_spi_pdf(Request $request)
+    {   
+        $start_date = Carbon::parse($request->start_date)->startOfDay();
+        $end_date = Carbon::parse($request->end_date)->endOfDay();
+
+        $spis = $this->dateFilter($start_date, $end_date);
+
+        // $spis = SPI::all();
         $pdf = PDF::loadView('spi.export', [
-            'spis' => $spis
+            'spis' => $spis,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
         ])->setPaper('legal', 'landscape');
 
-        return $pdf->stream('spi.pdf');
+        return $pdf->download('spi.pdf', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
 

@@ -1,3 +1,6 @@
+<title>@yield('title', 'Sourcing Plan')</title>
+<link rel="icon" type="image/x-icon" href="{{URL::asset('/images/sourcing.png')}}">
+
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 <link href="{{ asset('css/style.css') }}" rel="stylesheet">

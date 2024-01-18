@@ -81,9 +81,11 @@
                     <li>
                         <a href="{{ url('/supplier') }}"><i class="fa fa-truck"></i><span class="nav-label">Suppliers</span></a>
                     </li>
-                    <!-- <li>
+                    @if (@auth()->user()->position == 'Administrator')
+                    <li>
                         <a href="{{ url('/user') }}"><i class="fa fa-users" aria-hidden="true"></i><span class="nav-label">Users</span></a>
-                    </li> -->
+                    </li>
+                    @endif
                 </ul>
             </div>
         </nav>

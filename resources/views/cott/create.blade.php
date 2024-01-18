@@ -56,7 +56,14 @@
                                                 @endforeach
                                             </select>
                                         </td>
-                                        <td><input type="text" name="destination[]" id="destination" class="form-control adjust" required></td>
+                                        <!-- <td><input type="text" name="destination[]" id="destination" class="form-control adjust" required></td> -->
+                                        <td>
+                                            <select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>
+                                                <option value="CCC">CCC</option>
+                                                <option value="CAR">CAR</option>
+                                                <option value="CAR/PBI">CAR/PBI</option>
+                                            </select>
+                                        </td>
                                         <td>
                                             <select class="form-control adjust" name="food_grade[]" id="food_grade" required>
                                                 <option selected>Select</option>
@@ -138,7 +145,14 @@
                     '@endforeach'+
                 '</select>'+
             '</td>'+
-            '<td><input type="text" name="destination[]" id="destination" class="form-control adjust"></td>'+
+            // '<td><input type="text" name="destination[]" id="destination" class="form-control adjust"></td>'+
+            '<td>'+
+                '<select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>'+
+                    '<option value="CCC">CCC</option>'+
+                    '<option value="CAR">CAR</option>'+
+                    '<option value="CAR/PBI">CAR/PBI</option>'+
+                '</select>'+
+            '</td>'+
             '<td>'+
                 '<select class="form-control adjust" name="food_grade[]" id="food_grade" required>'+
                     '<option selected>Select</option>'+

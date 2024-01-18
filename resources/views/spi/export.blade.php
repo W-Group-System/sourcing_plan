@@ -39,7 +39,7 @@
             <img alt="image" src="{{URL::asset('/images/wgroup.png')}}" style='width:120px;margin-bottom:-10px'>
             <h4>Sourcing Plan</h4>
         </div>
-        <h5>Date: </h5>
+        <h5>Date: {{ date('M-d', strtotime($start_date)) }} - {{ date('d-Y', strtotime($end_date)) }}</h5>
         <table class="table table-bordered table-responsive" id="table-spis">
             <thead>
                 <tr>
@@ -123,87 +123,93 @@
         <table class="table table-borderless">
             <tbody>
                 <tr>
-                    <td style="width: 40%; padding:0%;">
+                    <td style="width: 20%; padding:0%;">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="table-spis">
                                 <thead>
                                     <tr>
-                                        <th colspan="6" style="text-align: center";>Total Average Cost</th>
+                                        <th colspan="3" style="text-align: center";>Total Average Cost</th>
                                     </tr>
                                     <tr>
-                                        <th width="15%">Item</th>
-                                        <th width="17%">Quantity (MT)</th>
-                                        <th width="18%">Cost</th>
-                                        <th width="15%">Item</th>
-                                        <th width="17%">Quantity (MT)</th>
-                                        <th width="18%"> Cost</th>
+                                        <th width="30%">Item</th>
+                                        <th width="34%">Quantity (MT)</th>
+                                        <th width="36%">Cost</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $total = 0;
+                                        $cost_total = 0;
+                                    @endphp
+                                    @for($i=1;$i<=8;$i++)
                                     <tr>
-                                        <td>1-1</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-9</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>1-{{$i}}</td>
+                                        @php
+                                            $spis_data = $spis->where('approved',1);
+                                            if(array_key_exists($i-1,$spis_data->toArray()))
+                                            {
+                                                $total = $total + $spis_data[$i-1]->buying_quantity;
+                                                $cost = $spis_data[$i-1]->buying_quantity*$spis_data[$i-1]->price_ctp;
+                                                $cost_total = $cost_total +$cost; 
+                                            }
+                                        @endphp
+                                        <td>
+                                            @if(array_key_exists($i-1,$spis_data->toArray()))
+                                                {{$total}}
+                                            @endif
+                                        </td>
+                                        <td>
+                                        @if(array_key_exists($i-1,$spis_data->toArray()))
+                                            {{number_format($cost_total/$total,2)}}
+                                        @endif</td>
+                                    </tr>
+                                    @endfor
+                                    
+                                </tbody>
+                            </table>
+                        </div> 
+                    </td>
+                    <td style="width: 20%; padding:0%;">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table-spis">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3" style="text-align: center";>Total Average Cost</th>
                                     </tr>
                                     <tr>
-                                        <td>1-2</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-10</td>
-                                        <td></td>
-                                        <td></td>
+                                        <th width="30%">Item</th>
+                                        <th width="34%">Quantity (MT)</th>
+                                        <th width="36%">Cost</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $total = 0;
+                                        $cost_total = 0;
+                                    @endphp
+                                    @for($i=9;$i<=16;$i++)
                                     <tr>
-                                        <td>1-3</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-11</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>1-{{$i}}</td>
+                                        @php
+                                            $spis_data = $spis->where('approved',1);
+                                            if(array_key_exists($i-1,$spis_data->toArray()))
+                                            {
+                                                $total = $total + $spis_data[$i-1]->buying_quantity;
+                                                $cost = $spis_data[$i-1]->buying_quantity*$spis_data[$i-1]->price_ctp;
+                                                $cost_total = $cost_total +$cost; 
+                                            }
+                                        @endphp
+                                        <td>
+                                            @if(array_key_exists($i-1,$spis_data->toArray()))
+                                                {{$total}}
+                                            @endif
+                                        </td>
+                                        <td>
+                                        @if(array_key_exists($i-1,$spis_data->toArray()))
+                                            {{number_format($cost_total/$total,2)}}
+                                        @endif</td>
                                     </tr>
-                                    <tr>
-                                        <td>1-4</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-12</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1-5</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-13</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1-6</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-14</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1-7</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-15</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1-8</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>1-16</td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    @endfor
                                 </tbody>
                             </table>
                         </div> 
@@ -248,7 +254,7 @@
                             <tfoot style="border-top: 1px solid black">
                                 <tr>
                                     <td><b>Total</b></td>
-                                    <td>MT</td>
+                                    <td>{{$totals['CAR'] + $totals['CCC']}}&nbsp;MT</td>
                                     <td><b>Total</b></td>
                                     <td>MT</td>
                                 </tr>

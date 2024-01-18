@@ -15,16 +15,16 @@
                     <div class="wrapper wrapper-content animated fadeIn">
                         <div class="row">
                             <div class="tabs-container">
-                                <form method="GET" action="{{ url('/filter') }}">
+                                <form method="GET" action="{{ url('/filterSpi') }}">
                                     @csrf
                                     <div class="row mt-10 mb-10">
                                         <div class="col-md-offset-5 col-md-3">
                                             <label>Start Date:</label>
-                                            <input type="date" class="form-control" name="start_date">
+                                            <input type="date" class="form-control" name="start_date" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}">
                                         </div>
                                         <div class="col-md-3">
                                             <label>End Date:</label>
-                                            <input type="date" class="form-control" name="end_date">
+                                            <input type="date" class="form-control" name="end_date" value="{{ isset($end_date) ? $end_date->format('Y-m-d') : '' }}">
                                         </div>
                                         <div class="col-md-1" style="margin-top: 22px">
                                             <button type="submit" class="btn btn-primary">Filter</button>
@@ -39,7 +39,11 @@
                                     <div id="tab-1" class="tab-pane active">
                                         <div class="panel-body">
                                             <div align="right">
-                                                <a href="{{ route('export_spi_pdf') }}" class="btn btn-primary">Export PDF</a>
+                                                @if(isset($start_date))
+                                                    <a target='_blank' href="{{ route('export_spi_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary">Export PDF</a>
+                                                @else
+                                                    <button class="btn btn-primary" disabled>Export PDF</button>
+                                                @endif
                                             </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">
@@ -169,7 +173,7 @@
                                                                     <td>{{$spi->price_ctp}}</td>
                                                                     <td>{{$spi->remarks}}</td>
                                                                     <td>{{$spi->comments}}</td>
-                                                                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_comments{{$spi->id}}">Add Comments<a href="{{url('add_comments/'.$spi->id)}}"></a></button></td>
+                                                                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_comments_spi{{$spi->id}}">Add Comments<a href="{{url('add_comments_spi/'.$spi->id)}}"></a></button></td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -191,8 +195,8 @@
     </div>
 </div>
 @foreach($spis as $spi)
-<div class="modal fade" id="add_comments{{$spi->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form action="{{url('add_comments/'.$spi->id)}}" method="POST">
+<div class="modal fade" id="add_comments_spi{{$spi->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{{url('add_comments_spi/'.$spi->id)}}" method="POST">
     @csrf
     <div class="modal-dialog" role="document">
             <div class="modal-content">

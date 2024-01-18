@@ -20,11 +20,11 @@
                                     <div class="row mt-10 mb-10">
                                         <div class="col-md-offset-5 col-md-3">
                                             <label>Start Date:</label>
-                                            <input type="date" class="form-control" name="start_date">
+                                            <input type="date" class="form-control" name="start_date" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}">
                                         </div>
                                         <div class="col-md-3">
                                             <label>End Date:</label>
-                                            <input type="date" class="form-control" name="end_date">
+                                            <input type="date" class="form-control" name="end_date" value="{{ isset($end_date) ? $end_date->format('Y-m-d') : '' }}">
                                         </div>
                                         <div class="col-md-1" style="margin-top: 22px">
                                             <button type="submit" class="btn btn-primary">Filter</button>
@@ -39,7 +39,11 @@
                                     <div id="tab-1" class="tab-pane active">
                                         <div class="panel-body">
                                             <div align="right">
-                                                <a href="{{ route('export_cott_pdf')}}" class="btn btn-primary">Export PDF</a>
+                                                @if(isset($start_date))
+                                                    <a target='_blank' href="{{ route('export_cott_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary">Export PDF</a>
+                                                @else
+                                                    <button class="btn btn-primary" disabled>Export PDF</button>
+                                                @endif
                                             </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">
@@ -80,9 +84,9 @@
                                                                 <td>{{$cott->offer_quantity}}</td>
                                                                 <td>{{$cott->buying_quantity}}</td>
                                                                 <td>{{$cott->uom}}</td>
-                                                                <td>{{$cott->original_price}}</td>
+                                                                <td>{{$cott->original_price ?$cott->original_price : 'Non-nego'}}</td>
                                                                 <td>{{$cott->buying_price}}</td>
-                                                                <td>{{$cott->expenses}}</td>
+                                                                <td>{{$cott->expenses ? $cott->expenses : '-'}}</td>
                                                                 <td>{{$cott->price_expense}}</td>
                                                                 <td>{{$cott->moisture_content}}</td>
                                                                 <td>{{$cott->delivery_schedule}}</td>
@@ -166,9 +170,9 @@
                                                                     <td>{{$cott->offer_quantity}}</td>
                                                                     <td>{{$cott->buying_quantity}}</td>
                                                                     <td>{{$cott->uom}}</td>
-                                                                    <td>{{$cott->original_price}}</td>
+                                                                    <td>{{$cott->original_price ? $cott->original_price : 'Non-nego'}}</td>
                                                                     <td>{{$cott->buying_price}}</td>
-                                                                    <td>{{$cott->expenses}}</td>
+                                                                    <td>{{$cott->expenses ? $cott->expenses : '-'}}</td>
                                                                     <td>{{$cott->price_expense}}</td>
                                                                     <td>{{$cott->moisture_content}}</td>
                                                                     <td>{{$cott->delivery_schedule}}</td>
@@ -184,7 +188,7 @@
                                                                     <td>{{$cott->remarks}}</td>
                                                                     <td>{{$cott->comments}}</td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_comments{{$cott->id}}">Add Comments<a href="{{url('add_comments/'.$cott->id)}}"></a></button>
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_comments_cott{{$cott->id}}">Add Comments<a href="{{url('add_comments_cott/'.$cott->id)}}"></a></button>
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -207,8 +211,8 @@
     </div>
 </div>
 @foreach($cotts as $cott)
-<div class="modal fade" id="add_comments{{$cott->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form action="{{url('add_comments/'.$cott->id)}}" method="POST">
+<div class="modal fade" id="add_comments_cott{{$cott->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="{{url('add_comments_cott/'.$cott->id)}}" method="POST">
     @csrf
     <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -324,9 +328,10 @@
 
     $(document).ready(function(){
 
-        $('.dataTables-example').DataTable({
+        $('.').DataTable({
             pageLength: 25,
             responsive: true,
+            ordering: false,
             // dom: '<"html5buttons"B>lTfgitp',
             // buttons: [
             //     {extend: 'csv', title: 'COTT List'},
