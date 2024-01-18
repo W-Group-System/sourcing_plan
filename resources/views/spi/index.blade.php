@@ -20,7 +20,7 @@
                                     <div class="row mt-10 mb-10">
                                         <div class="col-md-offset-5 col-md-3">
                                             <label for="start_date">Start Date:</label>
-                                            <input type="date" class="form-control" name="start_date" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}">
+                                            <input type="date" class="form-control" id="start_date" name="start_date" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}">
                                         </div>
                                         <div class="col-md-3">
                                             <label>End Date:</label>
