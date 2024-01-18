@@ -100,7 +100,7 @@ class SpiController extends Controller
             'end_date' => $end_date,
         ])->setPaper('legal', 'landscape');
 
-        return $pdf->download('spi.pdf', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
+        return $pdf->stream('spi.pdf', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
 
