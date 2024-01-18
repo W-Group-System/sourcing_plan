@@ -19,8 +19,8 @@
                                     @csrf
                                     <div class="row mt-10 mb-10">
                                         <div class="col-md-offset-5 col-md-3">
-                                            <label for="start_date">Start Datesss:</label>
-                                            <input type="date" class="form-control" name="start_date" id="start_date" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}">
+                                            <label>Start Date:</label>
+                                            <input type="date" class="form-control" name="start_date">
                                         </div>
                                         <div class="col-md-3">
                                             <label>End Date:</label>
@@ -109,22 +109,6 @@
                                     </div>
                                     <div id="tab-2" class="tab-pane">
                                         <div class="panel-body">
-                                            {{-- <form method="GET" action="{{ url('/filter') }}">
-                                                @csrf
-                                                <div class="row mt-10 mb-10">
-                                                    <div class="col-md-offset-5 col-md-3">
-                                                        <label>Start Date:</label>
-                                                        <input type="date" class="form-control" name="start_date">
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <label>End Date:</label>
-                                                        <input type="date" class="form-control" name="end_date">
-                                                    </div>
-                                                    <div class="col-md-1" style="margin-top: 22px">
-                                                        <button type="submit" class="btn btn-primary">Filter</button>
-                                                    </div>
-                                                </div>
-                                            </form> --}}
                                             <form method="POST" action="{{url('updateStatus')}}">
                                             @csrf
                                                 <div class="table-responsive">
