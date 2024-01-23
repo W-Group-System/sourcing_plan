@@ -312,10 +312,10 @@
 
     $(document).ready(function(){
 
-        $('.').DataTable({
+        $('.dataTables-example').DataTable({
             pageLength: 25,
             responsive: true,
-            ordering: false,
+            ordering: true,
         });
 
     });
