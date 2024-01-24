@@ -26,13 +26,23 @@
                                                 <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">
                                                     <thead>
                                                         <tr>
-                                                            <th>#</th>
-                                                            <th>File</th>
-                                                            <th>Actions</th>
+                                                            <th width="71%">File</th>
+                                                            <th width="29%" class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        
+                                                        @foreach($signeds->where('type', 'COTT') as $signed)
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{{ route('signeds.view', ['id' => $signed->id]) }}" target="_blank">{{$signed->file}}</a>
+                                                                </td>
+                                                                <td align="center">
+                                                                    <a href="{{ route('signeds.delete', ['id' => $signed->id]) }}" class="btn btn-sm btn-danger">
+                                                                        <i class="fa fa-ban"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -44,13 +54,23 @@
                                                 <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">
                                                     <thead>
                                                         <tr>
-                                                            <th>#</th>
-                                                            <th>File</th>
-                                                            <th>Actions</th>
+                                                            <th width="71%">File</th>
+                                                            <th width="29%" class="text-center">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        
+                                                        @foreach($signeds->where('type', 'SPI') as $signed)
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{{ route('signeds.view', ['id' => $signed->id]) }}" target="_blank">{{$signed->file}}</a>
+                                                                </td>
+                                                                <td align="center">
+                                                                    <a href="{{ route('signeds.delete', ['id' => $signed->id]) }}" class="btn btn-sm btn-danger">
+                                                                        <i class="fa fa-ban"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>

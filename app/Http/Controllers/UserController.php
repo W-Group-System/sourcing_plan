@@ -30,8 +30,15 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $user = User::where('id', $id)->first();
-        $user->delete();
+        $user = User::find($id);
+
+        if ($user) {
+            $user->delete();
+            Alert::success('Success Title', 'Success Message');
+        } else {
+            Alert::error('Error Title', 'Record not found');
+        }
+
         return back();
     }
 }

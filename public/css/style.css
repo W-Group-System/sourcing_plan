@@ -622,9 +622,9 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .btn {
   border-radius: 3px;
 }
-.float-e-margins .btn {
+/* .float-e-margins .btn {
   margin-bottom: 5px;
-}
+} */
 .btn-w-m {
   min-width: 120px;
 }
@@ -3987,7 +3987,7 @@ table.table-mail tr td {
 .ibox-title h5 {
   display: inline-block;
   font-size: 14px;
-  padding: 5px;
+  margin: 10px 5px 0px 5px;
   text-overflow: ellipsis;
   float: left;
 }

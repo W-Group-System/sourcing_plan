@@ -114,4 +114,18 @@ class CottController extends Controller
         return $pdf->stream('cott.pdf', ['cotts' => $cotts, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
+    public function approved ($id)
+    {
+        $cott = Cott::find($id);
+        if($cott){
+            if($cott->approved){
+                $cott->approved = 0;
+            }
+            else {
+                $cott->approved = 1;
+            }
+            $cott->save();
+        }
+        return back();
+    }
 }

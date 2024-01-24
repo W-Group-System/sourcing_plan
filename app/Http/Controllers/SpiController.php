@@ -120,4 +120,19 @@ class SpiController extends Controller
         Alert::success('Success Title', 'Records Updated Successfully');
         return back();
     }
+
+    public function approved ($id)
+    {
+        $spi = Spi::find($id);
+        if($spi){
+            if($spi->approved){
+                $spi->approved = 0;
+            }
+            else {
+                $spi->approved = 1;
+            }
+            $spi->save();
+        }
+        return back();
+    }
 }

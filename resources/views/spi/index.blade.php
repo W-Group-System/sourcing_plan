@@ -42,7 +42,7 @@
                                                 @if(isset($start_date))
                                                     <a target='_blank' href="{{ route('export_spi_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary">Export PDF</a>
                                                 @else
-                                                    <button class="btn btn-primary" disabled>Export PDF</button>
+                                                    <button class="btn btn-primary export" disabled>Export PDF</button>
                                                 @endif
                                             </div>
                                             <div class="table-responsive">
@@ -72,6 +72,7 @@
                                                             <th>Cost to Produce (Powder in USD)</th>
                                                             <th>Price + CTP (Budget in USD)</th>
                                                             <th>Remarks</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -100,6 +101,11 @@
                                                                 <td>{{$spi->cost_produce}}</td>
                                                                 <td>{{$spi->price_ctp}}</td>
                                                                 <td>{{$spi->remarks}}</td>
+                                                                <td align="center">
+                                                                    <a href="approved/{{ $spi->id }}" class="btn btn-sm btn-danger" title="Disapproved">
+                                                                        <i class="fa fa-thumbs-down"></i>
+                                                                    </a>
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
@@ -275,6 +281,9 @@
     }
     .mb-10 {
         margin-bottom: 10px;
+    }
+    .export {
+        margin: 5px 5px 5px 5px;
     }
 </style>
 <script>
