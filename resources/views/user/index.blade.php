@@ -32,7 +32,7 @@
                                             <td width="10%" align="center">
                                                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=""><i class="fa fa fa-pencil"></i><a href=""></a></button> -->
                                                 <a href="{{ route('users.delete', ['id' => $user->id]) }}">
-                                                <button type="button" class="btn btn-danger" title="Delete User"><i class="fa fa fa-ban"></i></button>
+                                                <button type="button" class="btn btn-danger btn-outline" title="Delete User"><i class="fa fa fa-ban"></i></button>
                                                 </a>
                                             </td>
                                         </tr>

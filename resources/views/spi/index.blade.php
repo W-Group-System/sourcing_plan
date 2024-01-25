@@ -40,7 +40,7 @@
                                         <div class="panel-body">
                                             <div align="right">
                                                 @if(isset($start_date))
-                                                    <a target='_blank' href="{{ route('export_spi_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary">Export PDF</a>
+                                                    <a target='_blank' href="{{ route('export_spi_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary export">Export PDF</a>
                                                 @else
                                                     <button class="btn btn-primary export" disabled>Export PDF</button>
                                                 @endif
@@ -102,8 +102,8 @@
                                                                 <td>{{$spi->price_ctp}}</td>
                                                                 <td>{{$spi->remarks}}</td>
                                                                 <td align="center">
-                                                                    <a href="approved/{{ $spi->id }}" class="btn btn-sm btn-danger" title="Disapproved">
-                                                                        <i class="fa fa-thumbs-down"></i>
+                                                                    <a href="{{ route('spis.delete', ['id' => $spi->id]) }}">
+                                                                        <button type="button" class="btn btn-danger btn-outline" title="Delete SPI"><i class="fa fa fa-trash"></i></button>
                                                                     </a>
                                                                 </td>
                                                             </tr>
@@ -118,7 +118,7 @@
                                         @csrf
                                             <div class="panel-body">
                                                 <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">
+                                                    <table class="table table-striped table-bordered table-hover table-responsive dataTables-example2">
                                                         <thead>
                                                             <tr>
                                                                 <th><input id="checkAll" type="checkbox" class="form-check-input"></th>
@@ -155,31 +155,42 @@
                                                                     <td>
                                                                         <input type="checkbox" class="form-check-input check-item" name="checkbox[]" value="{{ $spi->id }}">
                                                                     </td>
-                                                                    <td>{{$spi->name}}</td>
-                                                                    <td>{{$spi->destination}}</td>
-                                                                    <td>{{$spi->pes}}</td>
-                                                                    <td>{{$spi->origin}}</td>
-                                                                    <td>{{$spi->offer_quantity}}</td>
-                                                                    <td>{{$spi->buying_quantity}}</td>
-                                                                    <td>{{$spi->uom}}</td>
-                                                                    <td>{{$spi->original_price ? $spi->original_price : 'Non-nego'}}</td>
-                                                                    <td>{{$spi->buying_price}}</td>
-                                                                    <td>{{$spi->expenses ? $spi->expenses : '-'}}</td>
-                                                                    <td>{{$spi->price_expense}}</td>
-                                                                    <td>{{$spi->moisture_content}}</td>
-                                                                    <td>{{$spi->delivery_schedule}}</td>
-                                                                    <td>{{$spi->terms_payment}}</td>
-                                                                    <td>{{$spi->potassium}}</td>
-                                                                    <td>{{$spi->chips_yield}}</td>
-                                                                    <td>{{$spi->powder_yield}}%</td>
-                                                                    <td>{{$spi->price_yield}}</td>
-                                                                    <td>{{$spi->forex_rate}}</td>
-                                                                    <td>{{$spi->price_usd}}</td>
-                                                                    <td>{{$spi->cost_produce}}</td>
-                                                                    <td>{{$spi->price_ctp}}</td>
-                                                                    <td>{{$spi->remarks}}</td>
-                                                                    <td>{{$spi->comments}}</td>
-                                                                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_comments_spi{{$spi->id}}">Add Comments<a href="{{url('add_comments_spi/'.$spi->id)}}"></a></button></td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->name}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->destination}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->pes}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->origin}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->offer_quantity}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->buying_quantity}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->uom}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->original_price ? $spi->original_price : 'Non-nego'}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->buying_price}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->expenses ? $spi->expenses : '-'}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->price_expense}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->moisture_content}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->delivery_schedule}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->terms_payment}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->potassium}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->chips_yield}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->powder_yield}}%</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->price_yield}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->forex_rate}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->price_usd}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->cost_produce}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->price_ctp}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->remarks}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->comments}}</td>
+                                                                    <td class="action">
+                                                                        <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_spi{{$spi->id}}">
+                                                                            <i class="fa fa-pencil"></i>
+                                                                            <a href="{{url('add_comments_spi/'.$spi->id)}}"></a>
+                                                                        </button>
+                                                                        <a href="approvedStatus/{{ $spi->id }}" title="Approved" class="btn btn-success btn-outline" {{ $spi->status == 1 ? 'disabled' : '' }}>
+                                                                            <i class="fa fa-thumbs-up"></i>
+                                                                        </a>
+                                                                        <a href="disapprovedStatus/{{ $spi->id }}" title="Disapproved" class="btn btn-danger btn-outline" {{ $spi->status === 0 ? 'disabled' : '' }}>
+                                                                            <i class="fa fa-thumbs-down"></i>
+                                                                        </a>
+                                                                    </td>
                                                                 </tr>
                                                             @endforeach
                                                         </tbody>
@@ -285,6 +296,16 @@
     .export {
         margin: 5px 5px 5px 5px;
     }
+    .pre-approved {
+        background-color: #1d9322;
+        color: white;
+    }
+    .action {
+        max-width: 150px;
+        min-width: 150px;
+        width: 150px;
+        text-align: center;
+    }
 </style>
 <script>
     $(document).on('click', '#checkAll', function () {
@@ -325,6 +346,16 @@
             pageLength: 25,
             responsive: true,
             ordering: false,
+        });
+
+        $('.dataTables-example2').DataTable({
+            pageLength: 25,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                {extend: 'csv', title: 'SPI List'},
+                {extend: 'excel', title: 'SPI List'},
+            ]
         });
 
     });

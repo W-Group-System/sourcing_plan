@@ -30,7 +30,9 @@ Route::post('updateStatus', 'CottController@updateStatus');
 Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
 Route::get('/filter', 'CottController@filter');
 Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_cott_pdf')->name('export_cott_pdf');
-Route::get('approved/{id}', 'CottController@approved');
+Route::get('/cotts/delete/{id}', 'CottController@delete')->name('cotts.delete');
+Route::get('approvedStatus/{id}', 'CottController@approvedStatus');
+Route::get('disapprovedStatus/{id}', 'CottController@disapprovedStatus');
 
 Route::get('/spi', 'SpiController@index');
 Route::get('spi/create', 'SpiController@create');
@@ -39,7 +41,9 @@ Route::post('spi/updateStatus', 'SpiController@updateStatus');
 Route::post('add_comments_spi/{id}', 'SpiController@addCommentsSpi');
 Route::get('/filterSpi', 'SpiController@filterSpi');
 Route::get('/export_spi_pdf/{start_date}/{end_date}', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
-Route::get('approved/{id}', 'SpiController@approved');
+Route::get('delete/{id}', 'SpiController@delete')->name('spis.delete');
+Route::get('approvedStatus/{id}', 'SpiController@approvedStatus');
+Route::get('disapprovedStatus/{id}', 'SpiController@disapprovedStatus');
 
 Route::get('/user', 'UserController@index');
 Route::post('new_user', 'UserController@create');

@@ -114,18 +114,40 @@ class CottController extends Controller
         return $pdf->stream('cott.pdf', ['cotts' => $cotts, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
-    public function approved ($id)
+    public function delete($id)
     {
         $cott = Cott::find($id);
-        if($cott){
-            if($cott->approved){
-                $cott->approved = 0;
-            }
-            else {
-                $cott->approved = 1;
-            }
-            $cott->save();
+
+        if ($cott) {
+            $cott->delete();
+            Alert::success('Success Title', 'Success Message');
+        } else {
+            Alert::error('Error Title', 'Record not found');
         }
+
         return back();
+    }
+    
+    public function preStatus($id, $status)
+    {
+        $cott = Cott::find($id);
+
+        if ($cott) {
+            $cott->status = $status;
+            $cott->save();
+            Alert::success(($status ? 'Approved' : 'Disapproved'), 'Records Updated Successfully');
+        }
+
+        return back();
+    }
+
+    public function approvedStatus($id)
+    {
+        return $this->preStatus($id, 1);
+    }
+
+    public function disapprovedStatus($id)
+    {
+        return $this->preStatus($id, 0);
     }
 }

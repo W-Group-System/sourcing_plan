@@ -52,9 +52,9 @@
                                                                 <td>@if($supplier->email != null){{$supplier->email}}@else N/A @endif</td>
                                                                 <td>{{$supplier->terms}}</td>
                                                                 <td>{{date('M/d/Y', strtotime($supplier->accreditation_date))}}</td>
-                                                                <td width="10%" align="center">
-                                                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#edit_supplier{{$supplier->id}}"><i class="fa fa fa-pencil"></i><a href="{{url('update_supplier/'.$supplier->id)}}"></a></button>
-                                                                    <a href="status/{{ $supplier->id }}" class="btn btn-sm btn-{{ $supplier->status ? 'danger' : 'success' }}">
+                                                                <td class="action">
+                                                                    <button type="button" class="btn btn-sm btn-primary btn-outline" data-toggle="modal" data-target="#edit_supplier{{$supplier->id}}"><i class="fa fa fa-pencil"></i><a href="{{url('update_supplier/'.$supplier->id)}}"></a></button>
+                                                                    <a href="status/{{ $supplier->id }}" class="btn btn-sm btn-{{ $supplier->status ? 'danger' : 'success' }} btn-outline">
                                                                         <i class="fa {{ $supplier->status ? 'fa-ban' : 'fa-check' }}"></i>
                                                                     </a>
                                                                 </td>
@@ -97,9 +97,9 @@
                                                                 <td>@if($supplier->email != null){{$supplier->email}}@else N/A @endif</td>
                                                                 <td>{{$supplier->terms}}</td>
                                                                 <td>{{date('M/d/Y', strtotime($supplier->accreditation_date))}}</td>
-                                                                <td width="10%">
-                                                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#edit_supplier{{$supplier->id}}"><i class="fa fa fa-pencil"></i><a href="{{url('update_supplier/'.$supplier->id)}}"></a></button>
-                                                                    <a href="status/{{ $supplier->id }}" class="btn btn-sm btn-{{ $supplier->status ? 'danger' : 'success' }}">
+                                                                <td class="action">
+                                                                    <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#edit_supplier{{$supplier->id}}"><i class="fa fa fa-pencil"></i><a href="{{url('update_supplier/'.$supplier->id)}}"></a></button>
+                                                                    <a href="status/{{ $supplier->id }}" class="btn btn-{{ $supplier->status ? 'danger' : 'success' }} btn-outline">
                                                                         <i class="fa {{ $supplier->status ? 'fa-ban' : 'fa-check' }}"></i>
                                                                     </a>
                                                                 </td>
@@ -237,6 +237,12 @@
     }
     .mb-10 {
         margin-bottom: 10px;
+    }
+    .action {
+        max-width: 100px;
+        min-width: 100px;
+        width: 100px;
+        text-align: center;
     }
 </style>
 <script>

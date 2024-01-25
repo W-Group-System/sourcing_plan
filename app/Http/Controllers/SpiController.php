@@ -121,18 +121,40 @@ class SpiController extends Controller
         return back();
     }
 
-    public function approved ($id)
+    public function delete($id)
+    {
+        $data = Spi::find($id);
+
+        if ($data) {
+            $data->delete();
+            Alert::success('Success Title', 'Success Message');
+        } else {
+            Alert::error('Error Title', 'Record not found');
+        }
+
+        return back();
+    }
+
+    public function preStatus($id, $status)
     {
         $spi = Spi::find($id);
-        if($spi){
-            if($spi->approved){
-                $spi->approved = 0;
-            }
-            else {
-                $spi->approved = 1;
-            }
+
+        if ($spi) {
+            $spi->status = $status;
             $spi->save();
+            Alert::success(($status ? 'Approved' : 'Disapproved'), 'Records Updated Successfully');
         }
+
         return back();
+    }
+
+    public function approvedStatus($id)
+    {
+        return $this->preStatus($id, 1);
+    }
+
+    public function disapprovedStatus($id)
+    {
+        return $this->preStatus($id, 0);
     }
 }

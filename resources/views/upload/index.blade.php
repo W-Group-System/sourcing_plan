@@ -37,7 +37,7 @@
                                                                     <a href="{{ route('signeds.view', ['id' => $signed->id]) }}" target="_blank">{{$signed->file}}</a>
                                                                 </td>
                                                                 <td align="center">
-                                                                    <a href="{{ route('signeds.delete', ['id' => $signed->id]) }}" class="btn btn-sm btn-danger">
+                                                                    <a href="{{ route('signeds.delete', ['id' => $signed->id]) }}" class="btn btn-danger btn-outline">
                                                                         <i class="fa fa-ban"></i>
                                                                     </a>
                                                                 </td>
@@ -65,7 +65,7 @@
                                                                     <a href="{{ route('signeds.view', ['id' => $signed->id]) }}" target="_blank">{{$signed->file}}</a>
                                                                 </td>
                                                                 <td align="center">
-                                                                    <a href="{{ route('signeds.delete', ['id' => $signed->id]) }}" class="btn btn-sm btn-danger">
+                                                                    <a href="{{ route('signeds.delete', ['id' => $signed->id]) }}" class="btn btn-danger btn-outline">
                                                                         <i class="fa fa-ban"></i>
                                                                     </a>
                                                                 </td>
@@ -186,7 +186,6 @@
                 {extend: 'excel', title: 'Signed List'},
                 {extend: 'pdf', title: 'Signed List'},
             ]
-
         });
 
     });
