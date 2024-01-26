@@ -184,10 +184,10 @@
                                                                             <i class="fa fa-pencil"></i>
                                                                             <a href="{{url('add_comments_cott/'.$cott->id)}}"></a>
                                                                         </button>
-                                                                        <a href="approvedStatus/{{ $cott->id }}" title="Approved" class="btn btn-success btn-outline" {{ $cott->status == 1 ? 'disabled' : '' }}>
+                                                                        <a href="approvedCott/{{ $cott->id }}" title="Approved" class="btn btn-success btn-outline" {{ $cott->status == 1 ? 'disabled' : '' }}>
                                                                             <i class="fa fa-thumbs-up"></i>
                                                                         </a>
-                                                                        <a href="disapprovedStatus/{{ $cott->id }}" title="Disapproved" class="btn btn-danger btn-outline" {{ $cott->status === 0 ? 'disabled' : '' }}>
+                                                                        <a href="disapprovedCott/{{ $cott->id }}" title="Disapproved" class="btn btn-danger btn-outline" {{ $cott->status === 0 ? 'disabled' : '' }}>
                                                                             <i class="fa fa-thumbs-down"></i>
                                                                         </a>
                                                                     </td>

@@ -31,8 +31,8 @@ Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
 Route::get('/filter', 'CottController@filter');
 Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_cott_pdf')->name('export_cott_pdf');
 Route::get('/cotts/delete/{id}', 'CottController@delete')->name('cotts.delete');
-Route::get('approvedStatus/{id}', 'CottController@approvedStatus');
-Route::get('disapprovedStatus/{id}', 'CottController@disapprovedStatus');
+Route::get('approvedCott/{id}', 'CottController@approvedCott');
+Route::get('disapprovedCott/{id}', 'CottController@disapprovedCott');
 
 Route::get('/spi', 'SpiController@index');
 Route::get('spi/create', 'SpiController@create');

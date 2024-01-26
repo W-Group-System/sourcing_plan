@@ -128,7 +128,7 @@ class CottController extends Controller
         return back();
     }
     
-    public function preStatus($id, $status)
+    public function statusCott($id, $status)
     {
         $cott = Cott::find($id);
 
@@ -141,13 +141,13 @@ class CottController extends Controller
         return back();
     }
 
-    public function approvedStatus($id)
+    public function approvedCott($id)
     {
-        return $this->preStatus($id, 1);
+        return $this->statusCott($id, 1);
     }
 
-    public function disapprovedStatus($id)
+    public function disapprovedCott($id)
     {
-        return $this->preStatus($id, 0);
+        return $this->statusCott($id, 0);
     }
 }
