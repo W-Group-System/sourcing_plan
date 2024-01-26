@@ -19,6 +19,7 @@ class SupplierController extends Controller
     {   
         $new_supplier = new Supplier;
         $new_supplier->name = $request->name;
+        $new_supplier->nickname = $request->nickname;
         $new_supplier->code = $request->code;
         $new_supplier->contact_person = $request->contact_person;
         $new_supplier->address = $request->address;
@@ -44,6 +45,7 @@ class SupplierController extends Controller
     {
         $supplier = Supplier::find($id);
         $supplier->name = $request->input('name');
+        $supplier->nickname = $request->input('nickname');
         $supplier->code = $request->input('code');
         $supplier->contact_person = $request->input('contact_person');
         $supplier->address = $request->input('address');

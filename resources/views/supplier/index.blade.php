@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -27,6 +28,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Name</th>
+                                                            <th>Nickname</th>
                                                             <th>Supplier Code</th>
                                                             <th>Contact Person</th>
                                                             <th>Address</th>
@@ -43,6 +45,7 @@
                                                         @foreach($suppliers->where('status', 1) as $supplier)
                                                             <tr>
                                                                 <td>{{$supplier->name}}</td>
+                                                                <td>{{$supplier->nickname}}</td>
                                                                 <td>{{$supplier->code}}</td>
                                                                 <td>{{$supplier->contact_person}}</td>
                                                                 <td>{{$supplier->address}}</td>
@@ -72,6 +75,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Name</th>
+                                                            <th>Nickname</th>
                                                             <th>Supplier Code</th>
                                                             <th>Contact Person</th>
                                                             <th>Address</th>
@@ -88,6 +92,7 @@
                                                         @foreach($suppliers->where('status',0) as $supplier)
                                                             <tr>
                                                                 <td>{{$supplier->name}}</td>
+                                                                <td>{{$supplier->nickname}}</td>
                                                                 <td>{{$supplier->code}}</td>
                                                                 <td>{{$supplier->contact_person}}</td>
                                                                 <td>{{$supplier->address}}</td>
@@ -138,6 +143,10 @@
                         <div class="col-12 mb-10">
                             <label>Name</label>
                             <input name="name" class="form-control" type="text" placeholder="Enter Name" required>
+                        </div>
+                        <div class="col-12 mb-10">
+                            <label>Nickname</label>
+                            <input name="nickname" class="form-control" type="text" placeholder="Enter Nickname" required>
                         </div>
                         <div class="col-12 mb-10">
                             <label>Supplier Code</label>

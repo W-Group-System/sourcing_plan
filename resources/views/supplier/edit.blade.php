@@ -16,6 +16,10 @@
                             <input name="name" class="form-control" type="text" value="{{$supplier->name}}">
                         </div>
                         <div class="col-12 mb-10">
+                            <label>Nickname</label>
+                            <input name="nickname" class="form-control" type="text" value="{{$supplier->nickname}}">
+                        </div>
+                        <div class="col-12 mb-10">
                             <label>Supplier Code</label>
                             <input name="code" class="form-control" type="text" value="{{$supplier->code}}">
                         </div>
