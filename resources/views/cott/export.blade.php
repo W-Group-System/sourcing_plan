@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cott List</title>
+    <title>Cottonii List</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
@@ -109,7 +109,7 @@
                 @endforeach
             @else
             <tr>
-                <td colspan="24" align="center">No Cott Found</td>
+                <td colspan="24" align="center">No Cottonii Found</td>
             </tr>
         </tbody>
         @endif

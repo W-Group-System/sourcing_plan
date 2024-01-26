@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>COTT List</h5>
+                    <h5>Cottonii List</h5>
                     <div class="ibox-tools">
                         @if (@auth()->user()->position != 'Plant Manager')
                             <a href="{{ url('cott/create') }}"><button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add</button></a>

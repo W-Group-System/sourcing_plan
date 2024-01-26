@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Create COTT</h5>
+                    <h5>Create Cottonii</h5>
                     <div class="ibox-tools">
                         <a href="{{ url('/cott') }}"><button class="btn btn-primary"><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;Back</button></a>
                     </div>

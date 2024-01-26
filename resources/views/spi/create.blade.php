@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Create SPI</h5>
+                    <h5>Create Spinosum</h5>
                     <div class="ibox-tools">
                         <a href="{{ url('/spi') }}"><button class="btn btn-primary"><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;Back</button></a>
                     </div>
@@ -138,7 +138,14 @@
                     '@endforeach'+
                 '</select>'+
             '</td>'+
-            '<td><input type="text" name="destination[]" id="destination" class="form-control adjust"></td>'+
+            // '<td><input type="text" name="destination[]" id="destination" class="form-control adjust"></td>'+
+            '<td>'+
+                '<select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>'+
+                    '<option value="CCC">CCC</option>'+
+                    '<option value="CAR">CAR</option>'+
+                    '<option value="CAR/PBI">CAR/PBI</option>'+
+                '</select>'+
+            '</td>'+
             '<td><input type="text" name="pes[]" id="pes" class="form-control adjust"></td>'+
             '<td><input type="text" name="origin[]" id="origin" class="form-control adjust"></td>'+
             '<td><input type="text" name="offer_quantity[]" id="offer_quantity" class="form-control adjust"></td>'+

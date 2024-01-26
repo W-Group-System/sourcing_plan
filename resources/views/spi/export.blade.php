@@ -107,7 +107,7 @@
                     @endforeach
                 @else
                 <tr>
-                    <td colspan="23" align="center">No Spi Found</td>
+                    <td colspan="23" align="center">No Spinosum Found</td>
                 </tr>    
             </tbody>
             @endif

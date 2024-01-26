@@ -71,10 +71,10 @@
                         <a href="#"><i class="fa fa-search"></i> <span class="nav-label">Sourcing Plan </span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li>
-                                <a href="{{ url('/cott') }}">COTT</a>
+                                <a href="{{ url('/cott') }}">Cottonii</a>
                             </li>
                             <li>
-                                <a href="{{ url('/spi') }}">SPI</a>
+                                <a href="{{ url('/spi') }}">Spinosum</a>
                             </li>
                         </ul>
                     </li>
