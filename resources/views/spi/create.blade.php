@@ -50,8 +50,8 @@
                                         <td>
                                             <select name="name[]" id="name" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Seller" required>
                                                 @foreach($suppliers->where('status', 1) as $supplier)
-                                                    <option value="{{ $supplier->name }}" {{ ($supplier->id == $supplier->name) ? 'selected' : '' }}>
-                                                        {{ $supplier->name }}
+                                                    <option value="{{ $supplier->nickname }}" {{ ($supplier->id == $supplier->nickname) ? 'selected' : '' }}>
+                                                        {{ $supplier->nickname }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -132,8 +132,8 @@
             '<td>'+
                 '<select name="name[]" id="name" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Seller" required>'+
                     '@foreach($suppliers->where("status", 1) as $supplier)'+
-                        '<option value="{{ $supplier->name }}" {{ ($supplier->id == $supplier->name) ? "selected" : " " }}>'+
-                            '{{ $supplier->name }}'+
+                        '<option value="{{ $supplier->nickname }}" {{ ($supplier->id == $supplier->nickname) ? "selected" : " " }}>'+
+                            '{{ $supplier->nickname }}'+
                         '</option>'+
                     '@endforeach'+
                 '</select>'+
