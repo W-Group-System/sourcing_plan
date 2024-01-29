@@ -108,7 +108,7 @@
                                                         @foreach($suppliers->where('status', 1) as $supplier)
                                                             <tr>
                                                                 <td>{{$supplier->name}}</td>
-                                                                <td>{{$supplier->mickname}}</td>
+                                                                <td>{{$supplier->nickname}}</td>
                                                                 <td>{{$supplier->code}}</td>
                                                                 <td>{{$supplier->contact_person}}</td>
                                                                 <td>{{$supplier->address}}</td>
