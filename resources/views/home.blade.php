@@ -92,6 +92,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Name</th>
+                                                            <th>Nickname</th>
                                                             <th>Supplier Code</th>
                                                             <th>Contact Person</th>
                                                             <th>Address</th>
@@ -107,6 +108,7 @@
                                                         @foreach($suppliers->where('status', 1) as $supplier)
                                                             <tr>
                                                                 <td>{{$supplier->name}}</td>
+                                                                <td>{{$supplier->mickname}}</td>
                                                                 <td>{{$supplier->code}}</td>
                                                                 <td>{{$supplier->contact_person}}</td>
                                                                 <td>{{$supplier->address}}</td>
@@ -130,6 +132,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Name</th>
+                                                            <th>Nickname</th>
                                                             <th>Supplier Code</th>
                                                             <th>Contact Person</th>
                                                             <th>Address</th>
@@ -145,6 +148,7 @@
                                                         @foreach($suppliers->where('status',0) as $supplier)
                                                             <tr>
                                                                 <td>{{$supplier->name}}</td>
+                                                                <td>{{$supplier->nickname}}</td>
                                                                 <td>{{$supplier->code}}</td>
                                                                 <td>{{$supplier->contact_person}}</td>
                                                                 <td>{{$supplier->address}}</td>
