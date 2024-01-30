@@ -7,7 +7,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-success pull-right">as of {{ date('M. d, Y') }}</span>
-                    <h5>COTT</h5>
+                    <h5>Cottonii</h5>
                 </div>
                 <div class="ibox-content">
                     @php
@@ -23,7 +23,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-primary pull-right">as of {{ date('M. d, Y') }}</span>
-                    <h5>COTT</h5>
+                    <h5>Cottonii </h5>
                 </div>
                 <div class="ibox-content">
                     @php
@@ -39,7 +39,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-info pull-right">as of {{ date('M. d, Y') }}</span>
-                    <h5>SPI</h5>
+                    <h5>Spinosum</h5>
                 </div>
                 <div class="ibox-content">
                     @php
@@ -55,7 +55,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-warning pull-right">as of {{ date('M. d, Y') }}</span>
-                    <h5>SPI</h5>
+                    <h5>Spinosum</h5>
                 </div>
                 <div class="ibox-content">
                     @php
