@@ -85,6 +85,7 @@ class CottController extends Controller
     public function dateFilter($start_date, $end_date) {
         return Cott::whereDate('created_at','>=',$start_date)
                         ->whereDate('created_at','<=',$end_date)
+                        ->orderBy('price_yield', 'asc')
                         ->get();
     }
 

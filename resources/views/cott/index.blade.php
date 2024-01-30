@@ -120,7 +120,7 @@
                                             <form method="POST" action="{{url('updateStatus')}}">
                                             @csrf
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-responsive dataTables-example2">
+                                                    <table class="table table-bordered table-responsive dataTables-example">
                                                         <thead>
                                                             <tr>
                                                                 <th><input id="checkAll" type="checkbox" class="form-check-input"></th>
@@ -345,18 +345,18 @@
         $('.dataTables-example').DataTable({
             pageLength: 25,
             responsive: true,
-            ordering: false,
+            ordering: true,
         });
 
-        $('.dataTables-example2').DataTable({
-            pageLength: 25,
-            responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
-                {extend: 'csv', title: 'Cott List'},
-                {extend: 'excel', title: 'Cott List'},
-            ]
-        });
+        // $('.dataTables-example2').DataTable({
+        //     pageLength: 25,
+        //     responsive: true,
+        //     dom: '<"html5buttons"B>lTfgitp',
+        //     buttons: [
+        //         {extend: 'csv', title: 'Cott List'},
+        //         {extend: 'excel', title: 'Cott List'},
+        //     ]
+        // });
 
     });
 
