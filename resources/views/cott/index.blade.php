@@ -148,6 +148,7 @@
                                                                 <th>Price + CTP (Budget in USD)</th>
                                                                 <th>Remarks</th>
                                                                 <th>Comments</th>
+                                                                <th>Pre Approved</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -179,17 +180,23 @@
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->price_ctp}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->remarks}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->comments}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->pre_approved}}</td>
                                                                     <td class="action">
                                                                         <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_cott{{$cott->id}}" title="Add Comments">
-                                                                            <i class="fa fa-pencil"></i>
+                                                                            <i class="fa fa-comments"></i>
                                                                             <a href="{{url('add_comments_cott/'.$cott->id)}}"></a>
                                                                         </button>
-                                                                        <a href="approvedCott/{{ $cott->id }}" title="Approved" class="btn btn-success btn-outline" {{ $cott->status == 1 ? 'disabled' : '' }}>
-                                                                            <i class="fa fa-thumbs-up"></i>
-                                                                        </a>
-                                                                        <a href="disapprovedCott/{{ $cott->id }}" title="Disapproved" class="btn btn-danger btn-outline" {{ $cott->status === 0 ? 'disabled' : '' }}>
-                                                                            <i class="fa fa-thumbs-down"></i>
-                                                                        </a>
+                                                                        @if (@auth()->user()->position == 'Plant Manager' && $cott->status == 1) 
+                                                                            <a href="preApprover/{{ $cott->id }}" title="Pre-approved" class="btn btn-success btn-outline"><i class="fa fa-thumbs-up"></i></a>
+                                                                        @endif
+                                                                        @if (@auth()->user()->position != 'Plant Manager')
+                                                                            <a href="approvedCott/{{ $cott->id }}" title="Approved" class="btn btn-success btn-outline" style="{{ $cott->status == 1 ? 'display: none;' : '' }}">
+                                                                                <i class="fa fa-thumbs-up"></i>
+                                                                            </a>
+                                                                            <a href="disapprovedCott/{{ $cott->id }}" title="Disapproved" class="btn btn-danger btn-outline" style="{{ $cott->status == 0 ? 'display: none;' : '' }}">
+                                                                                <i class="fa fa-thumbs-down"></i>
+                                                                            </a>
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -341,23 +348,11 @@
     }
 
     $(document).ready(function(){
-
         $('.dataTables-example').DataTable({
             pageLength: 25,
             responsive: true,
             ordering: true,
         });
-
-        // $('.dataTables-example2').DataTable({
-        //     pageLength: 25,
-        //     responsive: true,
-        //     dom: '<"html5buttons"B>lTfgitp',
-        //     buttons: [
-        //         {extend: 'csv', title: 'Cott List'},
-        //         {extend: 'excel', title: 'Cott List'},
-        //     ]
-        // });
-
     });
 
     $(document).on('input', '.check-comments', function () {

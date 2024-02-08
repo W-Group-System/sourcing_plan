@@ -41,7 +41,7 @@
         <img alt="image" src="{{URL::asset('/images/wgroup.png')}}" style='width:120px;margin-bottom:-10px'>
         <h4>Sourcing Plan</h4>
     </div>
-    <h5>Date: {{ date('M d', strtotime($start_date)) }} - {{ date('d, Y', strtotime($end_date)) }}</h5>
+    <h5>Date: {{ date('M d', strtotime($start_date)) }} - {{ date('M d, Y', strtotime($end_date)) }}</h5>
     <table class="table table-bordered table-responsive" id="table-cotts">
         <thead>
             <tr>
@@ -68,6 +68,7 @@
                 <th>Cost to Produce (Powder in USD)</th>
                 <th>Price + CTP (Budget in USD)</th>
                 <th>Remarks</th>
+                <th>Pre Aprroved</th>
             </tr>
         </thead>
         <tbody>
@@ -101,6 +102,7 @@
                         <td>{{$cott->cost_produce}}</td>
                         <td>{{$cott->price_ctp}}</td>
                         <td>{{$cott->remarks}}</td>
+                        <td>{{$cott->pre_approved}}</td>
                     </tr>
                     @php
                         $totalBuyingQuantity += $cott->buying_quantity; 
@@ -109,7 +111,7 @@
                 @endforeach
             @else
             <tr>
-                <td colspan="24" align="center">No Cottonii Found</td>
+                <td colspan="25" align="center">No Cottonii Found</td>
             </tr>
         </tbody>
         @endif
@@ -118,7 +120,7 @@
                 <td colspan="4" align="right">Total:</td>
                 <td>{{$totalOfferQuantity}}</td>
                 <td>{{$totalBuyingQuantity}}</td>
-                <td colspan="17"></td>
+                <td colspan="18"></td>
             </tr>
         </tfoot>
     </table>
@@ -281,29 +283,29 @@
     <table style="margin-top: 30px;" width="100%">
         <thead>
             <tr>
-                <td width="25%">Prepared By:</td>
-                <td width="25%">Reviewed By:</td>
-                <td width="25%"></td>
-                <td width="25%">Approved By:</td>
+                <td width="30%">Prepared By:</td>
+                <td width="35%">Reviewed By:</td>
+                <!-- <td width="25%"></td> -->
+                <td width="35%">Approved By:</td>
             </tr>
         </thead>
         <tbody align="center">
             <tr>
                 <td style="padding-top: 20px;">KIARA BEATRIZ GALIMAO</td>
                 <td style="padding-top: 20px;">YEANESA MAE SAJA</td>
-                <td style="padding-top: 20px;">MA MICHELLE PILOTON/JHANICE FABABAER</td>
+                <!-- <td style="padding-top: 20px;">MA MICHELLE PILOTON/JHANICE FABABAER</td> -->
                 <td style="padding-top: 20px;">JLW</td>
             </tr>
             <tr>
                 <td>___________________________________________</td>
                 <td>___________________________________________</td>
-                <td>___________________________________________</td>
+                <!-- <td>___________________________________________</td> -->
                 <td>___________________________________________</td>
             </tr>
             <tr>
                 <td>SEAWEEDS PURCHASING SUPERVISOR</td>
                 <td>ASST. SEAWEEDS PURCHASING MANAGER</td>
-                <td>PLANT MANAGER</td>
+                <!-- <td>PLANT MANAGER</td -->
                 <td>PRESIDENT</td>
             </tr>
         </tbody>

@@ -33,6 +33,7 @@ Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_co
 Route::get('/cotts/delete/{id}', 'CottController@delete')->name('cotts.delete');
 Route::get('approvedCott/{id}', 'CottController@approvedCott');
 Route::get('disapprovedCott/{id}', 'CottController@disapprovedCott');
+Route::get('preApprover/{id}', 'CottController@preApprover');
 
 Route::get('/spi', 'SpiController@index');
 Route::get('spi/create', 'SpiController@create');

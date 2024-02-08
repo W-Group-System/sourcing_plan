@@ -9,7 +9,9 @@
                 <div class="ibox-title">
                     <h5>Supplier List</h5>
                     <div class="ibox-tools">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#add_supplier"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add</button>
+                        @if (@auth()->user()->position != 'Plant Manager')
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#add_supplier"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add</button>
+                        @endif
                     </div>
                 </div>
                 <div class="ibox-content">

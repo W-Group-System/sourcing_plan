@@ -19,6 +19,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Position</th>
+                                            <!-- <th>Role</th> -->
                                             <th>Email</th>
                                             <th>Actions</th>
                                         </tr>
@@ -28,6 +29,7 @@
                                         <tr>
                                             <td width="30%">{{$user->name}}</td>
                                             <td width="30%">{{$user->position}}</td>
+                                            <!-- <td width="22%">{{$user->role ? $user->role : 'N/A'}}</td> -->
                                             <td width="30%">{{$user->email}}</td>
                                             <td width="10%" align="center">
                                                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=""><i class="fa fa fa-pencil"></i><a href=""></a></button> -->
@@ -74,6 +76,14 @@
                                 <option value="President">President</option>
                             </select>
                         </div>
+                        <!-- <div class="col-12 mb-10">
+                            <label>Role</label>
+                            <select name="role" id="role" class="form-control selectpicker" title="Select Role">
+                                <option value="Approver">Approver</option>
+                                <option value="Approver 1">Approver 1</option>
+                                <option value="Approver 2">Approver 2</option>
+                            </select>
+                        </div> -->
                         <div class="col-12 mb-10">
                             <label>Email Address</label>
                             <input name="email" class="form-control" type="text" placeholder="Enter Email Address" required>

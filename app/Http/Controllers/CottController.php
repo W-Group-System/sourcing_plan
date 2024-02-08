@@ -151,4 +151,34 @@ class CottController extends Controller
     {
         return $this->statusCott($id, 0);
     }
+
+    // public function preStatusCott($id, $pre_approved)
+    // {
+    //     $cott = Cott::find($id);
+
+    //     if ($cott) {
+    //         $cott->pre_approved = $pre_approved;
+    //         $cott->save();
+    //         Alert::success('Approved', 'Records Updated Successfully');
+    //     }
+    //     return back();
+    // }
+
+    // public function preApprover($id)
+    // {
+    //     return $this->preStatusCott($id, auth()->user()->name);
+    // }
+
+    public function preApprover($id)
+    {
+        if ($cott = Cott::find($id)) {
+            $cott->pre_approved = auth()->user()->name;
+            $cott->save();
+            Alert::success('Approved', 'Records Updated Successfully');
+        }
+
+        return back();
+    }
+
+
 }
