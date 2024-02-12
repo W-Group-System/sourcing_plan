@@ -54,10 +54,17 @@
                             {{-- <img alt="image" class="img-circle" src="img/profile_small.jpg" />
                             </span> --}}
                             @auth
-                                <a href="#">
-                                    <span class="clear"> <span class="block m-t-xs">{{auth()->user()->name}}<strong class="font-bold"></strong>
-                                    </span><span class="text-muted text-xs block"></span>{{auth()->user()->position}}</span>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{auth()->user()->name}}</strong>
+                                    </span> <span class="text-muted text-xs block">{{auth()->user()->position}}&nbsp;<b class="caret"></b></span> </span> 
                                 </a>
+                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                    <li><a href="{{ route('change_password') }}">{{ __('Change Password') }}</a></li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="{{ route('logout') }}" onclick="logout(); show();">{{ __('Logout') }}</a>
+                                    </li>
+                                </ul>
                             @endauth
                         </div>
                         <div class="logo-element">
@@ -92,7 +99,7 @@
                 </ul>
             </div>
         </nav>
-    
+        
         <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">

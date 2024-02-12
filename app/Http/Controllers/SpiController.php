@@ -157,4 +157,15 @@ class SpiController extends Controller
     {
         return $this->preStatus($id, 0);
     }
+
+    public function preApproverSpi($id)
+    {
+        if ($spi = SPI::find($id)) {
+            $spi->pre_approved = auth()->user()->name;
+            $spi->save();
+            Alert::success('Approved', 'Records Updated Successfully');
+        }
+
+        return back();
+    }
 }

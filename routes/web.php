@@ -16,6 +16,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index');
     Route::get('/home','HomeController@index');
+    Route::get('change_password','HomeController@changePassword')->name('change_password');
+    Route::post('change_password','HomeController@updatePassword')->name('update_password');
 });
 
 Route::get('/supplier', 'SupplierController@index');
@@ -45,6 +47,7 @@ Route::get('/export_spi_pdf/{start_date}/{end_date}', 'SpiController@export_spi_
 Route::get('delete/{id}', 'SpiController@delete')->name('spis.delete');
 Route::get('approvedStatus/{id}', 'SpiController@approvedStatus');
 Route::get('disapprovedStatus/{id}', 'SpiController@disapprovedStatus');
+Route::get('preApproverSpi/{id}', 'SpiController@preApproverSpi');
 
 Route::get('/user', 'UserController@index');
 Route::post('new_user', 'UserController@create');

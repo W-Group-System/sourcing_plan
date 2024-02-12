@@ -148,6 +148,7 @@
                                                                 <th>Price + CTP (Budget in USD)</th>
                                                                 <th>Remarks</th>
                                                                 <th>Comments</th>
+                                                                <th>Pre Approved</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -181,7 +182,8 @@
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->price_ctp}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->remarks}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->comments}}</td>
-                                                                    <td class="action">
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->pre_approved}}</td>
+                                                                    <!-- <td class="action">
                                                                         <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_spi{{$spi->id}}">
                                                                             <i class="fa fa-comments"></i>
                                                                             <a href="{{url('add_comments_spi/'.$spi->id)}}"></a>
@@ -192,6 +194,23 @@
                                                                         <a href="disapprovedStatus/{{ $spi->id }}" title="Disapproved" class="btn btn-danger btn-outline" style="{{ $spi->status == 0 ? 'display: none;' : '' }}">
                                                                             <i class="fa fa-thumbs-down"></i>
                                                                         </a>
+                                                                    </td> -->
+                                                                    <td class="action">
+                                                                        <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_spi{{$spi->id}}" title="Add Comments">
+                                                                            <i class="fa fa-comments"></i>
+                                                                            <a href="{{url('add_comments_spi/'.$spi->id)}}"></a>
+                                                                        </button>
+                                                                        @if (@auth()->user()->position == 'Plant Manager' && $spi->status == 1) 
+                                                                            <a href="preApproverSpi/{{ $spi->id }}" title="Pre-approved" class="btn btn-success btn-outline"><i class="fa fa-thumbs-up"></i></a>
+                                                                        @endif
+                                                                        @if (@auth()->user()->position != 'Plant Manager')
+                                                                            <a href="approvedStatus/{{ $spi->id }}" title="Approved" class="btn btn-success btn-outline" style="{{ $spi->status == 1 ? 'display: none;' : '' }}">
+                                                                                <i class="fa fa-thumbs-up"></i>
+                                                                            </a>
+                                                                            <a href="disapprovedStatus/{{ $spi->id }}" title="Disapproved" class="btn btn-danger btn-outline" style="{{ $spi->status == 0 ? 'display: none;' : '' }}">
+                                                                                <i class="fa fa-thumbs-down"></i>
+                                                                            </a>
+                                                                        @endif
                                                                     </td>
                                                                 </tr>
                                                             @endforeach

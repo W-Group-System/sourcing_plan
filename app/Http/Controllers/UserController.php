@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserController extends Controller
 {
@@ -28,6 +29,23 @@ class UserController extends Controller
         Alert::success('Success Title', 'Success Message');
         return back();
     }
+
+    public function change_password($id)
+{
+    try {
+        $user = User::findOrFail($id);
+
+        // Update the password here, assuming you have a password field in the users table
+        $user->password = bcrypt('password'); // Replace 'new_password' with the actual new password
+        $user->save();
+
+        Alert::success('Success Title', 'Password changed successfully');
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        Alert::error('Error Title', 'User not found');
+    }
+
+    return back();
+}
 
     public function delete($id)
     {
