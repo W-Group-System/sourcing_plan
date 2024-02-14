@@ -236,12 +236,15 @@
                                 $totals['PBI'] += $cott->buying_quantity / 2;
                             }
                         @endphp
-                    @endforeach                    
+                    @endforeach  
+                    @php
+                        $totalDemand = $demandSupplies->sum('car') + $demandSupplies->sum('ccc') + $demandSupplies->sum('pbi');
+                    @endphp           
                     <table id="table-side">
                         <thead>
                             <tr>
                                 <th colspan="2" style="padding-right: 80px">QUANTITY DISTRIBUTION PER PLANT</th>
-                                <th colspan="2">DEMAND AND SUPPLY AS OF DEC 6 UPDATE</th>
+                                <th colspan="2">DEMAND AND SUPPLY AS OF {{ strtoupper(date('M d, Y', strtotime($end_date))) }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -249,19 +252,19 @@
                                 <td>CAR</td>
                                 <td>{{$totals['CAR']}}&nbsp;MT</td>
                                 <td>CAR</td>
-                                <td>MT</td>
+                                <td>{{$demandSupplies->sum('car')}} MT</td>
                             </tr>
                             <tr>
                                 <td>CCC</td>
                                 <td>{{$totals['CCC']}}&nbsp;MT</td>
                                 <td>CCC</td>
-                                <td>MT</td>
+                                <td>{{$demandSupplies->sum('ccc')}} MT</td>
                             </tr>
                             <tr>
                                 <td>PBI</td>
                                 <td>{{$totals['PBI']}}&nbsp;MT</td>
                                 <td>PBI</td>
-                                <td>MT</td>
+                                <td>{{$demandSupplies->sum('pbi')}} MT</td>
                             </tr>
                         </tbody>
                         <tfoot style="border-top: 1px solid black">
@@ -269,7 +272,7 @@
                                 <td><b>Total</b></td>
                                 <td>{{ array_sum($totals) }}&nbsp;MT</td>
                                 <td><b>Total</b></td>
-                                <td>MT</td>
+                                <td>{{ $totalDemand }} MT</td>
                             </tr>
                         </tfoot>
                     </table>

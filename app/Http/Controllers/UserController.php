@@ -35,8 +35,7 @@ class UserController extends Controller
     try {
         $user = User::findOrFail($id);
 
-        // Update the password here, assuming you have a password field in the users table
-        $user->password = bcrypt('password'); // Replace 'new_password' with the actual new password
+        $user->password = bcrypt('password'); 
         $user->save();
 
         Alert::success('Success Title', 'Password changed successfully');

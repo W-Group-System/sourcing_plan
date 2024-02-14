@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Spi;
 use App\Supplier;
+use App\DemandSupply;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 use PDF;
+use View;
 
 class SpiController extends Controller
 {
@@ -93,6 +94,13 @@ class SpiController extends Controller
 
         $spis = $this->dateFilter($start_date, $end_date);
 
+        $demandSupplies = DemandSupply::whereDate('from', '>=', $start_date)
+            ->whereDate('to', '<=', $end_date)
+            ->where('type', '=', 2)
+            ->get();
+
+        View::share('demandSupplies', $demandSupplies);
+
         // $spis = SPI::all();
         $pdf = PDF::loadView('spi.export', [
             'spis' => $spis,
@@ -166,6 +174,21 @@ class SpiController extends Controller
             Alert::success('Approved', 'Records Updated Successfully');
         }
 
+        return back();
+    }
+
+    public function add_demand_spi(Request $request)
+    {   
+        // dd('mark');
+        $cott = new DemandSupply();
+        $cott->from = $request->from;
+        $cott->to = $request->to;
+        $cott->car = $request->car;
+        $cott->ccc = $request->ccc;
+        $cott->pbi = $request->pbi;
+        $cott->type = 2;
+        $cott->save();
+        Alert::success('Success Title', 'Success Message');
         return back();
     }
 }

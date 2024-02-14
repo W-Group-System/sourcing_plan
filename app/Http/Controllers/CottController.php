@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use App\Cott;
 use App\Supplier;
+use App\DemandSupply;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
+use View;
 use Carbon\Carbon;
 
 class CottController extends Controller
@@ -104,6 +106,13 @@ class CottController extends Controller
         $start_date = Carbon::parse($request->start_date)->startOfDay();
         $end_date = Carbon::parse($request->end_date)->endOfDay();
 
+        $demandSupplies = DemandSupply::whereDate('from', '>=', $start_date)
+            ->whereDate('to', '<=', $end_date)
+            ->where('type', '=', 1)
+            ->get();
+
+        View::share('demandSupplies', $demandSupplies);
+
         $cotts = $this->dateFilter($start_date, $end_date);
         // $cotts = Cott::all();
         $pdf = PDF::loadView('cott.export', [
@@ -163,4 +172,18 @@ class CottController extends Controller
         return back();
     }
 
+    public function add_demand_spi(Request $request)
+    {   
+        // dd('mark');
+        $cott = new DemandSupply();
+        $cott->from = $request->from;
+        $cott->to = $request->to;
+        $cott->car = $request->car;
+        $cott->ccc = $request->ccc;
+        $cott->pbi = $request->pbi;
+        $cott->type = 1;
+        $cott->save();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
 }

@@ -43,8 +43,18 @@
                                             <div align="right">
                                                 @if(isset($start_date))
                                                     <a target='_blank' href="{{ route('export_cott_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary export">Export PDF</a>
-                                                @else
-                                                    <button class="btn btn-primary export" disabled>Export PDF</button>
+                                                    @if (@auth()->user()->position != 'Plant Manager')
+                                                        @if(App\DemandSupply::where(function ($query) use ($start_date, $end_date) {
+                                                            $query->whereBetween('from', [$start_date, $end_date])
+                                                                ->orWhereBetween('to', [$start_date, $end_date]);
+                                                                })->where('type', '!=', 2)->exists())
+                                                            <button class="btn btn-primary" style="display: none" >Demand and Supply</button>
+                                                        @else
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demandSupply">
+                                                                <a href="#" style="color: #FFF">Demand and Supply</a>
+                                                            </button>
+                                                        @endif
+                                                    @endif
                                                 @endif
                                             </div>
                                             <div class="table-responsive">
@@ -221,8 +231,8 @@
 @foreach($cotts as $cott)
 <div class="modal fade" id="add_comments_cott{{$cott->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form action="{{url('add_comments_cott/'.$cott->id)}}" method="POST">
-    @csrf
-    <div class="modal-dialog" role="document">
+        @csrf
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                 <h3 class="modal-title" id="exampleModalLabel">Add Comments</h3>
@@ -234,7 +244,7 @@
                     <div class="row">
                         <div class="col-12 mb-10">
                             <label>Comments</label>
-                            <input name="comments" class="form-control" type="text" >
+                            <input name="comments" class="form-control" type="text" placeholder="Add Comments">
                         </div>
                     </div>
                 </div>
@@ -247,6 +257,49 @@
     </form>
 </div>
 @endforeach
+<div class="modal fade" id="demandSupply" tabindex="-1" aria-labelledby="demandSupply" aria-hidden="true">
+    <form action="{{ url('add_demand') }}" method="POST">
+        @csrf
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h3 class="modal-title" id="demandSupply">Demand and Supply</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 mb-10" style="padding-left: 0px">
+                            <label>Start Date</label>
+                            <input type="date" class="form-control" name="from" value="{{ isset($start_date) ? $start_date->format('Y-m-d') : '' }}" readonly>
+                        </div>
+                        <div class="col-lg-6 mb-10" style="padding-right: 0px">
+                            <label>End Date</label>
+                            <input type="date" class="form-control" name="to" value="{{ isset($end_date) ? $end_date->format('Y-m-d') : '' }}" readonly> 
+                        </div>
+                        <div class="col-12 mb-10">
+                            <label>CAR</label>
+                            <input name="car" class="form-control" type="text" placeholder="Enter CAR">
+                        </div>
+                        <div class="col-12 mb-10">
+                            <label>CCC</label>
+                            <input name="ccc" class="form-control" type="text" placeholder="Enter CCC">
+                        </div>
+                        <div class="col-12 mb-10">
+                            <label>PBI</label>
+                            <input name="pbi" class="form-control" type="text" placeholder="Enter PBI">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 @endsection
 @section('footer')
 <!-- DataTables -->

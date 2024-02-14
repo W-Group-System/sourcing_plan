@@ -232,11 +232,14 @@
                                 }
                             @endphp
                         @endforeach
+                        @php
+                            $totalDemand = $demandSupplies->sum('car') + $demandSupplies->sum('ccc');
+                        @endphp  
                         <table id="table-side">
                             <thead>
                                 <tr>
                                     <th colspan="2" style="padding-right: 80px">QUANTITY DISTRIBUTION PER PLANT</th>
-                                    <th colspan="2">DEMAND AND SUPPLY AS OF DEC 6 UPDATE</th>
+                                    <th colspan="2">DEMAND AND SUPPLY AS OF {{ strtoupper(date('M d, Y', strtotime($end_date))) }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -244,13 +247,13 @@
                                     <td>CAR</td>
                                     <td>{{$totals['CAR']}} MT</td>
                                     <td>CAR</td>
-                                    <td>MT</td>
+                                    <td>{{$demandSupplies->sum('car')}} MT</td>
                                 </tr>
                                 <tr>
                                     <td>CCC</td>
                                     <td>{{$totals['CCC']}} MT</td>
                                     <td>CCC</td>
-                                    <td>MT</td>
+                                    <td>{{$demandSupplies->sum('ccc')}} MT</td>
                                 </tr>
                             </tbody>
                             <tfoot style="border-top: 1px solid black">
@@ -258,7 +261,7 @@
                                     <td><b>Total</b></td>
                                     <td>{{$totals['CAR'] + $totals['CCC']}}&nbsp;MT</td>
                                     <td><b>Total</b></td>
-                                    <td>MT</td>
+                                    <td>{{ $totalDemand }} MT</td>
                                 </tr>
                             </tfoot>
                         </table>
