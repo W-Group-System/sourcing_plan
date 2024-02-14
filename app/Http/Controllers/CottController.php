@@ -172,7 +172,7 @@ class CottController extends Controller
         return back();
     }
 
-    public function add_demand_spi(Request $request)
+    public function add_demand(Request $request)
     {   
         // dd('mark');
         $cott = new DemandSupply();
