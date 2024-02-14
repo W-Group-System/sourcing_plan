@@ -130,7 +130,7 @@
                                             <form method="POST" action="{{url('updateStatus')}}">
                                             @csrf
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-responsive dataTables-example">
+                                                    <table class="table table-bordered table-responsive dataTables-example2">
                                                         <thead>
                                                             <tr>
                                                                 <th><input id="checkAll" type="checkbox" class="form-check-input"></th>
@@ -405,6 +405,17 @@
             pageLength: 25,
             responsive: true,
             ordering: true,
+        });
+
+        $('.dataTables-example2').DataTable({
+            pageLength: 25,
+            responsive: true,
+            ordering: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [
+                {extend: 'csv', title: 'Cottonii List'},
+                {extend: 'excel', title: 'Cottonii List'},
+            ]
         });
     });
 
