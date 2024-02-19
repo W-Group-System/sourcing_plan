@@ -16,46 +16,47 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index');
     Route::get('/home','HomeController@index');
+
     Route::get('change_password','HomeController@changePassword')->name('change_password');
     Route::post('change_password','HomeController@updatePassword')->name('update_password');
+
+    Route::get('/supplier', 'SupplierController@index');
+    Route::post('new_supplier', 'SupplierController@create');
+    Route::post('update_supplier/{id}', 'SupplierController@update');
+    Route::get('status/{id}', 'SupplierController@status');
+
+    Route::get('/cott', 'CottController@index');
+    Route::get('cott/create', 'CottController@create');
+    Route::post('/submitData', 'CottController@submitData');
+    Route::post('updateStatus', 'CottController@updateStatus');
+    Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
+    Route::post('add_demand', 'CottController@add_demand');
+    Route::get('/filter', 'CottController@filter');
+    Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_cott_pdf')->name('export_cott_pdf');
+    Route::get('/cotts/delete/{id}', 'CottController@delete')->name('cotts.delete');
+    Route::get('approvedCott/{id}', 'CottController@approvedCott');
+    Route::get('disapprovedCott/{id}', 'CottController@disapprovedCott');
+    Route::get('preApprover/{id}', 'CottController@preApprover');
+
+    Route::get('/spi', 'SpiController@index');
+    Route::get('spi/create', 'SpiController@create');
+    Route::post('spi/submitData', 'SpiController@submitData');
+    Route::post('spi/updateStatus', 'SpiController@updateStatus');
+    Route::post('add_comments_spi/{id}', 'SpiController@addCommentsSpi');
+    Route::post('add_demand_spi', 'SpiController@add_demand_spi');
+    Route::get('/filterSpi', 'SpiController@filterSpi');
+    Route::get('/export_spi_pdf/{start_date}/{end_date}', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
+    Route::get('delete/{id}', 'SpiController@delete')->name('spis.delete');
+    Route::get('approvedStatus/{id}', 'SpiController@approvedStatus');
+    Route::get('disapprovedStatus/{id}', 'SpiController@disapprovedStatus');
+    Route::get('preApproverSpi/{id}', 'SpiController@preApproverSpi');
+
+    Route::get('/user', 'UserController@index');
+    Route::post('new_user', 'UserController@create');
+    Route::get('users/delete/{id}', 'UserController@delete')->name('users.delete');
+
+    Route::get('/upload', 'UploadController@index');
+    Route::post('new_signed', 'UploadController@create');
+    Route::get('upload/view/{id}', 'UploadController@view')->name('signeds.view');
+    Route::get('upload/delete/{id}', 'UploadController@delete')->name('signeds.delete');
 });
-
-Route::get('/supplier', 'SupplierController@index');
-Route::post('new_supplier', 'SupplierController@create');
-Route::post('update_supplier/{id}', 'SupplierController@update');
-Route::get('status/{id}', 'SupplierController@status');
-
-Route::get('/cott', 'CottController@index');
-Route::get('cott/create', 'CottController@create');
-Route::post('/submitData', 'CottController@submitData');
-Route::post('updateStatus', 'CottController@updateStatus');
-Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
-Route::post('add_demand', 'CottController@add_demand');
-Route::get('/filter', 'CottController@filter');
-Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_cott_pdf')->name('export_cott_pdf');
-Route::get('/cotts/delete/{id}', 'CottController@delete')->name('cotts.delete');
-Route::get('approvedCott/{id}', 'CottController@approvedCott');
-Route::get('disapprovedCott/{id}', 'CottController@disapprovedCott');
-Route::get('preApprover/{id}', 'CottController@preApprover');
-
-Route::get('/spi', 'SpiController@index');
-Route::get('spi/create', 'SpiController@create');
-Route::post('spi/submitData', 'SpiController@submitData');
-Route::post('spi/updateStatus', 'SpiController@updateStatus');
-Route::post('add_comments_spi/{id}', 'SpiController@addCommentsSpi');
-Route::post('add_demand_spi', 'SpiController@add_demand_spi');
-Route::get('/filterSpi', 'SpiController@filterSpi');
-Route::get('/export_spi_pdf/{start_date}/{end_date}', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
-Route::get('delete/{id}', 'SpiController@delete')->name('spis.delete');
-Route::get('approvedStatus/{id}', 'SpiController@approvedStatus');
-Route::get('disapprovedStatus/{id}', 'SpiController@disapprovedStatus');
-Route::get('preApproverSpi/{id}', 'SpiController@preApproverSpi');
-
-Route::get('/user', 'UserController@index');
-Route::post('new_user', 'UserController@create');
-Route::get('users/delete/{id}', 'UserController@delete')->name('users.delete');
-
-Route::get('/upload', 'UploadController@index');
-Route::post('new_signed', 'UploadController@create');
-Route::get('upload/view/{id}', 'UploadController@view')->name('signeds.view');
-Route::get('upload/delete/{id}', 'UploadController@delete')->name('signeds.delete');
