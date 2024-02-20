@@ -127,10 +127,27 @@
                                     </div>
                                     <div id="tab-2" class="tab-pane">
                                         <div class="panel-body">
+                                            <div align="right">
+                                                @if(isset($start_date))
+                                                    <a target='_blank' href="{{ route('for_approval_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary export">Export PDF</a>
+                                                    @if (@auth()->user()->position != 'Plant Manager')
+                                                        @if(App\DemandSupply::where(function ($query) use ($start_date, $end_date) {
+                                                            $query->whereBetween('from', [$start_date, $end_date])
+                                                                ->orWhereBetween('to', [$start_date, $end_date]);
+                                                                })->where('type', '!=', 2)->exists())
+                                                            <button class="btn btn-primary" style="display: none" >Demand and Supply</button>
+                                                        @else
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demandSupply">
+                                                                <a href="#" style="color: #FFF">Demand and Supply</a>
+                                                            </button>
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            </div>
                                             <form method="POST" action="{{url('updateStatus')}}">
                                             @csrf
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-responsive dataTables-example2">
+                                                    <table class="table table-bordered table-responsive dataTables-example">
                                                         <thead>
                                                             <tr>
                                                                 <th><input id="checkAll" type="checkbox" class="form-check-input"></th>
@@ -407,16 +424,16 @@
             ordering: true,
         });
 
-        $('.dataTables-example2').DataTable({
-            pageLength: 25,
-            responsive: true,
-            ordering: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
-                {extend: 'csv', title: 'Cottonii List'},
-                {extend: 'excel', title: 'Cottonii List'},
-            ]
-        });
+        // $('.dataTables-example2').DataTable({
+        //     pageLength: 25,
+        //     responsive: true,
+        //     ordering: true,
+        //     dom: '<"html5buttons"B>lTfgitp',
+        //     buttons: [
+        //         {extend: 'csv', title: 'Cottonii List'},
+        //         {extend: 'excel', title: 'Cottonii List'},
+        //     ]
+        // });
     });
 
     $(document).on('input', '.check-comments', function () {

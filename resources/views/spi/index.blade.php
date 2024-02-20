@@ -126,11 +126,28 @@
                                         </div>
                                     </div>
                                     <div id="tab-2" class="tab-pane">
-                                        <form method="POST" action="{{url('spi/updateStatus')}}">
-                                        @csrf
-                                            <div class="panel-body">
+                                        <div class="panel-body">
+                                        <div align="right">
+                                                @if(isset($start_date))
+                                                    <a target='_blank' href="{{ route('for_approval_spi', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary export">Export PDF</a>
+                                                    @if (@auth()->user()->position != 'Plant Manager')
+                                                        @if(App\DemandSupply::where(function ($query) use ($start_date, $end_date) {
+                                                            $query->whereBetween('from', [$start_date, $end_date])
+                                                                ->orWhereBetween('to', [$start_date, $end_date]);
+                                                                })->where('type', '!=', 2)->exists())
+                                                            <button class="btn btn-primary" style="display: none" >Demand and Supply</button>
+                                                        @else
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demandSupply">
+                                                                <a href="#" style="color: #FFF">Demand and Supply</a>
+                                                            </button>
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            </div>
+                                            <form method="POST" action="{{url('spi/updateStatus')}}">
+                                            @csrf
                                                 <div class="table-responsive">
-                                                    <table class="table table-striped table-bordered table-hover table-responsive dataTables-example2">
+                                                    <table class="table table-striped table-bordered table-hover table-responsive dataTables-example">
                                                         <thead>
                                                             <tr>
                                                                 <th><input id="checkAll" type="checkbox" class="form-check-input"></th>
@@ -230,8 +247,8 @@
                                                         <button type="submit" class="btn btn-primary btn-submit" disabled>Submit</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -422,15 +439,15 @@
             ordering: false,
         });
 
-        $('.dataTables-example2').DataTable({
-            pageLength: 25,
-            responsive: true,
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [
-                {extend: 'csv', title: 'SPI List'},
-                {extend: 'excel', title: 'SPI List'},
-            ]
-        });
+        // $('.dataTables-example2').DataTable({
+        //     pageLength: 25,
+        //     responsive: true,
+        //     dom: '<"html5buttons"B>lTfgitp',
+        //     buttons: [
+        //         {extend: 'csv', title: 'SPI List'},
+        //         {extend: 'excel', title: 'SPI List'},
+        //     ]
+        // });
 
     });
 </script>

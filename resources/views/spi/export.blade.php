@@ -75,32 +75,32 @@
                     $totalBuyingQuantity = 0; 
                 @endphp
                 @if(count($spis))
-                    @foreach($spis->where('approved',1) as $spi)
+                    @foreach($spis->whereIn('status', [1,0]) as $spi)
                         <tr>
-                            <td>{{$spi->name}}</td>
-                            <td>{{$spi->destination}}</td>
-                            <td>{{$spi->pes}}</td>
-                            <td>{{$spi->origin}}</td>
-                            <td>{{$spi->offer_quantity}}</td>
-                            <td>{{$spi->buying_quantity}}</td>
-                            <td>{{$spi->uom}}</td>
-                            <td>{{$spi->original_price ?$spi->original_price : 'Non-nego'}}</td>
-                            <td>{{$spi->buying_price}}</td>
-                            <td>{{$spi->expenses ? $spi->expenses : '-'}}</td>
-                            <td>{{$spi->price_expense}}</td>
-                            <td>{{$spi->moisture_content}}</td>
-                            <td>{{$spi->delivery_schedule}}</td>
-                            <td>{{$spi->terms_payment}}</td>
-                            <td>{{$spi->potassium}}</td>
-                            <td>{{$spi->chips_yield}}</td>
-                            <td>{{$spi->powder_yield}}%</td>
-                            <td>{{$spi->price_yield}}</td>
-                            <td>{{$spi->forex_rate}}</td>
-                            <td>{{$spi->price_usd}}</td>
-                            <td>{{$spi->cost_produce}}</td>
-                            <td>{{$spi->price_ctp}}</td>
-                            <td>{{$spi->remarks}}</td>
-                            <td>{{$spi->pre_approved}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->name}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->destination}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->pes}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->origin}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->offer_quantity}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->buying_quantity}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->uom}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->original_price ?$spi->original_price : 'Non-nego'}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->buying_price}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->expenses ? $spi->expenses : '-'}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_expense}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->moisture_content}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->delivery_schedule}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->terms_payment}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->potassium}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->chips_yield}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->powder_yield}}%</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_yield}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->forex_rate}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_usd}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->cost_produce}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_ctp}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->remarks}}</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->pre_approved}}</td>
                         </tr>
                         @php
                             $totalBuyingQuantity += $spi->buying_quantity; 

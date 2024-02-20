@@ -77,37 +77,41 @@
                 $totalBuyingQuantity = 0; 
             @endphp
             @if(count($cotts))
-                @foreach($cotts->where('approved', 1) as $cott)
+                @foreach($cotts->whereIn('status', [1,0]) as $cott)
                     <tr>
-                        <td>{{$cott->name}}</td>
-                        <td>{{$cott->destination}}</td>
-                        <td>{{$cott->food_grade}}</td>
-                        <td>{{$cott->origin}}</td>
-                        <td>{{$cott->offer_quantity}}</td>
-                        <td>{{$cott->buying_quantity}}</td>
-                        <td>{{$cott->uom}}</td>
-                        <td>{{$cott->original_price}}</td>
-                        <td>{{$cott->buying_price}}</td>
-                        <td>{{$cott->expenses}}</td>
-                        <td>{{$cott->price_expense}}</td>
-                        <td>{{$cott->moisture_content}}</td>
-                        <td>{{$cott->delivery_schedule}}</td>
-                        <td>{{$cott->terms_payment}}</td>
-                        <td>{{$cott->potassium}}</td>
-                        <td>{{$cott->chips_yield}}</td>
-                        <td>{{$cott->powder_yield}}%</td>
-                        <td>{{$cott->price_yield}}</td>
-                        <td>{{$cott->forex_rate}}</td>
-                        <td>{{$cott->price_usd}}</td>
-                        <td>{{$cott->cost_produce}}</td>
-                        <td>{{$cott->price_ctp}}</td>
-                        <td>{{$cott->remarks}}</td>
-                        <td>{{$cott->pre_approved}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->name}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->destination}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->food_grade}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->origin}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->offer_quantity}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->buying_quantity}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->uom}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->original_price}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->buying_price}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->expenses}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_expense}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->moisture_content}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->delivery_schedule}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->terms_payment}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->potassium}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->chips_yield}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->powder_yield}}%</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_yield}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->forex_rate}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_usd}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->cost_produce}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_ctp}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->remarks}}</td>
+                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->pre_approved}}</td>
                     </tr>
                     @php
-                        $totalBuyingQuantity += $cott->buying_quantity; 
                         $totalOfferQuantity += $cott->offer_quantity; 
                     @endphp
+                    @if($cott->status == 1)
+                        @php
+                            $totalBuyingQuantity += $cott->buying_quantity; 
+                        @endphp
+                    @endif
                 @endforeach
             @else
             <tr>
@@ -142,14 +146,15 @@
                             </thead>
                             <tbody>
                                 @php
+                                    $cot = array_key_last(($cotts->where('status',1))->toArray());
                                     $total = 0;
                                     $cost_total = 0;
                                 @endphp
                                 @for($i=1;$i<=8;$i++)
-                                <tr>
+                                <tr @if($cot == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->where('approved',1);
+                                        $cotts_data = $cotts->whereIn('status', [1,0]);
                                         if(array_key_exists($i-1,$cotts_data->toArray()))
                                         {
                                             $total = $total + $cotts_data[$i-1]->buying_quantity;
@@ -162,7 +167,7 @@
                                             {{$total}} 
                                         @endif
                                     </td>
-                                    <td>
+                                    <td >
                                         @if(array_key_exists($i-1,$cotts_data->toArray()))
                                             <!-- {{number_format($cost_total/$total,2)}} -->
                                             {{ sprintf("%.2f", $cost_total/$total) }}
@@ -189,10 +194,10 @@
                             </thead>
                             <tbody>
                                 @for($i=9;$i<=16;$i++)
-                                <tr>
+                                <tr @if($cot == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->where('approved',1);
+                                        $cotts_data = $cotts->whereIn('status', [1,0]);
                                         if(array_key_exists($i-1,$cotts_data->toArray()))
                                         {
                                             $total = $total + $cotts_data[$i-1]->buying_quantity;
@@ -225,7 +230,7 @@
                             'PBI' => 0,
                         ];
                     @endphp
-                    @foreach($cotts->where('approved', 1) as $cott)
+                    @foreach($cotts->where('status', 1) as $cott)
                         @php
                             if ($cott->destination == 'CCC') {
                                 $totals['CCC'] += $cott->buying_quantity;
@@ -314,6 +319,11 @@
         </tbody>
     </table>
 </div>
-
+<style>
+    .status {
+        background-color: #1d9322;
+        color: white;
+    }
+</style>
 </body>
 </html>

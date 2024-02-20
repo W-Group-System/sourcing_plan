@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cottonii List</title>
+    <title>Spinosum List</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
@@ -16,7 +16,7 @@
         font-size: 8px;
         margin: 5px 15px;
     }
-    #table-cotts th, #table-cotts td {
+    #table-spis th, #table-spis td {
         border: 1px solid #DDD;
         padding: 5px
     }
@@ -42,7 +42,7 @@
         <h4>Sourcing Plan</h4>
     </div>
     <h5>Date: {{ date('M d', strtotime($start_date)) }} - {{ date('M d, Y', strtotime($end_date)) }}</h5>
-    <table class="table table-bordered table-responsive" id="table-cotts">
+    <table class="table table-bordered table-responsive" id="table-spis">
         <thead>
             <tr>
                 <th>Seller's Name</th>
@@ -76,42 +76,46 @@
                 $totalOfferQuantity = 0;
                 $totalBuyingQuantity = 0; 
             @endphp
-            @if(count($cotts))
-                @foreach($cotts->where('approved', 1) as $cott)
+            @if(count($spis))
+                @foreach($spis->whereIn('status', [1,0]) as $spi)
                     <tr>
-                        <td>{{$cott->name}}</td>
-                        <td>{{$cott->destination}}</td>
-                        <td>{{$cott->food_grade}}</td>
-                        <td>{{$cott->origin}}</td>
-                        <td>{{$cott->offer_quantity}}</td>
-                        <td>{{$cott->buying_quantity}}</td>
-                        <td>{{$cott->uom}}</td>
-                        <td>{{$cott->original_price}}</td>
-                        <td>{{$cott->buying_price}}</td>
-                        <td>{{$cott->expenses}}</td>
-                        <td>{{$cott->price_expense}}</td>
-                        <td>{{$cott->moisture_content}}</td>
-                        <td>{{$cott->delivery_schedule}}</td>
-                        <td>{{$cott->terms_payment}}</td>
-                        <td>{{$cott->potassium}}</td>
-                        <td>{{$cott->chips_yield}}</td>
-                        <td>{{$cott->powder_yield}}%</td>
-                        <td>{{$cott->price_yield}}</td>
-                        <td>{{$cott->forex_rate}}</td>
-                        <td>{{$cott->price_usd}}</td>
-                        <td>{{$cott->cost_produce}}</td>
-                        <td>{{$cott->price_ctp}}</td>
-                        <td>{{$cott->remarks}}</td>
-                        <td>{{$cott->pre_approved}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->name}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->destination}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->food_grade}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->origin}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->offer_quantity}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->buying_quantity}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->uom}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->original_price}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->buying_price}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->expenses}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_expense}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->moisture_content}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->delivery_schedule}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->terms_payment}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->potassium}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->chips_yield}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->powder_yield}}%</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_yield}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->forex_rate}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_usd}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->cost_produce}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_ctp}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->remarks}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->pre_approved}}</td>
                     </tr>
                     @php
-                        $totalBuyingQuantity += $cott->buying_quantity; 
-                        $totalOfferQuantity += $cott->offer_quantity; 
+                        $totalOfferQuantity += $spi->offer_quantity; 
                     @endphp
+                    @if($spi->status == 1)
+                        @php
+                            $totalBuyingQuantity += $spi->buying_quantity; 
+                        @endphp
+                    @endif
                 @endforeach
             @else
             <tr>
-                <td colspan="25" align="center">No Cottonii Found</td>
+                <td colspan="25" align="center">No Spinosum Found</td>
             </tr>
         </tbody>
         @endif
@@ -119,7 +123,7 @@
             <tr>
                 <td colspan="4" align="right">Total:</td>
                 <td>{{$totalOfferQuantity}}</td>
-                <td>{{$totalBuyingQuantity}}</td>
+                <td class="status">{{$totalBuyingQuantity}}</td>
                 <td colspan="18"></td>
             </tr>
         </tfoot>
@@ -129,7 +133,7 @@
             <tr>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table-cotts">
+                        <table class="table table-bordered" id="table-spis">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
@@ -142,28 +146,29 @@
                             </thead>
                             <tbody>
                                 @php
+                                    $sp = array_key_last(($spis->where('status',1))->toArray());
                                     $total = 0;
                                     $cost_total = 0;
                                 @endphp
                                 @for($i=1;$i<=8;$i++)
-                                <tr>
+                                <tr @if($sp == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->where('approved',1);
-                                        if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        $spis_data = $spis->whereIn('status', [1,0]);
+                                        if(array_key_exists($i-1,$spis_data->toArray()))
                                         {
-                                            $total = $total + $cotts_data[$i-1]->buying_quantity;
-                                            $cost = $cotts_data[$i-1]->buying_quantity*$cotts_data[$i-1]->price_ctp;
+                                            $total = $total + $spis_data[$i-1]->buying_quantity;
+                                            $cost = $spis_data[$i-1]->buying_quantity*$spis_data[$i-1]->price_ctp;
                                             $cost_total = $cost_total + $cost; 
                                         }
                                     @endphp
                                     <td> 
-                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        @if(array_key_exists($i-1,$spis_data->toArray()))
                                             {{$total}} 
                                         @endif
                                     </td>
-                                    <td>
-                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                    <td >
+                                        @if(array_key_exists($i-1,$spis_data->toArray()))
                                             <!-- {{number_format($cost_total/$total,2)}} -->
                                             {{ sprintf("%.2f", $cost_total/$total) }}
                                         @endif
@@ -176,7 +181,7 @@
                 </td>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table-cotts">
+                        <table class="table table-bordered" id="table-spis">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
@@ -189,24 +194,24 @@
                             </thead>
                             <tbody>
                                 @for($i=9;$i<=16;$i++)
-                                <tr>
+                                <tr @if($sp == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->where('approved',1);
-                                        if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        $spis_data = $spis->whereIn('status', [1,0]);
+                                        if(array_key_exists($i-1,$spis_data->toArray()))
                                         {
-                                            $total = $total + $cotts_data[$i-1]->buying_quantity;
-                                            $cost = $cotts_data[$i-1]->buying_quantity*$cotts_data[$i-1]->price_ctp;
+                                            $total = $total + $spis_data[$i-1]->buying_quantity;
+                                            $cost = $spis_data[$i-1]->buying_quantity*$spis_data[$i-1]->price_ctp;
                                             $cost_total = $cost_total + $cost; 
                                         }
                                     @endphp
                                     <td> 
-                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        @if(array_key_exists($i-1,$spis_data->toArray()))
                                             {{$total}} 
                                         @endif
                                     </td>
                                     <td>
-                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        @if(array_key_exists($i-1,$spis_data->toArray()))
                                             <!-- {{number_format($cost_total/$total,2)}} -->
                                             {{ sprintf("%.2f", $cost_total/$total) }}
                                         @endif
@@ -225,20 +230,17 @@
                             'PBI' => 0,
                         ];
                     @endphp
-                    @foreach($cotts->where('approved', 1) as $cott)
+                    @foreach($spis->where('status', 1) as $cott)
                         @php
-                            if ($cott->destination == 'CCC') {
-                                $totals['CCC'] += $cott->buying_quantity;
-                            } elseif ($cott->destination == 'CAR') {
-                                $totals['CAR'] += $cott->buying_quantity ;
-                            } elseif ($cott->destination == 'CAR/PBI') {     
-                                $totals['CAR'] += $cott->buying_quantity / 2;
-                                $totals['PBI'] += $cott->buying_quantity / 2;
+                            if ($spi->destination == 'CCC') {
+                                $totals['CCC'] += $spi->buying_quantity;
+                            } elseif ($spi->destination == 'CAR') {
+                                $totals['CAR'] += $spi->buying_quantity ;
                             }
                         @endphp
                     @endforeach  
                     @php
-                        $totalDemand = $demandSupplies->sum('car') + $demandSupplies->sum('ccc') + $demandSupplies->sum('pbi');
+                    $totalDemand = $demandSupplies->sum('car') + $demandSupplies->sum('ccc');
                     @endphp           
                     <table id="table-side">
                         <thead>
@@ -314,6 +316,11 @@
         </tbody>
     </table>
 </div>
-
+<style>
+    .status {
+        background-color: #1d9322;
+        color: white;
+    }
+</style>
 </body>
 </html>

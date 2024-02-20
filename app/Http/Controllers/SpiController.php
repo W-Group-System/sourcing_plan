@@ -111,6 +111,29 @@ class SpiController extends Controller
         return $pdf->stream('spi.pdf', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
+    public function for_approval_spi(Request $request)
+    {   
+        $start_date = Carbon::parse($request->start_date)->startOfDay();
+        $end_date = Carbon::parse($request->end_date)->endOfDay();
+
+        $spis = $this->dateFilter($start_date, $end_date);
+
+        $demandSupplies = DemandSupply::whereDate('from', '>=', $start_date)
+            ->whereDate('to', '<=', $end_date)
+            ->where('type', '=', 2)
+            ->get();
+
+        View::share('demandSupplies', $demandSupplies);
+
+        // $spis = SPI::all();
+        $pdf = PDF::loadView('spi.for_approval', [
+            'spis' => $spis,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+        ])->setPaper('legal', 'landscape');
+
+        return $pdf->stream('spi.pdf', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
+    }
 
     public function updateStatus(Request $request)
     {
