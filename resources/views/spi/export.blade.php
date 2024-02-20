@@ -14,7 +14,7 @@
         body {
             background-color: #FFF;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 8px;
+            font-size: 10px;
             margin: 5px 15px;
         }
         #table-spis th, #table-spis td {
@@ -22,7 +22,7 @@
             padding: 5px
         }
         #table-side th, #table-side td {
-            font-size: 9px;
+            font-size: 10px;
             padding: 5px
         }
         .box-container {
