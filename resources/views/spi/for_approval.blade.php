@@ -77,7 +77,7 @@
                 $totalBuyingQuantity = 0; 
             @endphp
             @if(count($spis))
-                @foreach($spis->whereIn('status', [1,0])->whereNull('deleted_at') as $spi)
+                @foreach($spis->whereIn('status', [1,0]) as $spi)
                     <tr>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->name}}</td>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->destination}}</td>
