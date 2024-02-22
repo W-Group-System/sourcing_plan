@@ -262,12 +262,12 @@
                                 <td>CCC</td>
                                 <td>{{$demandSupplies->sum('ccc')}} MT</td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td>PBI</td>
                                 <td>{{$totals['PBI']}}&nbsp;MT</td>
                                 <td>PBI</td>
                                 <td>{{$demandSupplies->sum('pbi')}} MT</td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                         <tfoot style="border-top: 1px solid black">
                             <tr>
