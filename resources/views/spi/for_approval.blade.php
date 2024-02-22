@@ -77,7 +77,7 @@
                 $totalBuyingQuantity = 0; 
             @endphp
             @if(count($spis))
-                @foreach($spis->whereIn('status', [1,0]) as $spi)
+                @foreach($spis->whereIn('status', [1,0])->whereNull('deleted_at') as $spi)
                     <tr>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->name}}</td>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->destination}}</td>
@@ -230,7 +230,7 @@
                             'PBI' => 0,
                         ];
                     @endphp
-                    @foreach($spis->where('status', 1) as $cott)
+                    @foreach($spis->where('status', 1)->whereNull('deleted_at') as $spi)
                         @php
                             if ($spi->destination == 'CCC') {
                                 $totals['CCC'] += $spi->buying_quantity;
