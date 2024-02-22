@@ -230,7 +230,7 @@
                             'PBI' => 0,
                         ];
                     @endphp
-                    @foreach($spis->where('status', 1)->whereNull('deleted_at') as $spi)
+                    @foreach($spis->where('status', 1) as $spi)
                         @php
                             if ($spi->destination == 'CCC') {
                                 $totals['CCC'] += $spi->buying_quantity;
