@@ -47,7 +47,7 @@
             <tr>
                 <th>Seller's Name</th>
                 <th>Destination (Plant)</th>
-                <th>Food Grade/ Pet Food</th>
+                <th>PES</th>
                 <th>Origin</th>
                 <th>Offer Quantity</th>
                 <th>Buying Quantity</th>
@@ -81,7 +81,7 @@
                     <tr>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->name}}</td>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->destination}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->food_grade}}</td>
+                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->pes}}</td>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->origin}}</td>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->offer_quantity}}</td>
                         <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->buying_quantity}}</td>
