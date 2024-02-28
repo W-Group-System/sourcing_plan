@@ -31,7 +31,7 @@
         margin-top: 20px;
     }
     .status {
-        background-color: #1d9322;
+        background-color: #d4e7c5;
         color: black;
     }
     @page { margin: 5px 15px; }
