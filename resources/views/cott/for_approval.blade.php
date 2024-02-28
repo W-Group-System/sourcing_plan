@@ -30,6 +30,10 @@
         border: 2px solid #DDD; 
         margin-top: 20px;
     }
+    .status {
+        background-color: #1d9322;
+        color: black;
+    }
     @page { margin: 5px 15px; }
     
 </style>
@@ -319,11 +323,5 @@
         </tbody>
     </table>
 </div>
-<style>
-    .status {
-        background-color: #1d9322;
-        color: white;
-    }
-</style>
 </body>
 </html>
