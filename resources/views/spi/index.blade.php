@@ -134,7 +134,7 @@
                                                         @if(App\DemandSupply::where(function ($query) use ($start_date, $end_date) {
                                                             $query->whereBetween('from', [$start_date, $end_date])
                                                                 ->orWhereBetween('to', [$start_date, $end_date]);
-                                                                })->where('type', '!=', 2)->exists())
+                                                                })->where('type', '!=', 1)->exists())
                                                             <button class="btn btn-primary" style="display: none" >Demand and Supply</button>
                                                         @else
                                                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demandSupply">

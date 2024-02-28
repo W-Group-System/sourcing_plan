@@ -375,7 +375,7 @@
     }
     .pre-approved {
         background-color: #1d9322;
-        color: white;
+        color: black;
     }
     .action {
         max-width: 150px;

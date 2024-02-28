@@ -16,7 +16,7 @@
         font-size: 10px;
         margin: 5px 15px;
     }
-    #table-spis th, #table-spis td {
+    .table-spis th, .table-spis td {
         border: 1px solid #DDD;
         padding: 5px
     }
@@ -30,6 +30,10 @@
         border: 2px solid #DDD; 
         margin-top: 20px;
     }
+    .status {
+        background-color: #1d9322;
+        color: white;
+    }
     @page { margin: 5px 15px; }
     
 </style>
@@ -42,7 +46,7 @@
         <h4>Sourcing Plan</h4>
     </div>
     <h5>Date: {{ date('M d', strtotime($start_date)) }} - {{ date('M d, Y', strtotime($end_date)) }}</h5>
-    <table class="table table-bordered table-responsive" id="table-spis">
+    <table class="table table-bordered table-responsive table-spis">
         <thead>
             <tr>
                 <th>Seller's Name</th>
@@ -78,31 +82,31 @@
             @endphp
             @if(count($spis))
                 @foreach($spis->whereIn('status', [1,0]) as $spi)
-                    <tr>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->name}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->destination}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->pes}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->origin}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->offer_quantity}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->buying_quantity}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->uom}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->original_price}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->buying_price}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->expenses}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_expense}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->moisture_content}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->delivery_schedule}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->terms_payment}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->potassium}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->chips_yield}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->powder_yield}}%</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_yield}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->forex_rate}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_usd}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->cost_produce}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_ctp}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->remarks}}</td>
-                        <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->pre_approved}}</td>
+                    <tr class="{{ $spi->status == 1 ? 'status' : '' }}">
+                        <td>{{$spi->name}}</td>
+                        <td>{{$spi->destination}}</td>
+                        <td>{{$spi->pes}}</td>
+                        <td>{{$spi->origin}}</td>
+                        <td>{{$spi->offer_quantity}}</td>
+                        <td>{{$spi->buying_quantity}}</td>
+                        <td>{{$spi->uom}}</td>
+                        <td>{{$spi->original_price}}</td>
+                        <td>{{$spi->buying_price}}</td>
+                        <td>{{$spi->expenses}}</td>
+                        <td>{{$spi->price_expense}}</td>
+                        <td>{{$spi->moisture_content}}</td>
+                        <td>{{$spi->delivery_schedule}}</td>
+                        <td>{{$spi->terms_payment}}</td>
+                        <td>{{$spi->potassium}}</td>
+                        <td>{{$spi->chips_yield}}</td>
+                        <td>{{$spi->powder_yield}}%</td>
+                        <td>{{$spi->price_yield}}</td>
+                        <td>{{$spi->forex_rate}}</td>
+                        <td>{{$spi->price_usd}}</td>
+                        <td>{{$spi->cost_produce}}</td>
+                        <td>{{$spi->price_ctp}}</td>
+                        <td>{{$spi->remarks}}</td>
+                        <td>{{$spi->pre_approved}}</td>
                     </tr>
                     @php
                         $totalOfferQuantity += $spi->offer_quantity; 
@@ -133,7 +137,7 @@
             <tr>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table-spis">
+                        <table class="table table-bordered table-spis">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
@@ -181,7 +185,7 @@
                 </td>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table-spis">
+                        <table class="table table-bordered table-spis">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
@@ -316,11 +320,5 @@
         </tbody>
     </table>
 </div>
-<style>
-    .status {
-        background-color: #1d9322;
-        color: white;
-    }
-</style>
 </body>
 </html>
