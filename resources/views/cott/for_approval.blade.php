@@ -128,7 +128,7 @@
             <tr>
                 <td colspan="4" align="right">Total:</td>
                 <td>{{$totalOfferQuantity}}</td>
-                <td>{{$totalBuyingQuantity}}</td>
+                <td class="status">{{$totalBuyingQuantity}}</td>
                 <td colspan="18"></td>
             </tr>
         </tfoot>
