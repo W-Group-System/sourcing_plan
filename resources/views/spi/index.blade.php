@@ -388,8 +388,8 @@
         margin: 5px 5px 5px 5px;
     }
     .pre-approved {
-        background-color: #1d9322;
-        color: white;
+        background-color: #d4e7c5;
+        color: black;
     }
     .action {
         max-width: 150px;

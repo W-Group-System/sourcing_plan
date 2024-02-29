@@ -15,6 +15,7 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 10px;
         margin: 5px 15px;
+        color: black;
     }
     #table-cotts th, #table-cotts td {
         border: 1px solid #DDD;
@@ -82,31 +83,31 @@
             @endphp
             @if(count($cotts))
                 @foreach($cotts->whereIn('status', [1,0]) as $cott)
-                    <tr>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->name}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->destination}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->food_grade}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->origin}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->offer_quantity}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->buying_quantity}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->uom}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->original_price}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->buying_price}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->expenses}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_expense}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->moisture_content}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->delivery_schedule}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->terms_payment}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->potassium}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->chips_yield}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->powder_yield}}%</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_yield}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->forex_rate}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_usd}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->cost_produce}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->price_ctp}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->remarks}}</td>
-                        <td class="{{ $cott->status == 1 ? 'status' : '' }}">{{$cott->pre_approved}}</td>
+                    <tr class="{{ $cott->status == 1 ? 'status' : '' }}">
+                        <td>{{$cott->name}}</td>
+                        <td>{{$cott->destination}}</td>
+                        <td>{{$cott->food_grade}}</td>
+                        <td>{{$cott->origin}}</td>
+                        <td>{{$cott->offer_quantity}}</td>
+                        <td>{{$cott->buying_quantity}}</td>
+                        <td>{{$cott->uom}}</td>
+                        <td>{{$cott->original_price}}</td>
+                        <td>{{$cott->buying_price}}</td>
+                        <td>{{$cott->expenses}}</td>
+                        <td>{{$cott->price_expense}}</td>
+                        <td>{{$cott->moisture_content}}</td>
+                        <td>{{$cott->delivery_schedule}}</td>
+                        <td>{{$cott->terms_payment}}</td>
+                        <td>{{$cott->potassium}}</td>
+                        <td>{{$cott->chips_yield}}</td>
+                        <td>{{$cott->powder_yield}}%</td>
+                        <td>{{$cott->price_yield}}</td>
+                        <td>{{$cott->forex_rate}}</td>
+                        <td>{{$cott->price_usd}}</td>
+                        <td>{{$cott->cost_produce}}</td>
+                        <td>{{$cott->price_ctp}}</td>
+                        <td>{{$cott->remarks}}</td>
+                        <td>{{$cott->pre_approved}}</td>
                     </tr>
                     @php
                         $totalOfferQuantity += $cott->offer_quantity; 

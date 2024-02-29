@@ -15,8 +15,9 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 10px;
         margin: 5px 15px;
+        color: black;
     }
-    .table-spis th, .table-spis td {
+    #table-spis th, #table-spis td {
         border: 1px solid #DDD;
         padding: 5px
     }
@@ -31,8 +32,7 @@
         margin-top: 20px;
     }
     .status {
-        background-color: #1d9322;
-        color: white;
+        background-color: #d4e7c5;
     }
     @page { margin: 5px 15px; }
     
@@ -46,7 +46,7 @@
         <h4>Sourcing Plan</h4>
     </div>
     <h5>Date: {{ date('M d', strtotime($start_date)) }} - {{ date('M d, Y', strtotime($end_date)) }}</h5>
-    <table class="table table-bordered table-responsive table-spis">
+    <table class="table table-bordered table-responsive" id="table-spis">
         <thead>
             <tr>
                 <th>Seller's Name</th>
@@ -137,7 +137,7 @@
             <tr>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-spis">
+                        <table class="table table-bordered" id="table-spis">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
@@ -185,7 +185,7 @@
                 </td>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-spis">
+                        <table class="table table-bordered" id="table-spis">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
