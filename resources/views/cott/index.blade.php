@@ -58,7 +58,7 @@
                                                 @endif
                                             </div>
                                             <div class="table-responsive">
-                                                <table class="table table-bordered table-responsive dataTables-example">
+                                                <table class="table table-bordered dataTables-example">
                                                     <thead>
                                                         <tr>
                                                             <th>Seller's Name</th>
@@ -105,7 +105,8 @@
                                                                 <td>{{$cott->delivery_schedule}}</td>
                                                                 <td>{{$cott->terms_payment}}</td>
                                                                 <td>{{$cott->potassium}}</td>
-                                                                <td>{{$cott->chips_yield}}</td>
+                                                                <!-- <td>{{$cott->chips_yield}}%</td> -->
+                                                                <td>{{ number_format($cott->chips_yield, 2) }}%</td>
                                                                 <td>{{$cott->powder_yield}}%</td>
                                                                 <td>{{$cott->price_yield}}</td>
                                                                 <td>{{$cott->forex_rate}}</td>
@@ -147,7 +148,7 @@
                                             <form method="POST" action="{{url('updateStatus')}}">
                                             @csrf
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-responsive dataTables-example">
+                                                    <table class="table table-bordered dataTables-example">
                                                         <thead>
                                                             <tr>
                                                                 <th><input id="checkAll" type="checkbox" class="form-check-input"></th>
@@ -198,7 +199,7 @@
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->delivery_schedule}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->terms_payment}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->potassium}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->chips_yield}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{ number_format($cott->chips_yield, 2)}}%</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->powder_yield}}%</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->price_yield}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->forex_rate}}</td>
@@ -358,7 +359,7 @@
         clear: both;
         margin-top: 6px !important;
         margin-bottom: 6px !important;
-        max-width: none !important;
+        max-width: 100px !important;
         border-collapse: separate !important;
     }
     .dataTables_empty {
@@ -383,6 +384,7 @@
         width: 150px;
         text-align: center;
     }
+    
 </style>
 <script>
     $(document).on('click', '#checkAll', function () {

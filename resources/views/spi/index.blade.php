@@ -105,7 +105,7 @@
                                                                 <td>{{$spi->delivery_schedule}}</td>
                                                                 <td>{{$spi->terms_payment}}</td>
                                                                 <td>{{$spi->potassium}}</td>
-                                                                <td>{{$spi->chips_yield}}</td>
+                                                                <td>{{ number_format($spi->chips_yield, 2)}}%</td>
                                                                 <td>{{$spi->powder_yield}}%</td>
                                                                 <td>{{$spi->price_yield}}</td>
                                                                 <td>{{$spi->forex_rate}}</td>
@@ -200,7 +200,7 @@
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->delivery_schedule}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->terms_payment}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->potassium}}</td>
-                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->chips_yield}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{ number_format($spi->chips_yield, 2)}}%</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->powder_yield}}%</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->price_yield}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->forex_rate}}</td>

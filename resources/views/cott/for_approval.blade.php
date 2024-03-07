@@ -99,8 +99,8 @@
                         <td>{{$cott->delivery_schedule}}</td>
                         <td>{{$cott->terms_payment}}</td>
                         <td>{{$cott->potassium}}</td>
-                        <td>{{$cott->chips_yield}}</td>
-                        <td>{{$cott->powder_yield}}%</td>
+                        <td>{{$cott->chips_yield}}%</td>
+                        <td>{{ number_format($cott->chips_yield, 2) }} %</td>
                         <td>{{$cott->price_yield}}</td>
                         <td>{{$cott->forex_rate}}</td>
                         <td>{{$cott->price_usd}}</td>

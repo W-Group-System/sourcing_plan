@@ -98,7 +98,7 @@
                         <td>{{$spi->delivery_schedule}}</td>
                         <td>{{$spi->terms_payment}}</td>
                         <td>{{$spi->potassium}}</td>
-                        <td>{{$spi->chips_yield}}</td>
+                        <td>{{ number_format($spi->chips_yield, 2)}}%</td>
                         <td>{{$spi->powder_yield}}%</td>
                         <td>{{$spi->price_yield}}</td>
                         <td>{{$spi->forex_rate}}</td>
