@@ -15,7 +15,7 @@ class SpiController extends Controller
     // list
     public function index()
     {   
-        $spis = Spi::all();
+        $spis = Spi::orderBy('price_yield', 'asc')->get();
         return view('spi.index', compact('spis'));  
     }
 
@@ -72,7 +72,7 @@ class SpiController extends Controller
     {
         return SPI::whereDate('created_at','>=',$start_date)
                     ->whereDate('created_at','<=',$end_date)
-                    ->orderBy('buying_quantity','asc')
+                    ->orderBy('price_yield','asc')
                     ->get();
     }
 
