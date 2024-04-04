@@ -161,7 +161,7 @@
                                 <tr @if($cot == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->whereIn('status', [1,0])->sortBy('status');
+                                        $cotts_data = $cotts->whereIn('status', [1, 0])->sortBy('status');
                                         if(array_key_exists($i-1,$cotts_data->toArray()))
                                         {
                                             $total = $total + $cotts_data[$i-1]->buying_quantity;
@@ -204,7 +204,7 @@
                                 <tr @if($cot == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->whereIn('status', [1,0]);
+                                        $cotts_data = $cotts->whereIn('status', [1, 0])->sortBy('status');
                                         if(array_key_exists($i-1,$cotts_data->toArray()))
                                         {
                                             $total = $total + $cotts_data[$i-1]->buying_quantity;
