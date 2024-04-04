@@ -151,8 +151,8 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $cotts_data = $cotts->whereIn('status', [1, 0])->orderBy('status', 'desc')->get();
-                                    $cot = array_key_last($cotts_data->toArray());
+                                    $cotts_data = $cotts->whereIn('status', [1, 0])->get()->sortByDesc('status');
+                                    $cot = $cotts_data->keys()->last();
                                     $total = 0;
                                     $cost_total = 0;
                                 @endphp
