@@ -210,6 +210,7 @@
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->comments}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->pre_approved}}</td>
                                                                     <td class="action">
+                                                                        <!-- <a href="{{ url('cott/edit/' . $cott->id) }}" class="btn btn-info btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a> -->
                                                                         <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_cott{{$cott->id}}" title="Add Comments">
                                                                             <i class="fa fa-comments"></i>
                                                                             <a href="{{url('add_comments_cott/'.$cott->id)}}"></a>

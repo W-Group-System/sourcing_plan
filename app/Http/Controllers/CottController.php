@@ -209,4 +209,11 @@ class CottController extends Controller
         Alert::success('Success Title', 'Success Message');
         return back();
     }
+
+    // Edit
+    public function edit($id) {
+        $cotts = Cott::find($id);
+        // $suppliers = Supplier::all();
+        return view('cott.edit', compact('cotts'));  
+    }
 }

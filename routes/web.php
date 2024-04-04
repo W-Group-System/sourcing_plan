@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     // cottonii
     Route::get('/cott', 'CottController@index');
     Route::get('cott/create', 'CottController@create');
+    Route::post('cott/edit', 'CottController@edit');
     Route::post('/submitData', 'CottController@submitData');
     Route::post('updateStatus', 'CottController@updateStatus');
     Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
