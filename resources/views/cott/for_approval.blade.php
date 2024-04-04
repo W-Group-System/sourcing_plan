@@ -82,7 +82,10 @@
                 $totalBuyingQuantity = 0; 
             @endphp
             @if(count($cotts))
-                @foreach($cotts->whereIn('status', [1,0])->where('status', 1) as $cott)
+                <!-- @foreach($cotts->whereIn('status', [1,0]) as $cott) -->
+                @foreach($cotts->whereIn('status', [1, 0])->sortByDesc(function($cott) {
+                    return $cott->status == 1 ? 1 : 0;
+                }) as $cott)
                     <tr class="{{ $cott->status == 1 ? 'status' : '' }}">
                         <td>{{$cott->name}}</td>
                         <td>{{$cott->destination}}</td>
