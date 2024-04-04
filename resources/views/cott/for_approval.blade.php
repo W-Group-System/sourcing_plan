@@ -83,7 +83,7 @@
             @endphp
             @if(count($cotts))
                 @foreach($cotts->whereIn('status', [1,0]) as $cott)
-                    <tr class="{{ $cott->status == 1 ? 'status' : '' }}">
+                    <tr >
                         <td>{{$cott->name}}</td>
                         <td>{{$cott->destination}}</td>
                         <td>{{$cott->food_grade}}</td>
