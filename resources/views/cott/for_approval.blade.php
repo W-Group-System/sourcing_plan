@@ -153,7 +153,7 @@
                             </thead>
                             <tbody>
                                 @php
-                                    $cottsWithStatus1 = $cotts->where('status', 1)->sortBy('status', 'desc');
+                                    $cottsWithStatus1 = $cotts->where('status', 1)->sortBy('status');
                                     $cot = $cottsWithStatus1->keys()->last();
                                     $total = 0;
                                     $cost_total = 0;
