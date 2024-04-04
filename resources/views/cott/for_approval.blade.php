@@ -82,8 +82,8 @@
                 $totalBuyingQuantity = 0; 
             @endphp
             @if(count($cotts))
-                @foreach($cotts->whereIn('status', [1,0]) as $cott)
-                    <tr >
+                @foreach($cotts->whereIn('status', [1,0])->where('status', 1)->orderBy('status')->get() as $cott)
+                    <tr class="{{ $cott->status == 1 ? 'status' : '' }}">
                         <td>{{$cott->name}}</td>
                         <td>{{$cott->destination}}</td>
                         <td>{{$cott->food_grade}}</td>
