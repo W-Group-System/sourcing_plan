@@ -154,6 +154,7 @@
                             <tbody>
                                 @php
                                     $cotts_data = $cotts->whereIn('status', [1])->sortBy('status');
+                                    $cot = array_key_last($cotts_data->toArray());
                                     $total = 0;
                                     $cost_total = 0;
                                 @endphp
