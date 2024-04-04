@@ -152,30 +152,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @php
-    // Filter and sort the $cotts collection by status
-    $cotts_data = $cotts->whereIn('status', [1])->sortBy('status');
-@endphp
-
-@for($i=1; $i<=8; $i++)
-    <tr @if($cot == $i-1) class='status' @endif>
-        <td>1-{{$i}}</td>
-        @php
-            // Initialize total and cost_total for each iteration
-            $total = 0;
-            $cost_total = 0;
-
-            // Check if the current index exists in the filtered and sorted collection
-            if(array_key_exists($i-1, $cotts_data->toArray())) {
-                // Calculate total and cost_total
-                $total = $cotts_data[$i-1]->buying_quantity;
-                $cost_total = $cotts_data[$i-1]->buying_quantity * $cotts_data[$i-1]->price_ctp;
-            }
-        @endphp
-        <td>{{ $total }}</td>
-        <td>{{ sprintf("%.2f", $cost_total/$total) }}</td>
-    </tr>
-@endfor
+                                @php
+                                    $cotts_data = $cotts->whereIn('status', [1])->sortBy('status');
+                                    $total = 0;
+                                    $cost_total = 0;
+                                @endphp
+                                @for($i=1;$i<=8;$i++)
+                                <tr @if($cot == $i-1) class='status' @endif>
+                                    <td>1-{{$i}}</td>
+                                    @php
+                                        if(array_key_exists($i-1,$cotts_data->toArray()))
+                                        {
+                                            $total += $cotts_data[$i-1]->buying_quantity;
+                                            $cost = $cotts_data[$i-1]->buying_quantity * $cotts_data[$i-1]->price_ctp;
+                                            $cost_total += $cost;
+                                        }
+                                    @endphp
+                                    <td> 
+                                        {{ $total }} 
+                                    </td>
+                                    <td >
+                                        @if($total != 0)
+                                            {{ sprintf("%.2f", $cost_total/$total) }}
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endfor
                             </tbody>
                         </table>
                     </div> 
@@ -198,22 +200,18 @@
                                 <tr @if($cot == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->whereIn('status', [1,0]);
                                         if(array_key_exists($i-1,$cotts_data->toArray()))
                                         {
-                                            $total = $total + $cotts_data[$i-1]->buying_quantity;
-                                            $cost = $cotts_data[$i-1]->buying_quantity*$cotts_data[$i-1]->price_ctp;
-                                            $cost_total = $cost_total + $cost; 
+                                            $total += $cotts_data[$i-1]->buying_quantity;
+                                            $cost = $cotts_data[$i-1]->buying_quantity * $cotts_data[$i-1]->price_ctp;
+                                            $cost_total += $cost;
                                         }
                                     @endphp
                                     <td> 
-                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
-                                            {{$total}} 
-                                        @endif
+                                        {{ $total }} 
                                     </td>
-                                    <td>
-                                        @if(array_key_exists($i-1,$cotts_data->toArray()))
-                                            <!-- {{number_format($cost_total/$total,2)}} -->
+                                    <td >
+                                        @if($total != 0)
                                             {{ sprintf("%.2f", $cost_total/$total) }}
                                         @endif
                                     </td>
