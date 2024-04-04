@@ -82,7 +82,7 @@
                 $totalBuyingQuantity = 0; 
             @endphp
             @if(count($cotts))
-                @foreach($cotts->whereIn('status', [1,0]) as $cott)
+                @foreach($cotts->whereIn('status', [1]) as $cott)
                     <tr class="{{ $cott->status == 1 ? 'status' : '' }}">
                         <td>{{$cott->name}}</td>
                         <td>{{$cott->destination}}</td>
@@ -159,7 +159,7 @@
                                 <tr @if($cot == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->whereIn('status', [1]);
+                                        $cotts_data = $cotts->whereIn('status', [1,0]);
                                         if(array_key_exists($i-1,$cotts_data->toArray()))
                                         {
                                             $total = $total + $cotts_data[$i-1]->buying_quantity;
@@ -202,7 +202,7 @@
                                 <tr @if($cot == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $cotts_data = $cotts->whereIn('status', [1]);
+                                        $cotts_data = $cotts->whereIn('status', [1,0]);
                                         if(array_key_exists($i-1,$cotts_data->toArray()))
                                         {
                                             $total = $total + $cotts_data[$i-1]->buying_quantity;
