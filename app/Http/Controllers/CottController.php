@@ -87,6 +87,7 @@ class CottController extends Controller
     public function dateFilter($start_date, $end_date) {
         return Cott::whereDate('created_at','>=',$start_date)
                         ->whereDate('created_at','<=',$end_date)
+                        ->orderBy('status', 'desc')
                         ->orderBy('price_yield', 'asc')
                         ->get();
     }
@@ -137,6 +138,7 @@ class CottController extends Controller
         View::share('demandSupplies', $demandSupplies);
 
         $cotts = $this->dateFilter($start_date, $end_date);
+        
         // $cotts = Cott::all();
         $pdf = PDF::loadView('cott.for_approval', [
             'cotts' => $cotts,
