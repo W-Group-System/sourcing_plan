@@ -39,6 +39,9 @@
             opacity: .8;
             background-size:200px 120px;
         }
+        .adjust {
+            width: 100px;
+        }
     </style>
     
 </head>

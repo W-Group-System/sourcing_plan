@@ -68,7 +68,7 @@
                                         <td><input type="text" name="origin[]" id="origin" class="form-control adjust"></td>
                                         <td><input type="text" name="offer_quantity[]" id="offer_quantity" class="form-control adjust"></td>
                                         <td><input type="text" name="buying_quantity[]" id="buying_quantity" class="form-control adjust"></td>
-                                        <td><input type="text" name="uom[]" id="uom" class="form-control adjust" value="MT"></td>
+                                        <td><input type="text" name="uom[]" id="uom" class="form-control adjust" value="MT" readonly></td>
                                         <td><input type="text" name="original_price[]" id="original_price" class="form-control adjust"></td>
                                         <td><input type="text" name="buying_price[]" id="buying_price" class="form-control adjust buying_price"></td>
                                         <td><input type="text" name="expenses[]" id="expenses" class="form-control adjust expenses"></td>
@@ -150,7 +150,7 @@
             '<td><input type="text" name="origin[]" id="origin" class="form-control adjust"></td>'+
             '<td><input type="text" name="offer_quantity[]" id="offer_quantity" class="form-control adjust"></td>'+
             '<td><input type="text" name="buying_quantity[]" id="buying_quantity" class="form-control adjust"></td>'+
-            '<td><input type="text" name="uom[]" id="uom" class="form-control adjust" value="MT"></td>'+
+            '<td><input type="text" name="uom[]" id="uom" class="form-control adjust" value="MT" readonly></td>'+
             '<td><input type="text" name="original_price[]" id="original_price" class="form-control adjust"></td>'+
             '<td><input type="text" name="buying_price[]" id="buying_price" class="form-control adjust buying_price"></td>'+
             '<td><input type="text" name="expenses[]" id="expenses" class="form-control adjust expenses"></td>'+

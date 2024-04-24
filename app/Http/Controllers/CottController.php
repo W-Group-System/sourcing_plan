@@ -218,4 +218,20 @@ class CottController extends Controller
         // $suppliers = Supplier::all();
         return view('cott.edit', compact('cotts'));  
     }
+
+    public function update(Request $request, $id)
+    {
+        $cotts = Cott::find($id);
+        $cotts->origin = $request->input('origin');
+        $cotts->offer_quantity = $request->input('offer_quantity');
+        $cotts->buying_quantity = $request->input('buying_quantity');
+        $cotts->original_price = $request->input('original_price');
+        $cotts->delivery_schedule = $request->input('delivery_schedule');
+        $cotts->terms_payment = $request->input('terms_payment');
+        $cotts->potassium = $request->input('potassium');
+        $cotts->remarks = $request->input('remarks');
+        $cotts->update();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
 }

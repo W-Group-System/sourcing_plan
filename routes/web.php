@@ -30,7 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     // cottonii
     Route::get('/cott', 'CottController@index');
     Route::get('cott/create', 'CottController@create');
-    Route::post('cott/edit', 'CottController@edit');
+    Route::get('cott/edit/{id}', 'CottController@edit')->name('cott.edit');
+    Route::post('update_cott/{id}', 'CottController@update');
     Route::post('/submitData', 'CottController@submitData');
     Route::post('updateStatus', 'CottController@updateStatus');
     Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
@@ -46,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     // spinosum
     Route::get('/spi', 'SpiController@index');
     Route::get('spi/create', 'SpiController@create');
+    Route::get('spi/edit/{id}', 'SpiController@edit')->name('spi.edit');
+    Route::post('update_spi/{id}', 'SpiController@update');
     Route::post('spi/submitData', 'SpiController@submitData');
     Route::post('spi/updateStatus', 'SpiController@updateStatus');
     Route::post('add_comments_spi/{id}', 'SpiController@addCommentsSpi');

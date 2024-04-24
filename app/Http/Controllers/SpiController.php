@@ -214,4 +214,26 @@ class SpiController extends Controller
         Alert::success('Success Title', 'Success Message');
         return back();
     }
+
+    public function edit($id) {
+        $spis = Spi::find($id);
+        return view('spi.edit', compact('spis'));  
+    }
+
+    public function update(Request $request, $id)
+    {
+        $spis = Spi::find($id);
+        $spis->pes = $request->input('pes');
+        $spis->origin = $request->input('origin');
+        $spis->offer_quantity = $request->input('offer_quantity');
+        $spis->buying_quantity = $request->input('buying_quantity');
+        $spis->original_price = $request->input('original_price');
+        $spis->delivery_schedule = $request->input('delivery_schedule');
+        $spis->terms_payment = $request->input('terms_payment');
+        $spis->potassium = $request->input('potassium');
+        $spis->remarks = $request->input('remarks');
+        $spis->update();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
 }

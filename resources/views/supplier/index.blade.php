@@ -127,7 +127,7 @@
     </div>
 </div>
 @foreach($suppliers as $supplier)
-@include('supplier.edit')
+    @include('supplier.edit')
 @endforeach
 <div class="modal fade" id="add_supplier" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form method="POST" action="{{url('new_supplier')}}" autocomplete="off">

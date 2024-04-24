@@ -223,6 +223,7 @@
                                                                         </a>
                                                                     </td> -->
                                                                     <td class="action">
+                                                                        <a href="{{ route('spi.edit', ['id' => $spi->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
                                                                         <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_spi{{$spi->id}}" title="Add Comments">
                                                                             <i class="fa fa-comments"></i>
                                                                             <a href="{{url('add_comments_spi/'.$spi->id)}}"></a>
