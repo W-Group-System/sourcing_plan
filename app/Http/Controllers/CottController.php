@@ -73,15 +73,17 @@ class CottController extends Controller
             'checkbox' => 'required|array',
         ]);
 
-        $action = $request->input('action'); // Retrieve the action parameter from the request
+        $action = $request->input('action'); 
 
         foreach ($request->input('checkbox') as $id) {
             $data = Cott::find($id);
             if ($data) {
                 if ($action === 'approve') {
-                    $data->status = 1; // Approve the record
+                    $data->status = 1; 
                 } elseif ($action === 'disapprove') {
-                    $data->status = 0; // Disapprove the record
+                    $data->status = 0; 
+                } elseif ($action === 'approved') {
+                    $data->approved = 1;
                 }
                 $data->save();
             }

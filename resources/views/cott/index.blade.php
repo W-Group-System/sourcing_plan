@@ -105,7 +105,13 @@
                                                                 <td>{{$cott->delivery_schedule}}</td>
                                                                 <td>{{$cott->terms_payment}}</td>
                                                                 <td>{{$cott->potassium}}</td>
-                                                                <td>{{ number_format($cott->chips_yield, 2) }}%</td>
+                                                                <td>
+                                                                    @if (is_numeric($cott->chips_yield))
+                                                                        {{ number_format($cott->chips_yield, 2) }}%
+                                                                    @else
+                                                                        {{ $cott->chips_yield }}
+                                                                    @endif
+                                                                </td>
                                                                 <td>{{$cott->powder_yield}}%</td>
                                                                 <td>{{$cott->price_yield}}</td>
                                                                 <td>{{$cott->forex_rate}}</td>
@@ -237,9 +243,9 @@
                                                         </tbody>
                                                     </table>
                                                     <div align="right" class="mt-10">
-                                                        <!-- <button type="submit" class="btn btn-primary btn-submit" disabled>Submit</button> -->
-                                                        <button type="submit" class="btn btn-primary btn-submit btn-outline" name="action" value="approve" disabled>Approve All</button>
-                                                        <button type="submit" class="btn btn-danger btn-submit btn-outline" name="action" value="disapprove" disabled>Disapprove All</button>
+                                                        <button type="submit" class="btn btn-info btn-submit" name="action" value="approved" disabled>Submit</button>
+                                                        <button type="submit" class="btn btn-primary btn-submit" name="action" value="approve" disabled>Approve All</button>
+                                                        <button type="submit" class="btn btn-danger btn-submit" name="action" value="disapprove" disabled>Disapprove All</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -393,12 +399,6 @@
         width: 150px;
         text-align: center;
     }
-    .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary.active[disabled], fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-        background-color: transparent !important;
-    }
-    .btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled]:active, .btn-danger.active[disabled], fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
-        background-color: transparent !important;
-    }
 </style>
 <script>
     $(document).on('click', '#checkAll', function () {
@@ -415,8 +415,8 @@
         buttonDisabled()
     })
 
-    $(document).on('click', '#checkAll', function () {
-        if ($('#checkAll').length === $('#checkAll:checked').length) {
+    $(document).on('click', '.check-item', function () {
+        if ($('.check-item').length === $('.check-item:checked').length) {
             $('#checkAll').prop('checked', true);
         } else {
             $('#checkAll').prop('checked', false);
