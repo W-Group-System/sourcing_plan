@@ -24,7 +24,7 @@ class CottController extends Controller
         return view('cott.create', compact('suppliers'));
     }
 
-    public function submitData(Request $request)
+    public function submitCott(Request $request)
     {   
         foreach($request->name as $key=>$name) {
             
@@ -67,20 +67,29 @@ class CottController extends Controller
         return back();
     }
 
-    public function updateStatus(Request $request)
+    public function updateStatusCott(Request $request)
     {
         $request->validate([
             'checkbox' => 'required|array',
         ]);
 
+        $action = $request->input('action'); // Retrieve the action parameter from the request
+
         foreach ($request->input('checkbox') as $id) {
             $data = Cott::find($id);
             if ($data) {
-                $data->approved = 1; 
+                if ($action === 'approve') {
+                    $data->status = 1; // Approve the record
+                } elseif ($action === 'disapprove') {
+                    $data->status = 0; // Disapprove the record
+                }
                 $data->save();
             }
         }
-        Alert::success('Success Title', 'Records Updated Successfully');
+
+        $message = ($action === 'approve') ? 'Approved' : 'Disapproved';
+        Alert::success('Success Title', 'Records ' . $message . ' Successfully');
+
         return back();
     }
 

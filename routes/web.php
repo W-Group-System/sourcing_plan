@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cott/create', 'CottController@create');
     Route::get('cott/edit/{id}', 'CottController@edit')->name('cott.edit');
     Route::post('update_cott/{id}', 'CottController@update');
-    Route::post('/submitData', 'CottController@submitData');
-    Route::post('updateStatus', 'CottController@updateStatus');
+    Route::post('/submitCott', 'CottController@submitCott');
+    Route::post('updateStatusCott', 'CottController@updateStatusCott');
     Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
     Route::post('add_demand', 'CottController@add_demand');
     Route::get('/filter', 'CottController@filter');

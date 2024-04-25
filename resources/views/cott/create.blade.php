@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form method="POST" action="{{ url('submitData') }}">
+                    <form method="POST" action="{{ url('submitCott') }}">
                     @csrf
                         <div class="table-responsive">
                             <table class="table table-striped" id="tableEstimate">

@@ -141,14 +141,23 @@ class SpiController extends Controller
             'checkbox' => 'required|array',
         ]);
 
+        $action = $request->input('action'); // Retrieve the action parameter from the request
+
         foreach ($request->input('checkbox') as $id) {
             $data = Spi::find($id);
             if ($data) {
-                $data->approved = 1; 
+                if ($action === 'approve') {
+                    $data->status = 1; // Approve the record
+                } elseif ($action === 'disapprove') {
+                    $data->status = 0; // Disapprove the record
+                }
                 $data->save();
             }
         }
-        Alert::success('Success Title', 'Records Updated Successfully');
+
+        $message = ($action === 'approve') ? 'Approved' : 'Disapproved';
+        Alert::success('Success Title', 'Records ' . $message . ' Successfully');
+
         return back();
     }
 
