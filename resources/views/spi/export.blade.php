@@ -296,7 +296,7 @@
                 </tr>
                 <tr>
                     <td>SEAWEEDS PURCHASING SUPERVISOR</td>
-                    <td>ASST. SEAWEEDS PURCHASING MANAGER</td>
+                    <td>SEAWEEDS PURCHASING MANAGER</td>
                     <!-- <td>PLANT MANAGER</td -->
                     <td>PRESIDENT</td>
                 </tr>
