@@ -87,6 +87,9 @@
                             </div>
                         </div>
                     </div>
+                    <div style="margin-top: 20px;">
+                        <div style="justify-content: center; display:flex;" id="legend-container"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -108,6 +111,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div style="justify-content: center; display:flex;" id="spilegend-container"></div>
                     </div>
                 </div>
             </div>
@@ -419,7 +425,13 @@
             lineWidth: 1.5,
             fill: false,
         },
-        stack: null
+        stack: null,
+        points: {
+        show: true,
+        radius: 3,
+        fill: true,
+        fillColor: "#8A2BE2"
+    }
     });
 
     var options = {
@@ -464,17 +476,51 @@
             axisLabelPadding: 67
         }],
         legend: {
-            noColumns: 1,
+            noColumns: 9,
             labelBoxBorderColor: "#000000",
-            position: "nw"
+            container: $("#legend-container"),
+            labelFormatter: function(label, series) {
+        return '<span style="padding-right: 10px;">' + label + '</span>';
+    }
         },
         grid: {
             hoverable: true,
             borderWidth: 0
-        }
+        },
+        
     };
 
-    var plot = $.plot($("#flot-dashboard-chart"), dataset, options);
+  
+var plot = $.plot($("#flot-dashboard-chart"), dataset, options);
+
+
+function addDataLabels() {
+    var plotOffset = plot.getPlotOffset();
+
+
+    priceData.forEach(function(point) {
+        var x = point[0];
+        var y = point[1].toFixed(2); 
+        var plotPos = plot.pointOffset({ x: x, y: y });
+
+        
+        var label = $('<div class="data-label">' + y + '</div>').css({
+            position: 'absolute',
+            left: plotPos.left - plotOffset.left ,
+            top: plotPos.top - plotOffset.top , 
+            color: '#8a2be2',
+            // backgroundColor: '#ffffff', 
+            // padding: '4px',
+            borderRadius: '4px',
+            zIndex: '10' 
+        });
+
+        $("#flot-dashboard-chart").append(label);
+    });
+}
+
+addDataLabels();
+
 
     $("<div id='tooltip'></div>").css({
         position: "absolute",
@@ -689,9 +735,12 @@
             axisLabelPadding: 67
         }],
         legend: {
-            noColumns: 1,
+            noColumns: 9,
             labelBoxBorderColor: "#000000",
-            position: "nw"
+            container: $("#spilegend-container"),
+            labelFormatter: function(label, series) {
+        return '<span style="padding-right: 10px;">' + label + '</span>';
+    }
         },
         grid: {
             hoverable: true,
@@ -701,6 +750,33 @@
 
     var plot = $.plot($("#spinossum-dashboard-chart"), dataset, options);
 
+    
+function addSpiDataLabels() {
+    var plotOffset = plot.getPlotOffset();
+
+
+    priceData.forEach(function(point) {
+        var x = point[0];
+        var y = point[1].toFixed(2); 
+        var plotPos = plot.pointOffset({ x: x, y: y });
+
+        
+        var label = $('<div class="data-label">' + y + '</div>').css({
+            position: 'absolute',
+            left: plotPos.left - plotOffset.left ,
+            top: plotPos.top - plotOffset.top , 
+            color: '#8a2be2',
+            // backgroundColor: '#ffffff', 
+            // padding: '4px',
+            borderRadius: '4px',
+            zIndex: '10' 
+        });
+
+        $("#spinossum-dashboard-chart").append(label);
+    });
+}
+
+addSpiDataLabels();
     $("<div id='tooltip'></div>").css({
         position: "absolute",
         display: "none",
