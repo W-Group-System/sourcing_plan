@@ -614,7 +614,7 @@
         bars: {
             show: true,
             align: "center",
-            barWidth: calculateBarWidth(dataSets[area].length), 
+            barWidth:  0.5 * 24 * 60 * 60 * 1000, 
             lineWidth: 0,
             fill: true,
             fillColor: areaColors[area],
@@ -622,18 +622,18 @@
         }
     }));
 
-    function calculateBarWidth(numBars) {
-        var minBarWidth = 0.5 * 10 * 30 * 30 * 60;
-        var availableSpace = maxDate - minDate; 
-        var barWidth = availableSpace / numBars;
+    // function calculateBarWidth(numBars) {
+    //     var minBarWidth = 0.5 * 10 * 30 * 30 * 60;
+    //     var availableSpace = maxDate - minDate; 
+    //     var barWidth = availableSpace / numBars;
 
         
-        if (barWidth < minBarWidth) {
-            barWidth = minBarWidth;
-        }
+    //     if (barWidth < minBarWidth) {
+    //         barWidth = minBarWidth;
+    //     }
 
-        return barWidth;
-    }
+    //     return barWidth;
+    // }
 
     dataset.push({
         label: "Price",
