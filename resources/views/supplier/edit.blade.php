@@ -52,8 +52,16 @@
                             <input name="terms" class="form-control" type="text" value="{{$supplier->terms}}">
                         </div>
                         <div class="col-12 mb-10">
-                            <label>Accreditation Date</label>
-                            <input name="accreditation_date" class="form-control" type="date" value="{{date('Y-m-d', strtotime($supplier->accreditation_date))}}">
+                            <label>Area</label>
+                            <select class="form-control js-example-basic-single" name="area" id="area">
+                                <option value="" disabled selected>Select Area</option>
+                                <option value="ZAMBO BS" {{ $supplier->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>
+                                <option value="PAL BS" {{ $supplier->area == "PAL BS" ? 'selected' : '' }}>PAL BS</option>
+                                <option value="MINDORO BS" {{ $supplier->area == "MINDORO BS" ? 'selected' : '' }}>MINDORO BS</option>
+                                <option value="CEBU" {{ $supplier->area == "CEBU BS" ? 'selected' : '' }}>CEBU</option>
+                                <option value="OTHERS" {{ $supplier->area == "OTHERS BS" ? 'selected' : '' }}>OTHERS</option>
+                                <option value="INDO" {{ $supplier->area == "INDO BS" ? 'selected' : '' }}>INDO</option>
+                            </select>
                         </div>
                     </div>  
                 </div>

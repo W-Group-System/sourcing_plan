@@ -29,6 +29,7 @@ class SupplierController extends Controller
         $new_supplier->email = $request->email;
         $new_supplier->terms = $request->terms;
         $new_supplier->accreditation_date = $request->accreditation_date;
+        $new_supplier->area = $request->area;
         $new_supplier->save();
         Alert::success('Success Title', 'Success Message');
         return back();
@@ -55,6 +56,7 @@ class SupplierController extends Controller
         $supplier->email = $request->input('email');
         $supplier->terms = $request->input('terms');
         $supplier->accreditation_date = $request->input('accreditation_date');
+        $supplier->area = $request->input('area');
         $supplier->update();
         Alert::success('Success Title', 'Success Message');
         return back();
