@@ -40,7 +40,6 @@
                                                             <th>Email Address</th>
                                                             <th>Terms</th>
                                                             <th>Accreditation Date</th>
-                                                            <th>Area</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
@@ -58,7 +57,6 @@
                                                                 <td>@if($supplier->email != null){{$supplier->email}}@else N/A @endif</td>
                                                                 <td>{{$supplier->terms}}</td>
                                                                 <td>{{date('M/d/Y', strtotime($supplier->accreditation_date))}}</td>
-                                                                <td>{{$supplier->area}}</td>
                                                                 <td class="action">
                                                                     <button type="button" class="btn btn-sm btn-primary btn-outline" data-toggle="modal" data-target="#edit_supplier{{$supplier->id}}"><i class="fa fa fa-pencil"></i><a href="{{url('update_supplier/'.$supplier->id)}}"></a></button>
                                                                     <a href="status/{{ $supplier->id }}" class="btn btn-sm btn-{{ $supplier->status ? 'danger' : 'success' }} btn-outline">
@@ -89,7 +87,6 @@
                                                             <th>Email Address</th>
                                                             <th>Terms</th>
                                                             <th>Accreditation Date</th>
-                                                            <th>Area</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                     </thead>
@@ -107,7 +104,7 @@
                                                                 <td>@if($supplier->email != null){{$supplier->email}}@else N/A @endif</td>
                                                                 <td>{{$supplier->terms}}</td>
                                                                 <td>{{date('M/d/Y', strtotime($supplier->accreditation_date))}}</td>
-                                                                <td>{{$supplier->area}}</td>
+                                                                
                                                                 <td class="action">
                                                                     <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#edit_supplier{{$supplier->id}}"><i class="fa fa fa-pencil"></i><a href="{{url('update_supplier/'.$supplier->id)}}"></a></button>
                                                                     <a href="status/{{ $supplier->id }}" class="btn btn-{{ $supplier->status ? 'danger' : 'success' }} btn-outline">
@@ -190,18 +187,7 @@
                             <label>Accreditation Date</label>
                             <input name="accreditation_date" class="form-control" type="date" required>
                         </div>
-                        <div class="col-12 mb-10">
-                            <label>Area</label>
-                            <select class="form-control js-example-basic-single" name="area" id="area">
-                                <option value="" disabled selected>Select Area</option>
-                                <option value="ZAMBO BS" >ZAMBO BS</option>
-                                <option value="PAL BS" >PAL BS</option>
-                                <option value="MINDORO BS" >MINDORO BS</option>
-                                <option value="CEBU" >CEBU</option>
-                                <option value="OTHERS" >OTHERS</option>
-                                <option value="INDO" >INDO</option>
-                            </select>
-                        </div>
+                      
                     </div>  
                 </div>
                 <div class="modal-footer">

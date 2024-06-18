@@ -10,26 +10,39 @@
 </head>
 <body>
 <style>
+    @page {
+        size: legal landscape; 
+        margin: 5px 15px; 
+        }
     body {
         background-color: #FFF;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 10px;
+        font-size: 8px;
         margin: 5px 15px;
         color: black;
     }
     #table-spis th, #table-spis td {
         border: 1px solid #DDD;
-        padding: 5px
+        padding: 3px
     }
     #table-side th, #table-side td {
-        font-size: 10px;
-        padding: 5px
+        font-size: 7px;
+        padding: 0px
     }
+    #table-spis1 th, #table-spis1 td {
+            border: 1px solid #DDD;
+            padding: 1px;
+            font-size: 7px;
+        }
+        #table-summary{
+        margin: none;
+        padding: none;
+        }
     .box-container {
-        width: 500px; 
-        height: 100px; 
-        border: 2px solid #DDD; 
-        margin-top: 20px;
+            width: 400px; 
+            height: 50px; 
+            border: 2px solid #DDD; 
+            margin-top: 10px;
     }
     .status {
         background-color: #d4e7c5;
@@ -41,10 +54,10 @@
 
 
 <div class="row">
-    <div class="col-12" align="center">
+    {{-- <div class="col-12" align="center">
         <img alt="image" src="{{URL::asset('/images/wgroup.png')}}" style='width:120px;margin-bottom:-10px'>
         <h4>Sourcing Plan</h4>
-    </div>
+    </div> --}}
     <h5>Date: {{ date('M d', strtotime($start_date)) }} - {{ date('M d, Y', strtotime($end_date)) }}</h5>
     <table class="table table-bordered table-responsive" id="table-spis">
         <thead>
@@ -137,7 +150,7 @@
             <tr>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table-spis">
+                        <table class="table table-bordered" id="table-spis1">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
@@ -185,7 +198,7 @@
                 </td>
                 <td style="width: 20%; padding:0%;">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table-spis">
+                        <table class="table table-bordered" id="table-spis1">
                             <thead>
                                 <tr>
                                     <th colspan="3" class="text-center">Total Average Cost</th>
@@ -289,7 +302,7 @@
             </tr>
         </tbody>
     </table>
-    <table style="margin-top: 30px;" width="100%">
+    <table style="margin-top: 30px;" width="100%" id="table-summary">
         <thead>
             <tr>
                 <td width="30%">Prepared By:</td>

@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cott', 'CottController@index');
     Route::get('cott/create', 'CottController@create');
     Route::get('cott/edit/{id}', 'CottController@edit')->name('cott.edit');
+    Route::get('cott/editApproved/{id}', 'CottController@editApproved')->name('cott.editApproved');
     Route::post('update_cott/{id}', 'CottController@update');
     Route::post('/submitCott', 'CottController@submitCott');
     Route::post('updateStatusCott', 'CottController@updateStatusCott');
@@ -48,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/spi', 'SpiController@index');
     Route::get('spi/create', 'SpiController@create');
     Route::get('spi/edit/{id}', 'SpiController@edit')->name('spi.edit');
+    Route::get('spi/editApproved/{id}', 'SpiController@editApproved')->name('spi.editApproved');
     Route::post('update_spi/{id}', 'SpiController@update');
     Route::post('spi/submitData', 'SpiController@submitData');
     Route::post('spi/updateStatus', 'SpiController@updateStatus');

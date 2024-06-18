@@ -84,6 +84,7 @@
                                                             <th>Cost to Produce (Powder in USD)</th>
                                                             <th>Price + CTP (Budget in USD)</th>
                                                             <th>Remarks</th>
+                                                            <th>Area</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -119,7 +120,9 @@
                                                                 <td>{{$spi->cost_produce}}</td>
                                                                 <td>{{$spi->price_ctp}}</td>
                                                                 <td>{{$spi->remarks}}</td>
+                                                                <td>{{$spi->area}}</td>
                                                                 <td align="center">
+                                                                    <a href="{{ route('spi.editApproved', ['id' => $spi->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
                                                                     <a href="{{ route('spis.delete', ['id' => $spi->id]) }}">
                                                                         <button type="button" class="btn btn-danger btn-outline" title="Delete SPI"><i class="fa fa fa-trash"></i></button>
                                                                     </a>
@@ -180,6 +183,7 @@
                                                                 <th>Cost to Produce (Powder in USD)</th>
                                                                 <th>Price + CTP (Budget in USD)</th>
                                                                 <th>Remarks</th>
+                                                                <th>Area</th>
                                                                 <th>Comments</th>
                                                                 <th>Pre Approved</th>
                                                                 <th>Action</th>
@@ -220,6 +224,7 @@
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->cost_produce}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->price_ctp}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->remarks}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->area}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->comments}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : '' }}">{{$spi->pre_approved}}</td>
                                                                     <!-- <td class="action">

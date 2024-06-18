@@ -231,6 +231,11 @@ class SpiController extends Controller
         return view('spi.edit', compact('spis'));  
     }
 
+    public function editApproved($id) {
+        $spis = Spi::find($id);
+        // $suppliers = Supplier::all();
+        return view('spi.editApproved', compact('spis'));  
+    }
     public function update(Request $request, $id)
     {
         $spis = Spi::find($id);
@@ -243,6 +248,7 @@ class SpiController extends Controller
         $spis->terms_payment = $request->input('terms_payment');
         $spis->potassium = $request->input('potassium');
         $spis->remarks = $request->input('remarks');
+     
         $spis->update();
         Alert::success('Success Title', 'Success Message');
         return back();

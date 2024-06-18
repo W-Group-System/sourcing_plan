@@ -53,6 +53,8 @@ class CottController extends Controller
             $data->cost_produce = $request->cost_produce[$key];
             $data->price_ctp = $request->price_ctp[$key];
             $data->remarks = $request->remarks[$key];
+            $data->area = $request->area[$key];
+
             $data->save();
         }
         Alert::success('Success Title', 'Records Successfully Added');
@@ -230,6 +232,12 @@ class CottController extends Controller
         return view('cott.edit', compact('cotts'));  
     }
 
+    public function editApproved($id) {
+        $cotts = Cott::find($id);
+        // $suppliers = Supplier::all();
+        return view('cott.editApproved', compact('cotts'));  
+    }
+
     public function update(Request $request, $id)
     {
         $cotts = Cott::find($id);
@@ -241,6 +249,7 @@ class CottController extends Controller
         $cotts->terms_payment = $request->input('terms_payment');
         $cotts->potassium = $request->input('potassium');
         $cotts->remarks = $request->input('remarks');
+        $cotts->area = $request->input('area');
         $cotts->update();
         Alert::success('Success Title', 'Success Message');
         return back();

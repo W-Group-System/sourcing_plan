@@ -408,7 +408,7 @@
         bars: {
             show: true,
             align: "center",
-            barWidth: 0.5 * 24 * 60 * 60 * 1000, 
+            barWidth: 2 * 24 * 60 * 60 * 1000, 
             lineWidth: 0,
             fill: true,
             fillColor: areaColors[area],
@@ -561,7 +561,6 @@ addDataLabels();
 
     var spinossumWeeklyQuantities = @json($weeklySpiQuantities);
     var spinossumWeightedPrices = @json($weightedSpiPrices);
-    console.log(spinossumWeeklyQuantities)
     var dataSets = {
         "ZAMBO BS": [],
         "PAL BS": [],
@@ -595,7 +594,7 @@ addDataLabels();
         var weekNum = parseInt(yearWeek[1]);
         var monday = getDateOfISOWeek(weekNum, year);
 
-        console.log(`Week: ${week}, Monday: ${monday}`);
+        // console.log(`Week: ${week}, Monday: ${monday}`);
 
         var cumulativeQuantity = {};
         var hasData = false;
@@ -622,7 +621,7 @@ addDataLabels();
         var weekNum = parseInt(yearWeek[1]);
         var monday = getDateOfISOWeek(weekNum, year);
 
-        console.log(`Price Week: ${week}, Monday: ${monday}`);
+        // console.log(`Price Week: ${week}, Monday: ${monday}`);
 
         priceData.push([monday.getTime(), spinossumWeightedPrices[week]]);
     }
@@ -660,7 +659,7 @@ addDataLabels();
         bars: {
             show: true,
             align: "center",
-            barWidth:  0.5 * 24 * 60 * 60 * 1000, 
+            barWidth:  2 * 24 * 60 * 60 * 1000, 
             lineWidth: 0,
             fill: true,
             fillColor: areaColors[area],
@@ -691,7 +690,13 @@ addDataLabels();
             lineWidth: 1.5,
             fill: false
         },
-        stack: null
+        stack: null,
+        points: {
+        show: true,
+        radius: 3,
+        fill: true,
+        fillColor: "#8A2BE2"
+    }
     });
     var options = {
         series: {

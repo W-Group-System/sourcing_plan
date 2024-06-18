@@ -35,7 +35,8 @@
                                 </form>
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#tab-1">List</a></li>
-                                    <li class=""><a data-toggle="tab" href="#tab-2">For Approval</a></li>
+                                    <li class=""><a data-toggle="tab" href="#tab-2
+                                        ">For Approval</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div id="tab-1" class="tab-pane active">
@@ -84,6 +85,7 @@
                                                             <th>Cost to Produce (Powder in USD)</th>
                                                             <th>Price + CTP (Budget in USD)</th>
                                                             <th>Remarks</th>
+                                                            <th>Area</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -119,7 +121,9 @@
                                                                 <td>{{$cott->cost_produce}}</td>
                                                                 <td>{{$cott->price_ctp}}</td>
                                                                 <td>{{$cott->remarks}}</td>
+                                                                <td>{{$cott->area}}</td>
                                                                 <td align="center">
+                                                                    <a href="{{ route('cott.editApproved', ['id' => $cott->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
                                                                     <a href="{{ route('cotts.delete', ['id' => $cott->id]) }}">
                                                                         <button type="button" class="btn btn-danger btn-outline" title="Delete COTT"><i class="fa fa fa-trash"></i></button>
                                                                     </a>
@@ -180,6 +184,7 @@
                                                                 <th>Cost to Produce (Powder in USD)</th>
                                                                 <th>Price + CTP (Budget in USD)</th>
                                                                 <th>Remarks</th>
+                                                                <th>Area</th>
                                                                 <th>Comments</th>
                                                                 <th>Pre Approved</th>
                                                                 <th>Action</th>
@@ -218,6 +223,7 @@
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->cost_produce}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->price_ctp}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->remarks}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->area}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->comments}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->pre_approved}}</td>
                                                                     <td class="action">
