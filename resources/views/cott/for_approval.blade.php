@@ -86,7 +86,7 @@
                 <th>Cost to Produce (Powder in USD)</th>
                 <th>Price + CTP (Budget in USD)</th>
                 <th>Remarks</th>
-                <th>Pre Aprroved</th>
+                <th>Pre Approved</th>
             </tr>
         </thead>
         <tbody>
@@ -99,51 +99,49 @@
                     return $cott->status == 1 ? 1 : 0;
                 }) as $cott)
                     <tr class="{{ $cott->status == 1 ? 'status' : '' }}">
-                        <td>{{$cott->name}}</td>
-                        <td>{{$cott->destination}}</td>
-                        <td>{{$cott->food_grade}}</td>
-                        <td>{{$cott->origin}}</td>
-                        <td>{{$cott->offer_quantity}}</td>
-                        <td>{{$cott->buying_quantity}}</td>
-                        <td>{{$cott->uom}}</td>
-                        <td>{{$cott->original_price}}</td>
-                        <td>{{$cott->buying_price}}</td>
-                        <td>{{$cott->expenses}}</td>
-                        <td>{{$cott->price_expense}}</td>
-                        <td>{{$cott->moisture_content}}</td>
-                        <td>{{$cott->delivery_schedule}}</td>
-                        <td>{{$cott->terms_payment}}</td>
-                        <td>{{$cott->potassium}}</td>
-                        <td>{{ number_format($cott->chips_yield, 2) }}%</td>
-                        <td>{{ number_format($cott->powder_yield, 2) }} %</td>
-                        <td>{{$cott->price_yield}}</td>
-                        <td>{{$cott->forex_rate}}</td>
-                        <td>{{$cott->price_usd}}</td>
-                        <td>{{$cott->cost_produce}}</td>
-                        <td>{{$cott->price_ctp}}</td>
-                        <td>{{$cott->remarks}}</td>
-                        <td>{{$cott->pre_approved}}</td>
+                        <td>{{ $cott->name }}</td>
+                        <td>{{ $cott->destination }}</td>
+                        <td>{{ $cott->food_grade }}</td>
+                        <td>{{ $cott->origin }}</td>
+                        <td>{{ is_numeric($cott->offer_quantity) ? number_format($cott->offer_quantity) : $cott->offer_quantity }}</td>
+                        <td>{{ is_numeric($cott->buying_quantity) ? number_format($cott->buying_quantity) : $cott->buying_quantity }}</td>
+                        <td>{{ $cott->uom }}</td>
+                        <td>{{ is_numeric($cott->original_price) ? number_format($cott->original_price, 2) : $cott->original_price }}</td>
+                        <td>{{ is_numeric($cott->buying_price) ? number_format($cott->buying_price, 2) : $cott->buying_price }}</td>
+                        <td>{{ is_numeric($cott->expenses) ? number_format($cott->expenses, 2) : $cott->expenses }}</td>
+                        <td>{{ is_numeric($cott->price_expense) ? number_format($cott->price_expense, 2) : $cott->price_expense }}</td>
+                        <td>{{ $cott->moisture_content }}</td>
+                        <td>{{ $cott->delivery_schedule }}</td>
+                        <td>{{ $cott->terms_payment }}</td>
+                        <td>{{ $cott->potassium }}</td>
+                        <td>{{ is_numeric($cott->chips_yield) ? number_format($cott->chips_yield, 2) : $cott->chips_yield }}%</td>
+                        <td>{{ is_numeric($cott->powder_yield) ? number_format($cott->powder_yield, 2) : $cott->powder_yield }} %</td>
+                        <td>{{ $cott->price_yield }}</td>
+                        <td>{{ $cott->forex_rate }}</td>
+                        <td>{{ is_numeric($cott->price_usd) ? number_format($cott->price_usd, 2) : $cott->price_usd }}</td>
+                        <td>{{ is_numeric($cott->cost_produce) ? number_format($cott->cost_produce, 2) : $cott->cost_produce }}</td>
+                        <td>{{ is_numeric($cott->price_ctp) ? number_format($cott->price_ctp, 2) : $cott->price_ctp }}</td>
+                        <td>{{ $cott->remarks }}</td>
+                        <td>{{ $cott->pre_approved }}</td>
                     </tr>
                     @php
-                        $totalOfferQuantity += $cott->offer_quantity; 
+                        $totalOfferQuantity += is_numeric($cott->offer_quantity) ? (float) $cott->offer_quantity : 0;
+                        if ($cott->status == 1) {
+                            $totalBuyingQuantity += is_numeric($cott->buying_quantity) ? (float) $cott->buying_quantity : 0;
+                        }
                     @endphp
-                    @if($cott->status == 1)
-                        @php
-                            $totalBuyingQuantity += $cott->buying_quantity; 
-                        @endphp
-                    @endif
                 @endforeach
             @else
             <tr>
                 <td colspan="25" align="center">No Cottonii Found</td>
             </tr>
-        </tbody>
         @endif
+        </tbody>
         <tfoot>
             <tr>
                 <td colspan="4" align="right">Total:</td>
-                <td>{{$totalOfferQuantity}}</td>
-                <td class="status">{{$totalBuyingQuantity}}</td>
+                <td>{{ number_format($totalOfferQuantity) }}</td>
+                <td class="status">{{ number_format($totalBuyingQuantity) }}</td>
                 <td colspan="18"></td>
             </tr>
         </tfoot>
@@ -256,6 +254,8 @@
                                 $totals['CCC'] += $cott->buying_quantity;
                             } elseif ($cott->destination == 'CAR') {
                                 $totals['CAR'] += $cott->buying_quantity ;
+                            } elseif ($cott->destination == 'PBI') {
+                                $totals['PBI'] += $cott->buying_quantity ;
                             } elseif ($cott->destination == 'CAR/PBI') {     
                                 $totals['CAR'] += $cott->buying_quantity / 2;
                                 $totals['PBI'] += $cott->buying_quantity / 2;

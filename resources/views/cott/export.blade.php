@@ -82,7 +82,7 @@
                 <th>Cost to Produce (Powder in USD)</th>
                 <th>Price + CTP (Budget in USD)</th>
                 <th>Remarks</th>
-                <th>Pre Aprroved</th>
+                <th>Pre Approved</th>
             </tr>
         </thead>
         <tbody>
@@ -92,52 +92,68 @@
             @endphp
             @if(count($cotts))
                 @foreach($cotts->where('approved', 1) as $cott)
+                    @php
+                        // Ensure all necessary fields are numeric or cast them as zero if not
+                        $offerQuantity = is_numeric($cott->offer_quantity) ? $cott->offer_quantity : 0;
+                        $buyingQuantity = is_numeric($cott->buying_quantity) ? $cott->buying_quantity : 0;
+                        $originalPrice = is_numeric($cott->original_price) ? $cott->original_price : 0;
+                        $buyingPrice = is_numeric($cott->buying_price) ? $cott->buying_price : 0;
+                        $expenses = is_numeric($cott->expenses) ? $cott->expenses : 0;
+                        $priceExpense = is_numeric($cott->price_expense) ? $cott->price_expense : 0;
+                        $chipsYield = is_numeric($cott->chips_yield) ? $cott->chips_yield : 0;
+                        $powderYield = is_numeric($cott->powder_yield) ? $cott->powder_yield : 0;
+                        $forexRate = is_numeric($cott->forex_rate) ? $cott->forex_rate : 0;
+                        $priceUsd = is_numeric($cott->price_usd) ? $cott->price_usd : 0;
+                        $costProduce = is_numeric($cott->cost_produce) ? $cott->cost_produce : 0;
+                        $priceCtp = is_numeric($cott->price_ctp) ? $cott->price_ctp : 0;
+                    @endphp
                     <tr>
-                        <td>{{$cott->name}}</td>
-                        <td>{{$cott->destination}}</td>
-                        <td>{{$cott->food_grade}}</td>
-                        <td>{{$cott->origin}}</td>
-                        <td>{{$cott->offer_quantity}}</td>
-                        <td>{{$cott->buying_quantity}}</td>
-                        <td>{{$cott->uom}}</td>
-                        <td>{{$cott->original_price}}</td>
-                        <td>{{$cott->buying_price}}</td>
-                        <td>{{$cott->expenses}}</td>
-                        <td>{{$cott->price_expense}}</td>
-                        <td>{{$cott->moisture_content}}</td>
-                        <td>{{$cott->delivery_schedule}}</td>
-                        <td>{{$cott->terms_payment}}</td>
-                        <td>{{$cott->potassium}}</td>
-                        <td>{{$cott->chips_yield}}</td>
-                        <td>{{ number_format($cott->chips_yield, 2) }} %</td>
-                        <td>{{$cott->price_yield}}</td>
-                        <td>{{$cott->forex_rate}}</td>
-                        <td>{{$cott->price_usd}}</td>
-                        <td>{{$cott->cost_produce}}</td>
-                        <td>{{$cott->price_ctp}}</td>
-                        <td>{{$cott->remarks}}</td>
-                        <td>{{$cott->pre_approved}}</td>
+                        <td>{{ $cott->name }}</td>
+                        <td>{{ $cott->destination }}</td>
+                        <td>{{ $cott->food_grade }}</td>
+                        <td>{{ $cott->origin }}</td>
+                        <td>{{ number_format($offerQuantity) }}</td>
+                        <td>{{ number_format($buyingQuantity) }}</td>
+                        <td>{{ $cott->uom }}</td>
+                        <td>{{ number_format($originalPrice, 2) }}</td>
+                        <td>{{ number_format($buyingPrice, 2) }}</td>
+                        <td>{{ number_format($expenses, 2) }}</td>
+                        <td>{{ number_format($priceExpense, 2) }}</td>
+                        <td>{{ $cott->moisture_content }}</td>
+                        <td>{{ $cott->delivery_schedule }}</td>
+                        <td>{{ $cott->terms_payment }}</td>
+                        <td>{{ $cott->potassium }}</td>
+                        <td>{{ number_format($chipsYield, 2) }}%</td>
+                        <td>{{ number_format($powderYield, 2) }} %</td>
+                        <td>{{ $cott->price_yield }}</td>
+                        <td>{{ number_format($forexRate, 2) }}</td>
+                        <td>{{ number_format($priceUsd, 2) }}</td>
+                        <td>{{ number_format($costProduce, 2) }}</td>
+                        <td>{{ number_format($priceCtp, 2) }}</td>
+                        <td>{{ $cott->remarks }}</td>
+                        <td>{{ $cott->pre_approved }}</td>
                     </tr>
                     @php
-                        $totalBuyingQuantity += $cott->buying_quantity; 
-                        $totalOfferQuantity += $cott->offer_quantity; 
+                        $totalBuyingQuantity += $buyingQuantity;
+                        $totalOfferQuantity += $offerQuantity;
                     @endphp
                 @endforeach
             @else
-            <tr>
-                <td colspan="25" align="center">No Cottonii Found</td>
-            </tr>
+                <tr>
+                    <td colspan="25" align="center">No Cottonii Found</td>
+                </tr>
+            @endif
         </tbody>
-        @endif
         <tfoot>
             <tr>
                 <td colspan="4" align="right">Total:</td>
-                <td>{{$totalOfferQuantity}}</td>
-                <td>{{$totalBuyingQuantity}}</td>
+                <td>{{ number_format($totalOfferQuantity) }}</td>
+                <td>{{ number_format($totalBuyingQuantity) }}</td>
                 <td colspan="18"></td>
             </tr>
         </tfoot>
     </table>
+
     <table class="table table-borderless">
         <tbody>
             <tr>
@@ -245,6 +261,8 @@
                                 $totals['CCC'] += $cott->buying_quantity;
                             } elseif ($cott->destination == 'CAR') {
                                 $totals['CAR'] += $cott->buying_quantity ;
+                            } elseif ($cott->destination == 'PBI') {
+                                $totals['PBI'] += $cott->buying_quantity ;
                             } elseif ($cott->destination == 'CAR/PBI') {     
                                 $totals['CAR'] += $cott->buying_quantity / 2;
                                 $totals['PBI'] += $cott->buying_quantity / 2;

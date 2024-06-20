@@ -62,6 +62,7 @@
                                             <select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>
                                                 <option value="CCC">CCC</option>
                                                 <option value="CAR">CAR</option>
+                                                <option value="PBI">PBI</option>
                                                 <option value="CAR/PBI">CAR/PBI</option>
                                             </select>
                                         </td>
@@ -161,6 +162,7 @@
                 '<select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>'+
                     '<option value="CCC">CCC</option>'+
                     '<option value="CAR">CAR</option>'+
+                    '<option value="PBI">PBI</option>'+
                     '<option value="CAR/PBI">CAR/PBI</option>'+
                 '</select>'+
             '</td>'+
