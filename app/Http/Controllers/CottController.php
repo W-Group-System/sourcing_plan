@@ -320,7 +320,7 @@ class CottController extends Controller
                 $cott->cost_produce = $costproduces[$key];
                 $cott->price_ctp = $pricectps[$key];
                 $cott->remarks = $remarks[$key];
-                $cott->area = $areas[$key];
+                $cott->area = isset($areas[$key]) ? $areas[$key] : null;
                 $cott->save();
             }
         }
