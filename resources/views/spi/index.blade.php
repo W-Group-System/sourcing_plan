@@ -55,6 +55,13 @@
                                                         </button>
                                                     @endif
                                                 @endif
+                                                @if(count($spis) > 0)
+                                                        <?php
+                                                        $spiIds = collect($spis)->pluck('id')->toArray();
+                                                        $encodedIds = implode(',', $spiIds); 
+                                                        ?>
+                                                        <a href="{{ route('spi.editMultipleApproved', ['ids' => $encodedIds, 'start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary export">Edit Multiple</a>
+                                                    @endif
                                             @endif                      
                                             </div>
                                             <div class="table-responsive">

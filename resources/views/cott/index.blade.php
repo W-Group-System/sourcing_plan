@@ -56,6 +56,13 @@
                                                             </button>
                                                         @endif
                                                     @endif
+                                                    @if(count($cotts) > 0)
+                                                        <?php
+                                                        $cottIds = collect($cotts)->pluck('id')->toArray();
+                                                        $encodedIds = implode(',', $cottIds); 
+                                                        ?>
+                                                        <a href="{{ route('cott.editMultipleApproved', ['ids' => $encodedIds, 'start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary export">Edit Multiple</a>
+                                                    @endif
                                                 @endif
                                             </div>
                                             <div class="table-responsive">

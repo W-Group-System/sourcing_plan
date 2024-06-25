@@ -254,4 +254,79 @@ class CottController extends Controller
         Alert::success('Success Title', 'Success Message');
         return back();
     }
+
+    public function editMultipleApproved(Request $request) {
+        $cottIds = explode(',', $request->query('ids'));
+        
+        $cotts = Cott::whereIn('id', $cottIds)->get();
+        
+        $start_date = $request->query('start_date');
+        $end_date = $request->query('end_date');
+    
+        return view('cott.editMultipleApproved', compact('cotts', 'start_date', 'end_date'));  
+    }
+
+    public function updateMultiple(Request $request)
+    {
+        $ids = $request->input('id');
+        $names = $request->input('name');
+        $destinations = $request->input('destination');
+        $foodGrades = $request->input('food_grade');
+        $origins = $request->input('origin');
+        $offerQuantities = $request->input('offer_quantity');
+        $buyingquantities = $request->input('buying_quantity');
+        $uoms = $request->input('uom');
+        $originalprices = $request->input('original_price');
+        $buyingprices = $request->input('buying_price');
+        // $expenses = $request->input('expenses');
+        $priceexpenses = $request->input('price_expense');
+        $moisturecontent = $request->input('moisture_content');
+        $deliveryschedule = $request->input('delivery_schedule');
+        $termpayments = $request->input('terms_payment');
+        $potassiums = $request->input('potassium');
+        $chipyields = $request->input('chips_yield');
+        $powderyields = $request->input('powder_yield');
+        $priceyields = $request->input('price_yield');
+        $forexrates = $request->input('forex_rate');
+        $priceusd = $request->input('price_usd');
+        $costproduces = $request->input('cost_produce');
+        $pricectps = $request->input('price_ctp');
+        $remarks = $request->input('remarks');
+        $areas = $request->input('area');
+        
+        foreach ($ids as $key => $id) {
+            $cott = Cott::find($id);
+            if ($cott) {
+                $cott->name = $names[$key];
+                $cott->destination = $destinations[$key];
+                $cott->food_grade = $foodGrades[$key];
+                $cott->origin = $origins[$key];
+                $cott->offer_quantity = $offerQuantities[$key];
+                $cott->buying_quantity = $buyingquantities[$key];
+                $cott->uom = $uoms[$key];
+                $cott->original_price = $originalprices[$key];
+                $cott->buying_price = $buyingprices[$key];
+                // $cott->expenses = $expenses[$key];
+                $cott->price_expense = $priceexpenses[$key];
+                $cott->moisture_content = $moisturecontent[$key];
+                $cott->delivery_schedule = $deliveryschedule[$key];
+                $cott->terms_payment = $termpayments[$key];
+                $cott->potassium = $potassiums[$key];
+                $cott->chips_yield = $chipyields[$key];
+                $cott->powder_yield = $powderyields[$key];
+                $cott->price_yield = $priceyields[$key];
+                $cott->forex_rate = $forexrates[$key];
+                $cott->price_usd = $priceusd[$key];
+                $cott->cost_produce = $costproduces[$key];
+                $cott->price_ctp = $pricectps[$key];
+                $cott->remarks = $remarks[$key];
+                $cott->area = isset($areas[$key]) ? $areas[$key] : null;
+                $cott->save();
+            }
+        }
+
+        // Redirect back to a relevant page (e.g., index page)
+        return back();
+    }
+    
 }

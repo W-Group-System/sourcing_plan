@@ -255,4 +255,76 @@ class SpiController extends Controller
         Alert::success('Success Title', 'Success Message');
         return back();
     }
+
+    public function editMultipleApproved(Request $request) {
+        $spiIds = explode(',', $request->query('ids'));
+        
+        $spis = Spi::whereIn('id', $spiIds)->get();
+        
+        $start_date = $request->query('start_date');
+        $end_date = $request->query('end_date');
+    
+        return view('spi.editMultipleApproved', compact('spis', 'start_date', 'end_date'));  
+    }
+
+    public function updateMultiple(Request $request){
+            $ids = $request->input('id');
+            $names = $request->input('name');
+            $destinations = $request->input('destination');
+            $pes = $request->input('pes');
+            $origins = $request->input('origin');
+            $offerQuantities = $request->input('offer_quantity');
+            $buyingquantities = $request->input('buying_quantity');
+            $uoms = $request->input('uom');
+            $originalprices = $request->input('original_price');
+            $buyingprices = $request->input('buying_price');
+            // $expenses = $request->input('expenses');
+            $priceexpenses = $request->input('price_expense');
+            $moisturecontent = $request->input('moisture_content');
+            $deliveryschedule = $request->input('delivery_schedule');
+            $termpayments = $request->input('terms_payment');
+            $potassiums = $request->input('potassium');
+            $chipyields = $request->input('chips_yield');
+            $powderyields = $request->input('powder_yield');
+            $priceyields = $request->input('price_yield');
+            $forexrates = $request->input('forex_rate');
+            $priceusd = $request->input('price_usd');
+            $costproduces = $request->input('cost_produce');
+            $pricectps = $request->input('price_ctp');
+            $remarks = $request->input('remarks');
+            $areas = $request->input('area');
+
+            foreach ($ids as $key => $id) {
+            $spis = Spi::find($id);
+            if ($spis) {
+                $spis->name = $names[$key];
+                $spis->destination = $destinations[$key];
+                $spis->pes = $pes[$key];
+                $spis->origin = $origins[$key];
+                $spis->offer_quantity = $offerQuantities[$key];
+                $spis->buying_quantity = $buyingquantities[$key];
+                $spis->uom = $uoms[$key];
+                $spis->original_price = $originalprices[$key];
+                $spis->buying_price = $buyingprices[$key];
+                // $spis->expenses = $expenses[$key];
+                $spis->price_expense = $priceexpenses[$key];
+                $spis->moisture_content = $moisturecontent[$key];
+                $spis->delivery_schedule = $deliveryschedule[$key];
+                $spis->terms_payment = $termpayments[$key];
+                $spis->potassium = $potassiums[$key];
+                $spis->chips_yield = $chipyields[$key];
+                $spis->powder_yield = $powderyields[$key];
+                $spis->price_yield = $priceyields[$key];
+                $spis->forex_rate = $forexrates[$key];
+                $spis->price_usd = $priceusd[$key];
+                $spis->cost_produce = $costproduces[$key];
+                $spis->price_ctp = $pricectps[$key];
+                $spis->remarks = $remarks[$key];
+                $spis->area = $areas[$key];
+                $spis->area = isset($areas[$key]) ? $areas[$key] : null;
+                $spis->save();
+            }
+        }
+        return back();
+    }
 }

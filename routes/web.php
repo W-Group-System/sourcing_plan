@@ -32,7 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cott/create', 'CottController@create');
     Route::get('cott/edit/{id}', 'CottController@edit')->name('cott.edit');
     Route::get('cott/editApproved/{id}', 'CottController@editApproved')->name('cott.editApproved');
+    Route::get('cott/editApproved', 'CottController@editMultipleApproved')->name('cott.editMultipleApproved');
     Route::post('update_cott/{id}', 'CottController@update');
+    Route::post('update_cotts', 'CottController@updateMultiple');
     Route::post('/submitCott', 'CottController@submitCott');
     Route::post('updateStatusCott', 'CottController@updateStatusCott');
     Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
@@ -50,7 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('spi/create', 'SpiController@create');
     Route::get('spi/edit/{id}', 'SpiController@edit')->name('spi.edit');
     Route::get('spi/editApproved/{id}', 'SpiController@editApproved')->name('spi.editApproved');
+    Route::get('spi/editApproved', 'SpiController@editMultipleApproved')->name('spi.editMultipleApproved');
     Route::post('update_spi/{id}', 'SpiController@update');
+    Route::post('update_spis', 'SpiController@updateMultiple');
     Route::post('spi/submitData', 'SpiController@submitData');
     Route::post('spi/updateStatus', 'SpiController@updateStatus');
     Route::post('add_comments_spi/{id}', 'SpiController@addCommentsSpi');
