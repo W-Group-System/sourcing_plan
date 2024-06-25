@@ -50,14 +50,26 @@
                                             <input type="text" name="name" class="form-control adjust" value="{{$cotts->name}}" readonly>
                                         </td>
                                         <td>
-                                            <input type="text" name="destination" class="form-control adjust" value="{{$cotts->destination}}" readonly>
+                                            {{-- <input type="text" name="destination" class="form-control adjust" value="{{$cotts->destination}}"> --}}
+                                            <select name="destination" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination">
+                                                <option value="" disabled selected>Select Destination</option>
+                                                <option value="CCC" {{ $cotts->destination == "CCC" ? 'selected' : '' }}>CCC</option>
+                                                <option value="CAR" {{ $cotts->destination == "CAR" ? 'selected' : '' }}>CAR</option>
+                                                <option value="PBI" {{ $cotts->destination == "PBI" ? 'selected' : '' }}>PBI</option>
+                                                <option value="CAR/PBI" {{ $cotts->destination == "CAR/PBI" ? 'selected' : '' }}>CAR/PBI</option>
+                                            </select>
                                         </td>
                                         <td>
-                                            <input type="text" name="food_grade" class="form-control adjust" value="{{$cotts->food_grade}}" readonly>
+                                            {{-- <input type="text" name="food_grade" class="form-control adjust" value="{{$cotts->food_grade}}" readonly> --}}
+                                            <select class="form-control adjust" name="food_grade" id="food_grade">
+                                                <option value="" disabled selected>Select Food Grade</option>
+                                                <option value="FG" {{ $cotts->food_grade == "FG" ? 'selected' : '' }}>FG</option>
+                                                <option value="PF" {{ $cotts->food_grade == "PF" ? 'selected' : '' }}>PF</option>
+                                            </select>
                                         </td>
-                                        <td><input type="text" name="origin" id="origin" class="form-control adjust" value="{{$cotts->origin}}" readonly></td>
-                                        <td><input type="text" name="offer_quantity" class="form-control adjust" value="{{$cotts->offer_quantity}}" readonly></td>
-                                        <td><input type="text" name="buying_quantity" class="form-control adjust" value="{{$cotts->buying_quantity}}" readonly></td>
+                                        <td><input type="text" name="origin" id="origin" class="form-control adjust" value="{{$cotts->origin}}"></td>
+                                        <td><input type="text" name="offer_quantity" class="form-control adjust" value="{{$cotts->offer_quantity}}"></td>
+                                        <td><input type="text" name="buying_quantity" class="form-control adjust" value="{{$cotts->buying_quantity}}"></td>
                                         <td><input type="text" name="uom[]" id="uom" class="form-control adjust" value="MT" readonly></td>
                                         <td><input type="text" name="original_price" class="form-control adjust" value="{{$cotts->original_price}}" readonly></td>
                                         <td><input type="text" name="buying_price" class="form-control adjust buying_price" value="{{$cotts->buying_price}}" readonly></td>
@@ -82,7 +94,7 @@
                                         <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$cotts->price_usd}}" readonly></td>
                                         <td><input type="text" name="cost_produce" class="form-control adjust cost_produce" value="{{$cotts->cost_produce}}" readonly></td>
                                         <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$cotts->price_ctp}}" readonly></td>
-                                        <td><input type="text" name="remarks" class="form-control adjust"  value="{{$cotts->remarks}}" readonly></td>
+                                        <td><input type="text" name="remarks" class="form-control adjust"  value="{{$cotts->remarks}}"></td>
                                         <td><select class="form-control adjust" name="area" id="area">
                                             <option value="" disabled selected>Select Area</option>
                                             <option value="ZAMBO BS" {{ $cotts->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>

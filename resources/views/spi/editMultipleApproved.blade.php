@@ -49,33 +49,42 @@
                                     <tr>
                                         <td>
                                             <input type="hidden" name="id[]" value="{{ $spi->id }}">
-                                            <input type="text" name="name[]" class="form-control adjust" value="{{$spi->name}}">
+                                            <input type="text" name="name[]" class="form-control adjust" value="{{$spi->name}}" readonly>
                                         </td>
-                                        <td><input type="text" name="destination[]" class="form-control adjust" value="{{$spi->destination}}"></td>
+                                        <td>
+                                            {{-- <input type="text" name="destination[]" class="form-control adjust" value="{{$spi->destination}}"> --}}
+                                            <select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" >
+                                                <option value="" disabled selected>Select Destination</option>
+                                                <option value="CCC" {{ $spi->destination == "CCC" ? 'selected' : '' }}>CCC</option>
+                                                <option value="CAR" {{ $spi->destination == "CAR" ? 'selected' : '' }}>CAR</option>
+                                                <option value="PBI" {{ $spi->destination == "PBI" ? 'selected' : '' }}>PBI</option>
+                                                <option value="CAR/PBI" {{ $spi->destination == "CAR/PBI" ? 'selected' : '' }}>CAR/PBI</option>
+                                            </select>
+                                        </td>
                                         <td><input type="text" name="pes[]" class="form-control adjust" value="{{$spi->pes}}"></td>
                                         <td><input type="text" name="origin[]" class="form-control adjust" value="{{$spi->origin}}"></td>
                                         <td><input type="text" name="offer_quantity[]" class="form-control adjust" value="{{$spi->offer_quantity}}"></td>
                                         <td><input type="text" name="buying_quantity[]" class="form-control adjust" value="{{$spi->buying_quantity}}"></td>
-                                        <td><input type="text" name="uom[]" class="form-control adjust" value="MT"></td>
-                                        <td><input type="text" name="original_price[]" class="form-control adjust" value="{{$spi->original_price}}"></td>
-                                        <td><input type="text" name="buying_price[]" class="form-control adjust buying_price" value="{{$spi->buying_price}}"></td>
-                                        <td><input type="text" name="expenses[]" class="form-control adjust expenses" value="{{$spi->expenses}}"></td>
-                                        <td><input type="text" name="price_expense[]" class="form-control adjust price_expense" value="{{$spi->price_expense}}"></td>
-                                        <td> <input type="text" name="moisture_content[]" class="form-control adjust" value="{{$spi->moisture_content}}"></td>
-                                        <td><input type="text" name="delivery_schedule[]" class="form-control adjust" value="{{$spi->delivery_schedule}}"></td>
-                                        <td><input type="text" name="terms_payment[]" class="form-control adjust" value="{{$spi->terms_payment}}"></td>
-                                        <td><input type="text" name="potassium[]" class="form-control adjust" value="{{$spi->potassium}}"></td>
-                                        <td><input type="text" name="chips_yield[]" class="form-control adjust chips_yield" value="{{$spi->chips_yield}}"></td>
+                                        <td><input type="text" name="uom[]" class="form-control adjust" value="MT" readonly></td>
+                                        <td><input type="text" name="original_price[]" class="form-control adjust" value="{{$spi->original_price}}" readonly></td>
+                                        <td><input type="text" name="buying_price[]" class="form-control adjust buying_price" value="{{$spi->buying_price}}" readonly></td>
+                                        <td><input type="text" name="expenses[]" class="form-control adjust expenses" value="{{$spi->expenses}}" readonly></td>
+                                        <td><input type="text" name="price_expense[]" class="form-control adjust price_expense" value="{{$spi->price_expense}}" readonly></td>
+                                        <td> <input type="text" name="moisture_content[]" class="form-control adjust" value="{{$spi->moisture_content}}" readonly></td>
+                                        <td><input type="text" name="delivery_schedule[]" class="form-control adjust" value="{{$spi->delivery_schedule}}" readonly></td>
+                                        <td><input type="text" name="terms_payment[]" class="form-control adjust" value="{{$spi->terms_payment}}" readonly></td>
+                                        <td><input type="text" name="potassium[]" class="form-control adjust" value="{{$spi->potassium}}" readonly></td>
+                                        <td><input type="text" name="chips_yield[]" class="form-control adjust chips_yield" value="{{$spi->chips_yield}}" readonly></td>
                                         <td>
                                             <div class="input-group m-b">
-                                                <input type="text" name="powder_yield[]" class="form-control powder_yield" style="width: 80px" value="{{$spi->powder_yield}}"><span class="input-group-addon">%</span> 
+                                                <input type="text" name="powder_yield[]" class="form-control powder_yield" style="width: 80px" value="{{$spi->powder_yield}}" readonly><span class="input-group-addon">%</span> 
                                             </div>
                                         </td>
-                                        <td><input type="text" name="price_yield[]" class="form-control adjust price_yield" value="{{$spi->price_yield}}"></td>
-                                        <td><input type="text" name="forex_rate[]" class="form-control adjust forex_rate" value="{{$spi->forex_rate}}"></td>
-                                        <td><input type="text" name="price_usd[]" class="form-control adjust price_usd" value="{{$spi->price_usd}}"></td>
-                                        <td><input type="text" name="cost_produce[]" class="form-control adjust cost_produce" value="{{$spi->cost_produce}}"></td>
-                                        <td><input type="text" name="price_ctp[]" class="form-control adjust price_ctp" value="{{$spi->price_ctp}}"></td>
+                                        <td><input type="text" name="price_yield[]" class="form-control adjust price_yield" value="{{$spi->price_yield}}" readonly></td>
+                                        <td><input type="text" name="forex_rate[]" class="form-control adjust forex_rate" value="{{$spi->forex_rate}}" readonly></td>
+                                        <td><input type="text" name="price_usd[]" class="form-control adjust price_usd" value="{{$spi->price_usd}}" readonly></td>
+                                        <td><input type="text" name="cost_produce[]" class="form-control adjust cost_produce" value="{{$spi->cost_produce}}" readonly></td>
+                                        <td><input type="text" name="price_ctp[]" class="form-control adjust price_ctp" value="{{$spi->price_ctp}}" readonly></td>
                                         <td><input type="text" name="remarks[]" class="form-control adjust" value="{{$spi->remarks}}"></td>
                                         <td><select class="form-control adjust" name="area[]" id="area">
                                             <option value="" disabled selected>Select Area</option>
