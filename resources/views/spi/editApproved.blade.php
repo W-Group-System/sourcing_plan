@@ -47,11 +47,20 @@
                                 <tbody>
                                     <tr>
                                         <td><input type="text" name="name" class="form-control adjust" value="{{$spis->name}}" readonly></td>
-                                        <td><input type="text" name="destination" class="form-control adjust" value="{{$spis->destination}}" readonly></td>
-                                        <td><input type="text" name="pes" class="form-control adjust" value="{{$spis->pes}}" readonly></td>
-                                        <td><input type="text" name="origin" class="form-control adjust" value="{{$spis->origin}}" readonly></td>
-                                        <td><input type="text" name="offer_quantity" class="form-control adjust" value="{{$spis->offer_quantity}}" readonly></td>
-                                        <td><input type="text" name="buying_quantity" class="form-control adjust" value="{{$spis->buying_quantity}}" readonly></td>
+                                        <td>
+                                            {{-- <input type="text" name="destination" class="form-control adjust" value="{{$spis->destination}}" readonly> --}}
+                                            <select name="destination" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination">
+                                                <option value="" disabled selected>Select Destination</option>
+                                                <option value="CCC" {{ $spis->destination == "CCC" ? 'selected' : '' }}>CCC</option>
+                                                <option value="CAR" {{ $spis->destination == "CAR" ? 'selected' : '' }}>CAR</option>
+                                                <option value="PBI" {{ $spis->destination == "PBI" ? 'selected' : '' }}>PBI</option>
+                                                <option value="CAR/PBI" {{ $spis->destination == "CAR/PBI" ? 'selected' : '' }}>CAR/PBI</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="text" name="pes" class="form-control adjust" value="{{$spis->pes}}"></td>
+                                        <td><input type="text" name="origin" class="form-control adjust" value="{{$spis->origin}}" ></td>
+                                        <td><input type="text" name="offer_quantity" class="form-control adjust" value="{{$spis->offer_quantity}}" ></td>
+                                        <td><input type="text" name="buying_quantity" class="form-control adjust" value="{{$spis->buying_quantity}}"></td>
                                         <td><input type="text" name="uom" class="form-control adjust" value="MT" readonly></td>
                                         <td><input type="text" name="original_price" class="form-control adjust" value="{{$spis->original_price}}" readonly></td>
                                         <td><input type="text" name="buying_price" class="form-control adjust buying_price" value="{{$spis->buying_price}}" readonly></td>
@@ -72,7 +81,7 @@
                                         <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$spis->price_usd}}" readonly></td>
                                         <td><input type="text" name="cost_produc" class="form-control adjust cost_produce" value="{{$spis->cost_produce}}" readonly></td>
                                         <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$spis->price_ctp}}" readonly></td>
-                                        <td><input type="text" name="remarks" class="form-control adjust" value="{{$spis->remarks}}" readonly></td>
+                                        <td><input type="text" name="remarks" class="form-control adjust" value="{{$spis->remarks}}"></td>
                                         <td><select class="form-control adjust" name="area" id="area">
                                             <option value="" disabled selected>Select Area</option>
                                             <option value="ZAMBO BS" {{ $spis->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>
