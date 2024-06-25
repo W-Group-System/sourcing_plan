@@ -88,9 +88,9 @@
                                             <option value="ZAMBO BS" {{ $cotts->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>
                                             <option value="PAL BS" {{ $cotts->area == "PAL BS" ? 'selected' : '' }}>PAL BS</option>
                                             <option value="MINDORO BS" {{ $cotts->area == "MINDORO BS" ? 'selected' : '' }}>MINDORO BS</option>
-                                            <option value="CEBU" {{ $cotts->area == "CEBU BS" ? 'selected' : '' }}>CEBU</option>
-                                            <option value="OTHERS" {{ $cotts->area == "OTHERS BS" ? 'selected' : '' }}>OTHERS</option>
-                                            <option value="INDO" {{ $cotts->area == "INDO BS" ? 'selected' : '' }}>INDO</option>
+                                            <option value="CEBU" {{ $cotts->area == "CEBU" ? 'selected' : '' }}>CEBU</option>
+                                            <option value="OTHERS" {{ $cotts->area == "OTHERS" ? 'selected' : '' }}>OTHERS</option>
+                                            <option value="INDO" {{ $cotts->area == "INDO" ? 'selected' : '' }}>INDO</option>
                                             <option value=" " {{ $cotts->area == " " ? 'selected' : '' }}>None</option>
                                         </select></td>
                                     </tr>
