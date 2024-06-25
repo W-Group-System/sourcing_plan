@@ -92,7 +92,7 @@ class SpiController extends Controller
         $start_date = Carbon::parse($request->start_date)->startOfDay();
         $end_date = Carbon::parse($request->end_date)->endOfDay();
 
-        $spis = $this->dateFilter($start_date, $end_date);
+        $spis = $this->dateFilter($start_date, $end_date)->orderBy('price_yield', 'asc')->get();
 
         $demandSupplies = DemandSupply::whereDate('from', '>=', $start_date)
             ->whereDate('to', '<=', $end_date)

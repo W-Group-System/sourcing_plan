@@ -100,24 +100,24 @@
                         <td>{{$spi->destination}}</td>
                         <td>{{$spi->pes}}</td>
                         <td>{{$spi->origin}}</td>
-                        <td>{{$spi->offer_quantity}}</td>
-                        <td>{{$spi->buying_quantity}}</td>
+                        <td>{{ is_numeric($spi->offer_quantity) ? number_format($spi->offer_quantity) : $spi->offer_quantity }}</td>
+                        <td>{{ is_numeric($spi->buying_quantity) ? number_format($spi->buying_quantity) : $spi->buying_quantity }}</td>
                         <td>{{$spi->uom}}</td>
-                        <td>{{$spi->original_price}}</td>
-                        <td>{{$spi->buying_price}}</td>
-                        <td>{{$spi->expenses}}</td>
-                        <td>{{$spi->price_expense}}</td>
+                        <td>{{ is_numeric($spi->original_price) ? number_format($spi->original_price, 2) : $spi->original_price }}</td>
+                        <td>{{ is_numeric($spi->buying_price) ? number_format($spi->buying_price, 2) : $spi->buying_price }}</td>
+                        <td>{{ is_numeric($spi->expenses) ? number_format($spi->expenses, 2) : $spi->expenses }}</td>
+                        <td>{{ is_numeric($spi->price_expense) ? number_format($spi->price_expense, 2) : $spi->price_expense }}</td>
                         <td>{{$spi->moisture_content}}</td>
                         <td>{{$spi->delivery_schedule}}</td>
                         <td>{{$spi->terms_payment}}</td>
                         <td>{{$spi->potassium}}</td>
-                        <td>{{ number_format($spi->chips_yield, 2)}}%</td>
-                        <td>{{$spi->powder_yield}}%</td>
+                        <td>{{ is_numeric($spi->chips_yield) ? number_format($spi->chips_yield, 2) : $spi->chips_yield }}%</td>
+                        <td>{{ is_numeric($spi->powder_yield) ? number_format($spi->powder_yield, 2) : $spi->powder_yield }} %</td>
                         <td>{{$spi->price_yield}}</td>
                         <td>{{$spi->forex_rate}}</td>
-                        <td>{{$spi->price_usd}}</td>
-                        <td>{{$spi->cost_produce}}</td>
-                        <td>{{$spi->price_ctp}}</td>
+                        <td>{{ is_numeric($spi->price_usd) ? number_format($spi->price_usd, 2) : $spi->price_usd }}</td>
+                        <td>{{ is_numeric($spi->cost_produce) ? number_format($spi->cost_produce, 2) : $spi->cost_produce }}</td>
+                        <td>{{ is_numeric($spi->price_ctp) ? number_format($spi->price_ctp, 2) : $spi->price_ctp }}</td>
                         <td>{{$spi->remarks}}</td>
                         <td>{{$spi->pre_approved}}</td>
                     </tr>
