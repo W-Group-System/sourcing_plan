@@ -72,6 +72,7 @@ class SpiController extends Controller
     {
         return SPI::whereDate('created_at','>=',$start_date)
                     ->whereDate('created_at','<=',$end_date)
+                    ->orderBy('status', 'desc')
                     ->orderBy('price_yield','asc')
                     ->get();
     }

@@ -94,7 +94,9 @@
                 $totalBuyingQuantity = 0; 
             @endphp
             @if(count($spis))
-                @foreach($spis->whereIn('status', [1,0]) as $spi)
+                @foreach($spis->whereIn('status', [1, 0])->sortByDesc(function($spis) {
+                    return $spis->status == 1 ? 1 : 0;
+                }) as $spi)
                     <tr class="{{ $spi->status == 1 ? 'status' : '' }}">
                         <td>{{$spi->name}}</td>
                         <td>{{$spi->destination}}</td>
@@ -171,7 +173,7 @@
                                 <tr @if($sp == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $spis_data = $spis->whereIn('status', [1,0]);
+                                        $spis_data = $spis->where('status','!=',2);
                                         if(array_key_exists($i-1,$spis_data->toArray()))
                                         {
                                             $total = $total + $spis_data[$i-1]->buying_quantity;
@@ -214,7 +216,7 @@
                                 <tr @if($sp == $i-1) class='status' @endif>
                                     <td>1-{{$i}}</td>
                                     @php
-                                        $spis_data = $spis->whereIn('status', [1,0]);
+                                        $spis_data = $spis->where('status','!=',2);
                                         if(array_key_exists($i-1,$spis_data->toArray()))
                                         {
                                             $total = $total + $spis_data[$i-1]->buying_quantity;
