@@ -393,7 +393,7 @@
     }
 
     var areaColors = {
-        "ZAMBO BS": "#2e75b6",
+        "ZAMBO BS": "#89CFF0",
         "PAL BS": "#ff0000",
         "MINDORO BS": "#00b050",
         "CEBU": "#ffff00",
@@ -508,7 +508,8 @@ function addDataLabels() {
             position: 'absolute',
             left: plotPos.left - plotOffset.left ,
             top: plotPos.top - plotOffset.top , 
-            color: '#8a2be2',
+            color: 'black',
+            fontWeight: 'bold', 
             // backgroundColor: '#ffffff', 
             // padding: '4px',
             borderRadius: '4px',
@@ -644,7 +645,7 @@ addDataLabels();
     }
 
     var areaColors = {
-        "ZAMBO BS": "#2e75b6",
+        "ZAMBO BS": "#89CFF0",
         "PAL BS": "#ff0000",
         "MINDORO BS": "#00b050",
         "CEBU": "#ffff00",
@@ -770,8 +771,9 @@ function addSpiDataLabels() {
             position: 'absolute',
             left: plotPos.left - plotOffset.left ,
             top: plotPos.top - plotOffset.top , 
-            color: '#8a2be2',
-            // backgroundColor: '#ffffff', 
+            color: 'black',
+            fontWeight: 'bold', 
+            // backgroundColor: 'white', 
             // padding: '4px',
             borderRadius: '4px',
             zIndex: '10' 
