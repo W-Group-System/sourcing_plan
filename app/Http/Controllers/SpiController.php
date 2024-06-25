@@ -319,6 +319,7 @@ class SpiController extends Controller
                 $spis->price_ctp = $pricectps[$key];
                 $spis->remarks = $remarks[$key];
                 $spis->area = $areas[$key];
+                $spis->area = isset($areas[$key]) ? $areas[$key] : null;
                 $spis->save();
             }
         }
