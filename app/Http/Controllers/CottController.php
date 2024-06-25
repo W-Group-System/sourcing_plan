@@ -150,7 +150,7 @@ class CottController extends Controller
 
         View::share('demandSupplies', $demandSupplies);
 
-        $cotts = $this->dateFilter($start_date, $end_date)->orderBy('price_yield', 'asc')->get();
+        $cotts = $this->dateFilter($start_date, $end_date)->sortBy('price_yield');
         
         // $cotts = Cott::all();
         $pdf = PDF::loadView('cott.for_approval', [
