@@ -75,7 +75,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Cottonii</h5>
+                    <h5>Cottonii Weekly PO/Delivered Price</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="wrapper wrapper-content animated fadeInRight">
@@ -100,7 +100,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Spinossum</h5>
+                    <h5>Spinosum Weekly PO/Delivered Price</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="wrapper wrapper-content animated fadeInRight">
