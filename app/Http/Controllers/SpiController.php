@@ -248,6 +248,7 @@ class SpiController extends Controller
         $spis->terms_payment = $request->input('terms_payment');
         $spis->potassium = $request->input('potassium');
         $spis->remarks = $request->input('remarks');
+        $spis->area = $request->input('area');
      
         $spis->update();
         Alert::success('Success Title', 'Success Message');
