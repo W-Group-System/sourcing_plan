@@ -725,13 +725,13 @@ addDataLabels();
         },
         yaxes: [{
             position: "left",
-            max: 1200,
+            max: 500,
             color: "#d5d5d5",
             axisLabelUseCanvas: true,
             axisLabelFontSizePixels: 12,
             axisLabelFontFamily: 'Arial',
             axisLabelPadding: 3,
-            ticks: [0, 200, 400, 600, 800, 1000, 1200]
+            // ticks: [0, 200, 400, 600, 800, 1000, 1200]
         }, {
             position: "right",
             color: "#d5d5d5",
