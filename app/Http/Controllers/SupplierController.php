@@ -56,7 +56,7 @@ class SupplierController extends Controller
         $supplier->email = $request->input('email');
         $supplier->terms = $request->input('terms');
         $supplier->accreditation_date = $request->input('accreditation_date');
-        $supplier->area = $request->input('area');
+        // $supplier->area = $request->input('area');
         $supplier->update();
         Alert::success('Success Title', 'Success Message');
         return back();

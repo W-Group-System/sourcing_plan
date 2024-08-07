@@ -98,7 +98,7 @@
                                         <td><input type="text" name="cost_produce[]" id="cost_produce" class="form-control adjust cost_produce"></td>
                                         <td><input type="text" name="price_ctp[]" id="price_ctp" class="form-control adjust price_ctp" readonly></td>
                                         <td><input type="text" name="remarks[]" id="remarks" class="form-control adjust"></td>
-                                        <td><select class="form-control adjust" name="area[]" id="area">
+                                        <td><select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Area" name="area[]" id="area">
                                             <option value="" disabled selected>Select Area</option>
                                             <option value="ZAMBO BS" >ZAMBO BS</option>
                                             <option value="PAL BS" >PAL BS</option>
@@ -189,16 +189,17 @@
             '<td><input type="text" name="cost_produce[]" id="cost_produce" class="form-control adjust cost_produce"></td>'+
             '<td><input type="text" name="price_ctp[]" id="price_ctp" class="form-control adjust price_ctp" readonly></td>'+
             '<td><input type="text" name="remarks[]" id="remarks" class="form-control adjust"></td>'+
-            '<td><select class="form-control adjust" name="area[]" id="area">'+
-                                            '<option value="" disabled selected>Select Area</option>' +
-                                            '<option value="ZAMBO BS" >ZAMBO BS</option>'+
-                                            '<option value="PAL BS" >PAL BS</option>'+
-                                            '<option value="MINDORO BS" >MINDORO BS</option>'+
-                                            '<option value="CEBU" >CEBU</option>'+
-                                            '<option value="OTHERS" >OTHERS</option>'+
-                                            '<option value="INDO" >INDO</option>'+
-                                            '<option value=" " >None</option>'+
-                                        '</select></td>'+
+            '<td><select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Area" name="area[]" id="area">'+
+                    '<option value="" disabled selected>Select Area</option>' +
+                    '<option value="ZAMBO BS" >ZAMBO BS</option>'+
+                    '<option value="PAL BS" >PAL BS</option>'+
+                    '<option value="MINDORO BS" >MINDORO BS</option>'+
+                    '<option value="CEBU" >CEBU</option>'+
+                    '<option value="OTHERS" >OTHERS</option>'+
+                    '<option value="INDO" >INDO</option>'+
+                    '<option value=" " >None</option>'+
+                '</select>'+
+            '</td>'+
         '</tr>';
 
         $('tbody').append(tr);

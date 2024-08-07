@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/submitCott', 'CottController@submitCott');
     Route::post('updateStatusCott', 'CottController@updateStatusCott');
     Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
+    Route::post('disapproved_comments/{id}', 'CottController@disapprovedComments');
     Route::post('add_demand', 'CottController@add_demand');
     Route::get('/filter', 'CottController@filter');
     Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_cott_pdf')->name('export_cott_pdf');
@@ -58,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('spi/submitData', 'SpiController@submitData');
     Route::post('spi/updateStatus', 'SpiController@updateStatus');
     Route::post('add_comments_spi/{id}', 'SpiController@addCommentsSpi');
+    Route::post('disapproved_comments/{id}', 'SpiController@disapprovedComments');
     Route::post('add_demand_spi', 'SpiController@add_demand_spi');
     Route::get('/filterSpi', 'SpiController@filterSpi');
     Route::get('/export_spi_pdf/{start_date}/{end_date}', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
@@ -77,4 +79,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('new_signed', 'UploadController@create');
     Route::get('upload/view/{id}', 'UploadController@view')->name('signeds.view');
     Route::get('upload/delete/{id}', 'UploadController@delete')->name('signeds.delete');
+
+    // Cottonii PO
+    Route::get('/cott_po', 'CottPoController@index');
+    Route::get('cott_po/create', 'CottPoController@create');
+    Route::post('/submitPoCott', 'CottPoController@submitPoCott');
+    Route::get('/cott_po/delete/{id}', 'CottPoController@delete')->name('cott_po.delete');
+    Route::get('cott_po/edit/{id}', 'CottPoController@edit')->name('cott_po.edit');
+    Route::post('update_cott_po/{id}', 'CottPoController@update');
+
+    // Spinosum PO
+    Route::get('/spi_po', 'SpiPoController@index');
+    Route::get('spi_po/create', 'SpiPoController@create');
+    Route::post('/submitPoSpi', 'SpiPoController@submitPoSpi');
+    Route::get('spi_po/edit/{id}', 'SpiPoController@edit')->name('spi_po.edit');
+    Route::post('update_spi_po/{id}', 'SpiPoController@update');
+    Route::get('/spi_po/delete/{id}', 'SpiPoController@delete')->name('spi_po.delete');
+
 });

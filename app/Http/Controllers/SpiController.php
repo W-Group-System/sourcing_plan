@@ -152,6 +152,7 @@ class SpiController extends Controller
                     $data->status = 1; 
                 } elseif ($action === 'disapprove') {
                     $data->status = 0;
+                    $data->approved = 2;
                 } elseif ($action === 'approved') {
                     $data->approved = 1;
                 }
@@ -326,6 +327,16 @@ class SpiController extends Controller
                 $spis->save();
             }
         }
+        return back();
+    }
+    
+    public function disapprovedComments(Request $request, $id)
+    {
+        $spi = Spi::find($id);
+        $spi->comments = $request->input('comments');
+        $spi->status = 0;
+        $spi->save();
+        Alert::success('Success Title', 'Success Message');
         return back();
     }
 }

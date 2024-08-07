@@ -89,6 +89,17 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span class="nav-label">Additional PO </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li>
+                                <a href="{{ url('/cott_po') }}">Cottonii</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/spi_po') }}">Spinosum</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="{{ url('/supplier') }}"><i class="fa fa-truck"></i><span class="nav-label">Suppliers</span></a>
                     </li>
                     <li>

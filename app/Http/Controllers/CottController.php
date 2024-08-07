@@ -60,10 +60,21 @@ class CottController extends Controller
         Alert::success('Success Title', 'Records Successfully Added');
         return back();
     }
+    
     public function addCommentsCott(Request $request, $id)
     {
         $cott = Cott::find($id);
         $cott->comments = $request->input('comments');
+        $cott->save();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
+    
+    public function disapprovedComments(Request $request, $id)
+    {
+        $cott = Cott::find($id);
+        $cott->comments = $request->input('comments');
+        $cott->status = 0;
         $cott->save();
         Alert::success('Success Title', 'Success Message');
         return back();
@@ -84,6 +95,7 @@ class CottController extends Controller
                     $data->status = 1; 
                 } elseif ($action === 'disapprove') {
                     $data->status = 0; 
+                    $data->approved = 2;
                 } elseif ($action === 'approved') {
                     $data->approved = 1;
                 }

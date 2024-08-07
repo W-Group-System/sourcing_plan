@@ -34,8 +34,9 @@
                                     </div>
                                 </form>
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#tab-1">List</a></li>
-                                    <li class=""><a data-toggle="tab" href="#tab-2
+                                    <li class="active"><a data-toggle="tab" href="#tab-1">Approved List</a></li>
+                                    <li><a data-toggle="tab" href="#tab-2">Disapproved List</a></li>
+                                    <li><a data-toggle="tab" href="#tab-3
                                         ">For Approval</a></li>
                                 </ul>
                                 <div class="tab-content">
@@ -144,6 +145,101 @@
                                     </div>
                                     <div id="tab-2" class="tab-pane">
                                         <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered dataTables-example mt-3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Seller's Name</th>
+                                                            <th>Destination (Plant)</th>
+                                                            <th>Food Grade/ Pet Food</th>
+                                                            <th>Origin</th>
+                                                            <th>Offer Quantity</th>
+                                                            <th>Buying Quantity</th>
+                                                            <th>UOM</th>
+                                                            <th>Original Price</th>
+                                                            <th>Buying Price</th>
+                                                            <th>Expenses</th>
+                                                            <th>Price + Expenses</th>
+                                                            <th>Agreed Moisture Content</th>
+                                                            <th>Delivery Schedule</th>
+                                                            <th>Terms of Payment</th>
+                                                            <th>Potassium Gel Strength (KGS)</th>
+                                                            <th>Chips Yield</th>
+                                                            <th>Powder Yield</th>
+                                                            <th>Price/ Yield</th>
+                                                            <th>FX Rate</th>
+                                                            <th>Price in USD</th>
+                                                            <th>Cost to Produce (Powder in USD)</th>
+                                                            <th>Price + CTP (Budget in USD)</th>
+                                                            <th>Remarks</th>
+                                                            <th>Area</th>
+                                                            <th>Comments</th>
+                                                            <!-- <th>Pre Approved</th> -->
+                                                            <!-- <th>Action</th> -->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($cotts->where('approved',2) as $cott)
+                                                            <tr>
+                                                                <td>{{$cott->name}}</td>
+                                                                <td>{{$cott->destination}}</td>
+                                                                <td>{{$cott->food_grade}}</td>
+                                                                <td>{{$cott->origin}}</td>
+                                                                <td>{{$cott->offer_quantity}}</td>
+                                                                <td>{{$cott->buying_quantity}}</td>
+                                                                <td>{{$cott->uom}}</td>
+                                                                <td>{{$cott->original_price ? $cott->original_price : 'Non-nego'}}</td>
+                                                                <td>{{$cott->buying_price}}</td>
+                                                                <td>{{$cott->expenses ? $cott->expenses : '-'}}</td>
+                                                                <td>{{$cott->price_expense}}</td>
+                                                                <td>{{$cott->moisture_content}}</td>
+                                                                <td>{{$cott->delivery_schedule}}</td>
+                                                                <td>{{$cott->terms_payment}}</td>
+                                                                <td>{{$cott->potassium}}</td>
+                                                                <td>
+                                                                    @if (is_numeric($cott->chips_yield))
+                                                                        {{ number_format($cott->chips_yield, 2) }}%
+                                                                    @else
+                                                                        {{ $cott->chips_yield }}
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{$cott->powder_yield}}%</td>
+                                                                <td>{{$cott->price_yield}}</td>
+                                                                <td>{{$cott->forex_rate}}</td>
+                                                                <td>{{$cott->price_usd}}</td>
+                                                                <td>{{$cott->cost_produce}}</td>
+                                                                <td>{{$cott->price_ctp}}</td>
+                                                                <td>{{$cott->remarks}}</td>
+                                                                <td>{{$cott->area}}</td>
+                                                                <td>{{$cott->comments}}</td>
+                                                                <!-- <td>{{$cott->pre_approved}}</td> -->
+                                                                <!-- <td class="action">
+                                                                    <a href="{{ route('cott.edit', ['id' => $cott->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
+                                                                    <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_cott{{$cott->id}}" title="Add Comments">
+                                                                        <i class="fa fa-comments"></i>
+                                                                        <a href="{{url('add_comments_cott/'.$cott->id)}}"></a>
+                                                                    </button>
+                                                                    @if (@auth()->user()->position == 'Plant Manager' && $cott->status == 1) 
+                                                                        <a href="preApprover/{{ $cott->id }}" title="Pre-approved" class="btn btn-success btn-outline"><i class="fa fa-thumbs-up"></i></a>
+                                                                    @endif
+                                                                    @if (@auth()->user()->position != 'Plant Manager')
+                                                                        <a href="approvedCott/{{ $cott->id }}" title="Approved" class="btn btn-success btn-outline" style="{{ $cott->status == 1 ? 'display: none;' : '' }}">
+                                                                            <i class="fa fa-thumbs-up"></i>
+                                                                        </a>
+                                                                        <a href="disapprovedCott/{{ $cott->id }}" title="Disapproved" class="btn btn-danger btn-outline" style="{{ $cott->status == 0 ? 'display: none;' : '' }}">
+                                                                            <i class="fa fa-thumbs-down"></i>
+                                                                        </a>
+                                                                    @endif
+                                                                </td> -->
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab-3" class="tab-pane">
+                                        <div class="panel-body">
                                             <div align="right">
                                                 @if(isset($start_date))
                                                     <a target='_blank' href="{{ route('for_approval_pdf', ['start_date' => $start_date, 'end_date' => $end_date]) }}" class="btn btn-primary export">Export PDF</a>
@@ -200,39 +296,39 @@
                                                         <tbody>
                                                             @foreach($cotts->where('approved',0) as $cott)
                                                                 <tr>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}"><input type="checkbox" class="form-check-input check-item" name="checkbox[]" value="{{ $cott->id }}"></td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->name}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->destination}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->food_grade}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->origin}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->offer_quantity}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->buying_quantity}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->uom}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->original_price ? $cott->original_price : 'Non-nego'}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->buying_price}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->expenses ? $cott->expenses : '-'}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->price_expense}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->moisture_content}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->delivery_schedule}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->terms_payment}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->potassium}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}"><input type="checkbox" class="form-check-input check-item" name="checkbox[]" value="{{ $cott->id }}"></td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->name}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->destination}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->food_grade}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->origin}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->offer_quantity}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->buying_quantity}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->uom}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->original_price ? $cott->original_price : 'Non-nego'}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->buying_price}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->expenses ? $cott->expenses : '-'}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->price_expense}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->moisture_content}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->delivery_schedule}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->terms_payment}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->potassium}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">
                                                                         @if (is_numeric($cott->chips_yield))
                                                                             {{ number_format($cott->chips_yield, 2) }}%
                                                                         @else
                                                                             {{ $cott->chips_yield }}
                                                                         @endif
                                                                     </td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->powder_yield}}%</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->price_yield}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->forex_rate}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->price_usd}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->cost_produce}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->price_ctp}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->remarks}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->area}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->comments}}</td>
-                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : '' }}">{{$cott->pre_approved}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->powder_yield}}%</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->price_yield}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->forex_rate}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->price_usd}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->cost_produce}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->price_ctp}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->remarks}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->area}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->comments}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->pre_approved}}</td>
                                                                     <td class="action">
                                                                         <a href="{{ route('cott.edit', ['id' => $cott->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
                                                                         <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_cott{{$cott->id}}" title="Add Comments">
@@ -246,7 +342,10 @@
                                                                             <a href="approvedCott/{{ $cott->id }}" title="Approved" class="btn btn-success btn-outline" style="{{ $cott->status == 1 ? 'display: none;' : '' }}">
                                                                                 <i class="fa fa-thumbs-up"></i>
                                                                             </a>
-                                                                            <a href="disapprovedCott/{{ $cott->id }}" title="Disapproved" class="btn btn-danger btn-outline" style="{{ $cott->status == 0 ? 'display: none;' : '' }}">
+                                                                            <!-- <a href="disapprovedCott/{{ $cott->id }}" title="Disapproved" class="btn btn-danger btn-outline" style="{{ $cott->status == 0 ? 'display: none;' : '' }}">
+                                                                                <i class="fa fa-thumbs-down"></i>
+                                                                            </a> -->
+                                                                            <a href="javascript:void(0)" title="Disapproved" class="btn btn-danger btn-outline" style="{{ $cott->status == 0 ? 'display: none;' : '' }}" data-toggle="modal" data-target="#disapproveModal-{{ $cott->id }}">
                                                                                 <i class="fa fa-thumbs-down"></i>
                                                                             </a>
                                                                         @endif
@@ -273,14 +372,44 @@
         </div>
     </div>
 </div>
+
 @foreach($cotts as $cott)
+<div class="modal fade" id="disapproveModal-{{ $cott->id }}" tabindex="-1" role="dialog" aria-labelledby="disapproveModalLabel-{{ $cott->id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="disapproveModalLabel-{{ $cott->id }}">Disapprove Cott</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ url('disapproved_comments', ['id' => $cott->id]) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 mb-10">
+                            <label>Reason for Disapproval:</label>
+                            <input name="comments" class="form-control" type="text" placeholder="Reason for Disapproval" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Disapprove</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Comments -->
 <div class="modal fade" id="add_comments_cott{{$cott->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <form action="{{url('add_comments_cott/'.$cott->id)}}" method="POST">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Add Comments</h3>
+                    <h3 class="modal-title" id="exampleModalLabel">Add Comments</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -308,7 +437,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h3 class="modal-title" id="demandSupply">Demand and Supply</h3>
+                    <h3 class="modal-title" id="demandSupply">Demand and Supply</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -404,7 +533,11 @@
     }
     .pre-approved {
         background-color: #d4e7c5;
-        color: black;
+        color: #000;
+    }
+    .pre-disapproved {
+        background-color: #ed8282;
+        color: #FFF;
     }
     .action {
         max-width: 150px;
