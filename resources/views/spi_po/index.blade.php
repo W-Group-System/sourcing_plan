@@ -28,7 +28,7 @@
                                         <th>Price + Expenses</th>
                                         <th>Original PO Date</th>
                                         <th>PO Date</th>
-                                        <th>Destination</th>
+                                        <th>Area</th>
                                         <th>Remarks</th>
                                         <th>Action</th>
                                     </tr>
@@ -45,7 +45,7 @@
                                         <td>{{$po_spi->price_expenses}}</td>
                                         <td>{{$po_spi->original_po_date}}</td>
                                         <td>{{$po_spi->po_date}}</td>
-                                        <td>{{$po_spi->destination}}</td>
+                                        <td>{{$po_spi->area}}</td>
                                         <td>{{$po_spi->remarks}}</td>
                                         <td align="center" style="width: 100px;">
                                             <a href="{{ route('spi_po.edit', ['id' => $po_spi->id]) }}" class="btn btn-warning btn-outline" title="Edit PO Cottonii"><i class="fa fa-pencil"></i></a>

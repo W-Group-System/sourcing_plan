@@ -28,7 +28,7 @@
                                         <th>Price + Expenses</th>
                                         <th>Original PO Date</th>
                                         <th>PO Date</th>
-                                        <th>Destination</th>
+                                        <th>Area</th>
                                         <th>Remarks</th>
                                         <th>Action</th>
                                     </tr>
