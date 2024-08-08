@@ -49,11 +49,15 @@
                                         <td><input type="date" name="original_po_date" class="form-control adjust_date" value="{{$spi_po->original_po_date}}"></td>
                                         <td><input type="date" name="po_date" class="form-control adjust_date" value="{{$spi_po->po_date}}"></td>
                                         <td>
-                                            <select name="destination" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>
-                                                <option value="CCC" {{ $spi_po->destination == "CCC" ? 'selected' : '' }}>CCC</option>
-                                                <option value="CAR" {{ $spi_po->destination == "CAR" ? 'selected' : '' }}>CAR</option>
-                                                <option value="PBI" {{ $spi_po->destination == "PBI" ? 'selected' : '' }}>PBI</option>
-                                                <option value="CAR/PBI" {{ $spi_po->destination == "CAR/PBI" ? 'selected' : '' }}>CAR/PBI</option>
+                                            <select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area[]" id="area" title="Select Area" required>
+                                                <option value="" disabled selected>Select Area</option>
+                                                <option value="ZAMBO BS"{{ $spi_po->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>
+                                                <option value="PAL BS"{{ $spi_po->area == "PAL BS" ? 'selected' : '' }}>PAL BS</option>
+                                                <option value="MINDORO BS"{{ $spi_po->area == "MINDORO BS" ? 'selected' : '' }}>MINDORO BS</option>
+                                                <option value="CEBU"{{ $spi_po->area == "CEBU" ? 'selected' : '' }}>CEBU</option>
+                                                <option value="OTHERS"{{ $spi_po->area == "OTHERS" ? 'selected' : '' }}>OTHERS</option>
+                                                <option value="INDO"{{ $spi_po->area == "INDO" ? 'selected' : '' }}>INDO</option>
+                                                <option value="" {{ $spi_po->area == "None" ? 'selected' : '' }}>None</option>
                                             </select>
                                         </td>
                                         <td><input type="text" name="remarks" class="form-control adjust_date" value="{{$spi_po->remarks}}"></td>

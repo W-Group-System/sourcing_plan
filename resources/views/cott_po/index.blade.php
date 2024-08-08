@@ -45,7 +45,7 @@
                                         <td>{{$po_cott->price_expenses}}</td>
                                         <td>{{$po_cott->original_po_date}}</td>
                                         <td>{{$po_cott->po_date}}</td>
-                                        <td>{{$po_cott->destination}}</td>
+                                        <td>{{$po_cott->area}}</td>
                                         <td>{{$po_cott->remarks}}</td>
                                         <td align="center" style="width: 100px;">
                                             <a href="{{ route('cott_po.edit', ['id' => $po_cott->id]) }}" class="btn btn-warning btn-outline" title="Edit PO Cottonii"><i class="fa fa-pencil"></i></a>

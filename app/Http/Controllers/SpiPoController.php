@@ -38,7 +38,7 @@ class SpiPoController extends Controller
             $data->price_expenses = $request->price_expenses[$key];
             $data->original_po_date = $request->original_po_date[$key];
             $data->po_date = $request->po_date[$key];
-            $data->destination = $request->destination[$key];
+            $data->area = $request->area[$key];
             $data->remarks = $request->remarks[$key];
 
             $data->save();
@@ -67,7 +67,7 @@ class SpiPoController extends Controller
         $cotts->price_expenses = $request->input('price_expenses');
         $cotts->original_po_date = $request->input('original_po_date');
         $cotts->po_date = $request->input('po_date');
-        $cotts->destination = $request->input('destination');
+        $cotts->area = $request->input('area');
         $cotts->remarks = $request->input('remarks');
         $cotts->update();
         Alert::success('Success Title', 'Success Message');

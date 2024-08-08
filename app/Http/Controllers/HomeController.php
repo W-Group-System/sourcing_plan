@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cott;
 use App\Spi;
+use App\CottPo;
 use Illuminate\Http\Request;
 use App\Supplier;
 use App\User;
@@ -188,76 +189,188 @@ class HomeController extends Controller
 //     return view('home', compact('suppliers', 'cottonli', 'spinossum', 'weeklyQuantities', 'weightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices'));
 // }
 
+// Jun 
+// public function index()
+// {
+//     $suppliers = Supplier::all();
+//     $cottonli = Cott::where('approved', 1)->get();
+//     $spinossum = Spi::where('approved', 1)->get();
+
+//     $weeklyQuantities = [];
+//     $totalExpenses = []; 
+//     $weightedPrices = []; 
+
+//     foreach ($cottonli as $record) {
+       
+//         $date = new DateTime($record->created_at);
+//         $date->modify('this week Monday');
+//         $week = $date->format("Y-W"); 
+//         $cottArea = $record->area; 
+        
+//         // $area = $cottArea;
+       
+//         // if (!isset($weeklyQuantities[$week])) {
+//         //     $weeklyQuantities[$week] = [];
+//         // }
+//         // if (!isset($weeklyQuantities[$week][$area])) {
+//         //     $weeklyQuantities[$week][$area] = 0;
+//         // }
+//         // $buying_quantity = $record->buying_quantity;
+//         // $price_expense = $record->price_expense;
+
+//         // if (!isset($totalExpenses[$week])) {
+//         //     $totalExpenses[$week] = 0;
+//         // }
+//         // $totalExpenses[$week] += $buying_quantity * $price_expense;
+//         // $weeklyQuantities[$week][$area] += $buying_quantity;
+//         if (!empty($cottArea)) {
+//             $area = $cottArea;
+    
+//             if (!isset($weeklyQuantities[$week])) {
+//                 $weeklyQuantities[$week] = [];
+//             }
+//             if (!isset($weeklyQuantities[$week][$area])) {
+//                 $weeklyQuantities[$week][$area] = 0;
+//             }
+    
+//             $buying_quantity = $record->buying_quantity;
+//             $price_expense = $record->price_expense;
+    
+//             if (!isset($totalExpenses[$week])) {
+//                 $totalExpenses[$week] = 0;
+//             }
+//             $totalExpenses[$week] += $buying_quantity * $price_expense;
+//             $weeklyQuantities[$week][$area] += $buying_quantity;
+//         }
+
+//     }
+//     foreach ($totalExpenses as $week => $totalExpense) {
+//         $totalQuantity = array_sum($weeklyQuantities[$week]);
+//         $weightedPrices[$week] = $totalExpense / $totalQuantity;
+
+//     }
+    
+//     $weeklySpiQuantities = [];
+//     $totalSpiExpenses = []; 
+//     $weightedSpiPrices = []; 
+    
+//     foreach ($spinossum as $spiRecord) {
+
+//         $date = new DateTime($spiRecord->created_at);
+//         $date->modify('this week Monday');
+//         $week = $date->format("Y-W");
+//         $spiArea =$spiRecord->area; 
+
+//         if (!empty($spiArea)) {
+//             $area = $spiArea;
+
+//             if (!isset($weeklySpiQuantities[$week])) {
+//                 $weeklySpiQuantities[$week] = [];
+//             }
+//             if (!isset($weeklySpiQuantities[$week][$area])) {
+//                 $weeklySpiQuantities[$week][$area] = 0;
+//             }
+//             $buying_quantity = $spiRecord->buying_quantity;
+//             $price_expense = $spiRecord->price_expense;
+        
+//             if (!isset($totalSpiExpenses[$week])) {
+//                 $totalSpiExpenses[$week] = 0;
+//             }
+//             $totalSpiExpenses[$week] += $buying_quantity * $price_expense;
+//             $weeklySpiQuantities[$week][$area] += $buying_quantity;
+//         }
+       
+//     }
+    
+//     foreach ($totalSpiExpenses as $week => $totalExpense) {
+//         $totalQuantity = array_sum($weeklySpiQuantities[$week]);
+//         $weightedSpiPrices[$week] = $totalExpense / $totalQuantity;
+//     }
+    
+//     return view('home', compact('suppliers', 'cottonli', 'spinossum', 'weeklyQuantities', 'weightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices'));
+// }
+
 public function index()
 {
     $suppliers = Supplier::all();
     $cottonli = Cott::where('approved', 1)->get();
     $spinossum = Spi::where('approved', 1)->get();
+    $cottonii_po = CottPo::all();
 
     $weeklyQuantities = [];
     $totalExpenses = []; 
     $weightedPrices = []; 
 
+    // Process Cott records
     foreach ($cottonli as $record) {
-       
         $date = new DateTime($record->created_at);
         $date->modify('this week Monday');
         $week = $date->format("Y-W"); 
-        $cottArea = $record->area; 
-        
-        // $area = $cottArea;
-       
-        // if (!isset($weeklyQuantities[$week])) {
-        //     $weeklyQuantities[$week] = [];
-        // }
-        // if (!isset($weeklyQuantities[$week][$area])) {
-        //     $weeklyQuantities[$week][$area] = 0;
-        // }
-        // $buying_quantity = $record->buying_quantity;
-        // $price_expense = $record->price_expense;
+        $cottArea = $record->area;
 
-        // if (!isset($totalExpenses[$week])) {
-        //     $totalExpenses[$week] = 0;
-        // }
-        // $totalExpenses[$week] += $buying_quantity * $price_expense;
-        // $weeklyQuantities[$week][$area] += $buying_quantity;
         if (!empty($cottArea)) {
             $area = $cottArea;
-    
+
             if (!isset($weeklyQuantities[$week])) {
                 $weeklyQuantities[$week] = [];
             }
             if (!isset($weeklyQuantities[$week][$area])) {
                 $weeklyQuantities[$week][$area] = 0;
             }
-    
+
             $buying_quantity = $record->buying_quantity;
             $price_expense = $record->price_expense;
-    
+
             if (!isset($totalExpenses[$week])) {
                 $totalExpenses[$week] = 0;
             }
             $totalExpenses[$week] += $buying_quantity * $price_expense;
             $weeklyQuantities[$week][$area] += $buying_quantity;
         }
-
     }
+
+    // Process CottPo records
+    foreach ($cottonii_po as $record) {
+        $date = new DateTime($record->po_date ?? $record->created_at);
+        $date->modify('this week Monday');
+        $week = $date->format("Y-W"); 
+        $cottArea = $record->area;
+
+        if (!empty($cottArea)) {
+            $area = $cottArea;
+
+            if (!isset($weeklyQuantities[$week])) {
+                $weeklyQuantities[$week] = [];
+            }
+            if (!isset($weeklyQuantities[$week][$area])) {
+                $weeklyQuantities[$week][$area] = 0;
+            }
+
+            $buying_quantity = $record->quantity;
+            $price_expense = $record->price_expenses;
+
+            if (!isset($totalExpenses[$week])) {
+                $totalExpenses[$week] = 0;
+            }
+            $totalExpenses[$week] += $buying_quantity * $price_expense;
+            $weeklyQuantities[$week][$area] += $buying_quantity;
+        }
+    }
+
     foreach ($totalExpenses as $week => $totalExpense) {
         $totalQuantity = array_sum($weeklyQuantities[$week]);
         $weightedPrices[$week] = $totalExpense / $totalQuantity;
-
     }
-    
+
     $weeklySpiQuantities = [];
     $totalSpiExpenses = []; 
     $weightedSpiPrices = []; 
-    
-    foreach ($spinossum as $spiRecord) {
 
+    foreach ($spinossum as $spiRecord) {
         $date = new DateTime($spiRecord->created_at);
         $date->modify('this week Monday');
         $week = $date->format("Y-W");
-        $spiArea =$spiRecord->area; 
+        $spiArea = $spiRecord->area; 
 
         if (!empty($spiArea)) {
             $area = $spiArea;
@@ -268,25 +381,26 @@ public function index()
             if (!isset($weeklySpiQuantities[$week][$area])) {
                 $weeklySpiQuantities[$week][$area] = 0;
             }
+
             $buying_quantity = $spiRecord->buying_quantity;
             $price_expense = $spiRecord->price_expense;
-        
+
             if (!isset($totalSpiExpenses[$week])) {
                 $totalSpiExpenses[$week] = 0;
             }
             $totalSpiExpenses[$week] += $buying_quantity * $price_expense;
             $weeklySpiQuantities[$week][$area] += $buying_quantity;
         }
-       
     }
-    
+
     foreach ($totalSpiExpenses as $week => $totalExpense) {
         $totalQuantity = array_sum($weeklySpiQuantities[$week]);
         $weightedSpiPrices[$week] = $totalExpense / $totalQuantity;
     }
-    
+
     return view('home', compact('suppliers', 'cottonli', 'spinossum', 'weeklyQuantities', 'weightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices'));
 }
+
 
     public function changePassword()
     {

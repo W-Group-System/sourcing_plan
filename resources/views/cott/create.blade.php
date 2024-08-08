@@ -114,7 +114,7 @@
                                             <option value="CEBU" >CEBU</option>
                                             <option value="OTHERS" >OTHERS</option>
                                             <option value="INDO" >INDO</option>
-                                            <option value=" " >None</option>
+                                            <option value="" >None</option>
                                         </select></td>
                                     </tr>
                                 </tbody>

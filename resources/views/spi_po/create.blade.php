@@ -51,11 +51,15 @@
                                         <td><input type="date" name="original_po_date[]" id="original_po_date" class="form-control adjust_date" required></td>
                                         <td><input type="date" name="po_date[]" id="po_date" class="form-control adjust_date" required></td>
                                         <td>
-                                            <select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>
-                                                <option value="CCC">CCC</option>
-                                                <option value="CAR">CAR</option>
-                                                <option value="PBI">PBI</option>
-                                                <option value="CAR/PBI">CAR/PBI</option>
+                                            <select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area[]" id="area" title="Select Area" required>
+                                                <option value="" disabled selected>Select Area</option>
+                                                <option value="ZAMBO BS">ZAMBO BS</option>
+                                                <option value="PAL BS">PAL BS</option>
+                                                <option value="MINDORO BS">MINDORO BS</option>
+                                                <option value="CEBU">CEBU</option>
+                                                <option value="OTHERS">OTHERS</option>
+                                                <option value="INDO">INDO</option>
+                                                <option value="" >None</option>
                                             </select>
                                         </td>
                                         <td><input type="text" name="remarks[]" id="remarks" class="form-control adjust" placeholder="Enter Remarks"></td>
@@ -108,11 +112,15 @@
             '<td><input type="date" name="original_po_date[]" id="original_po_date" class="form-control adjust_date" required></td>'+
             '<td><input type="date" name="po_date[]" id="po_date" class="form-control adjust_date" required></td>'+
             '<td>'+
-                '<select name="destination[]" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>'+
-                    '<option value="CCC">CCC</option>'+
-                    '<option value="CAR">CAR</option>'+
-                    '<option value="PBI">PBI</option>'+
-                    '<option value="CAR/PBI">CAR/PBI</option>'+
+                '<select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area[]" id="area" title="Select Area" required>'+
+                    '<option value="" disabled selected>Select Area</option>'+
+                    '<option value="ZAMBO BS">ZAMBO BS</option>'+
+                    '<option value="PAL BS">PAL BS</option>'+
+                    '<option value="MINDORO BS">MINDORO BS</option>'+
+                    '<option value="CEBU">CEBU</option>'+
+                    '<option value="OTHERS">OTHERS</option>'+
+                    '<option value="INDO">INDO</option>'+
+                    '<option value="" >None</option>'+
                 '</select>'+
             '</td>'+
             '<td><input type="text" name="remarks[]" id="remarks" class="form-control adjust" placeholder="Enter Remarks"></td>'+

@@ -45,15 +45,19 @@
                                         <td><input type="text" name="quantity" class="form-control adjust" value="{{$cott_po->quantity}}"></td>
                                         <td><input type="text" name="buying_price" class="form-control adjust" value="{{$cott_po->buying_price}}"></td>
                                         <td><input type="text" name="expenses" class="form-control adjust" value="{{$cott_po->expenses}}"></td>
-                                        <td><input type="text" name="price_expenses" class="form-control adjust" value="{{$cott_po->price_expenses}}"></td>
+                                        <td><input type="text" name="price_expenses" class="form-control adjust" value="{{$cott_po->price_expenses}}" readonly></td>
                                         <td><input type="date" name="original_po_date" class="form-control adjust_date" value="{{$cott_po->original_po_date}}"></td>
                                         <td><input type="date" name="po_date" class="form-control adjust_date" value="{{$cott_po->po_date}}"></td>
                                         <td>
-                                            <select name="destination" id="destination" class="form-control selectpicker" data-live-search="true" data-live-search-placeholder="Search" title="Select Destination" required>
-                                                <option value="CCC" {{ $cott_po->destination == "CCC" ? 'selected' : '' }}>CCC</option>
-                                                <option value="CAR" {{ $cott_po->destination == "CAR" ? 'selected' : '' }}>CAR</option>
-                                                <option value="PBI" {{ $cott_po->destination == "PBI" ? 'selected' : '' }}>PBI</option>
-                                                <option value="CAR/PBI" {{ $cott_po->destination == "CAR/PBI" ? 'selected' : '' }}>CAR/PBI</option>
+                                            <select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area[]" id="area" title="Select Area" required>
+                                                <option value="" disabled selected>Select Area</option>
+                                                <option value="ZAMBO BS"{{ $cott_po->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>
+                                                <option value="PAL BS"{{ $cott_po->area == "PAL BS" ? 'selected' : '' }}>PAL BS</option>
+                                                <option value="MINDORO BS"{{ $cott_po->area == "MINDORO BS" ? 'selected' : '' }}>MINDORO BS</option>
+                                                <option value="CEBU"{{ $cott_po->area == "CEBU" ? 'selected' : '' }}>CEBU</option>
+                                                <option value="OTHERS"{{ $cott_po->area == "OTHERS" ? 'selected' : '' }}>OTHERS</option>
+                                                <option value="INDO"{{ $cott_po->area == "INDO" ? 'selected' : '' }}>INDO</option>
+                                                <option value="" {{ $cott_po->area == "None" ? 'selected' : '' }}>None</option>
                                             </select>
                                         </td>
                                         <td><input type="text" name="remarks" class="form-control adjust_date" value="{{$cott_po->remarks}}"></td>
