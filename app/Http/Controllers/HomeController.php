@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cott;
 use App\Spi;
 use App\CottPo;
+use App\SpiPo;
 use Illuminate\Http\Request;
 use App\Supplier;
 use App\User;
@@ -296,6 +297,7 @@ public function index()
     $cottonli = Cott::where('approved', 1)->get();
     $spinossum = Spi::where('approved', 1)->get();
     $cottonii_po = CottPo::all();
+    $spinossum_po = SpiPo::all();
 
     $weeklyQuantities = [];
     $totalExpenses = []; 
@@ -390,6 +392,33 @@ public function index()
             }
             $totalSpiExpenses[$week] += $buying_quantity * $price_expense;
             $weeklySpiQuantities[$week][$area] += $buying_quantity;
+        }
+    }
+
+    foreach ($spinossum_po as $spiRecord) {
+        $date = new DateTime($spiRecord->po_date ?? $spiRecord->created_at);
+        $date->modify('this week Monday');
+        $week = $date->format("Y-W"); 
+        $cottArea = $spiRecord->area;
+
+        if (!empty($cottArea)) {
+            $area = $cottArea;
+
+            if (!isset($weeklyQuantities[$week])) {
+                $weeklyQuantities[$week] = [];
+            }
+            if (!isset($weeklyQuantities[$week][$area])) {
+                $weeklyQuantities[$week][$area] = 0;
+            }
+
+            $buying_quantity = $spiRecord->quantity;
+            $price_expense = $spiRecord->price_expenses;
+
+            if (!isset($totalExpenses[$week])) {
+                $totalExpenses[$week] = 0;
+            }
+            $totalExpenses[$week] += $buying_quantity * $price_expense;
+            $weeklyQuantities[$week][$area] += $buying_quantity;
         }
     }
 
