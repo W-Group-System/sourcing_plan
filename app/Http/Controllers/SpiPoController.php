@@ -58,18 +58,18 @@ class SpiPoController extends Controller
     // Update
     public function update(Request $request, $id)
     {
-        $cotts = Spipo::find($id);
-        $cotts->supplier_name = $request->input('supplier_name');
-        $cotts->lot_code = $request->input('lot_code');
-        $cotts->quantity = $request->input('quantity');
-        $cotts->buying_price = $request->input('buying_price');
-        $cotts->expenses = $request->input('expenses');
-        $cotts->price_expenses = $request->input('price_expenses');
-        $cotts->original_po_date = $request->input('original_po_date');
-        $cotts->po_date = $request->input('po_date');
-        $cotts->area = $request->input('area');
-        $cotts->remarks = $request->input('remarks');
-        $cotts->update();
+        $spis = Spipo::find($id);
+        $spis->supplier_name = $request->input('supplier_name');
+        $spis->lot_code = $request->input('lot_code');
+        $spis->quantity = $request->input('quantity');
+        $spis->buying_price = $request->input('buying_price');
+        $spis->expenses = $request->input('expenses');
+        $spis->price_expenses = $request->input('price_expenses');
+        $spis->original_po_date = $request->input('original_po_date');
+        $spis->po_date = $request->input('po_date');
+        $spis->area = $request->input('area');
+        $spis->remarks = $request->input('remarks');
+        $spis->update();
         Alert::success('Success Title', 'Success Message');
         return back();
     }

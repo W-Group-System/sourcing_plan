@@ -298,7 +298,7 @@ public function index()
     $spinossum = Spi::where('approved', 1)->get();
     $cottonii_po = CottPo::all();
     $spinossum_po = SpiPo::all();
-
+    
     $weeklyQuantities = [];
     $totalExpenses = []; 
     $weightedPrices = []; 
@@ -399,32 +399,38 @@ public function index()
         $date = new DateTime($spiRecord->po_date ?? $spiRecord->created_at);
         $date->modify('this week Monday');
         $week = $date->format("Y-W"); 
-        $cottArea = $spiRecord->area;
+        $spiArea = $spiRecord->area;
 
-        if (!empty($cottArea)) {
-            $area = $cottArea;
+        if (!empty($spiArea)) {
+            $area = $spiArea;
 
-            if (!isset($weeklyQuantities[$week])) {
-                $weeklyQuantities[$week] = [];
+            if (!isset($weeklySpiQuantities[$week])) {
+                $weeklySpiQuantities[$week] = [];
             }
-            if (!isset($weeklyQuantities[$week][$area])) {
-                $weeklyQuantities[$week][$area] = 0;
+            if (!isset($weeklySpiQuantities[$week][$area])) {
+                $weeklySpiQuantities[$week][$area] = 0;
             }
 
             $buying_quantity = $spiRecord->quantity;
             $price_expense = $spiRecord->price_expenses;
 
-            if (!isset($totalExpenses[$week])) {
-                $totalExpenses[$week] = 0;
+            if (!isset($totalSpiExpenses[$week])) {
+                $totalSpiExpenses[$week] = 0;
             }
-            $totalExpenses[$week] += $buying_quantity * $price_expense;
-            $weeklyQuantities[$week][$area] += $buying_quantity;
+            $totalSpiExpenses[$week] += $buying_quantity * $price_expense;
+            $weeklySpiQuantities[$week][$area] += $buying_quantity;
         }
     }
 
     foreach ($totalSpiExpenses as $week => $totalExpense) {
         $totalQuantity = array_sum($weeklySpiQuantities[$week]);
-        $weightedSpiPrices[$week] = $totalExpense / $totalQuantity;
+
+        // Check if totalQuantity is greater than zero to avoid division by zero
+        if ($totalQuantity > 0) {
+            $weightedSpiPrices[$week] = $totalExpense / $totalQuantity;
+        } else {
+            $weightedSpiPrices[$week] = 0; // or handle the zero quantity case as needed
+        }
     }
 
     return view('home', compact('suppliers', 'cottonli', 'spinossum', 'weeklyQuantities', 'weightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices'));

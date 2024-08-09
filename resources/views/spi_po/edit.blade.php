@@ -45,11 +45,11 @@
                                         <td><input type="text" name="quantity" class="form-control adjust" value="{{$spi_po->quantity}}"></td>
                                         <td><input type="text" name="buying_price" class="form-control adjust" value="{{$spi_po->buying_price}}"></td>
                                         <td><input type="text" name="expenses" class="form-control adjust" value="{{$spi_po->expenses}}"></td>
-                                        <td><input type="text" name="price_expenses" class="form-control adjust" value="{{$spi_po->price_expenses}}"></td>
+                                        <td><input type="text" name="price_expenses" class="form-control adjust" value="{{$spi_po->price_expenses}}" readonly></td>
                                         <td><input type="date" name="original_po_date" class="form-control adjust_date" value="{{$spi_po->original_po_date}}"></td>
                                         <td><input type="date" name="po_date" class="form-control adjust_date" value="{{$spi_po->po_date}}"></td>
                                         <td>
-                                            <select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area[]" id="area" title="Select Area" required>
+                                            <select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area" id="area" title="Select Area" required>
                                                 <option value="" disabled selected>Select Area</option>
                                                 <option value="ZAMBO BS"{{ $spi_po->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>
                                                 <option value="PAL BS"{{ $spi_po->area == "PAL BS" ? 'selected' : '' }}>PAL BS</option>
