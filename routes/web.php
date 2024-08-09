@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/submitCott', 'CottController@submitCott');
     Route::post('updateStatusCott', 'CottController@updateStatusCott');
     Route::post('add_comments_cott/{id}', 'CottController@addCommentsCott');
-    Route::post('disapproved_comments/{id}', 'CottController@disapprovedComments');
+    Route::post('disapproved_comments_cott/{id}', 'CottController@disapprovedComments');
     Route::post('add_demand', 'CottController@add_demand');
     Route::get('/filter', 'CottController@filter');
     Route::get('/export_cott_pdf/{start_date}/{end_date}', 'CottController@export_cott_pdf')->name('export_cott_pdf');
@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('approvedCott/{id}', 'CottController@approvedCott');
     Route::get('disapprovedCott/{id}', 'CottController@disapprovedCott');
     Route::get('preApprover/{id}', 'CottController@preApprover');
+    Route::get('pre_approval_cott/{id}', 'CottController@pre_approval_cott');
 
     // spinosum
     Route::get('/spi', 'SpiController@index');
@@ -65,9 +66,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/export_spi_pdf/{start_date}/{end_date}', 'SpiController@export_spi_pdf')->name('export_spi_pdf');
     Route::get('/for_approval_spi/{start_date}/{end_date}', 'SpiController@for_approval_spi')->name('for_approval_spi');
     Route::get('delete/{id}', 'SpiController@delete')->name('spis.delete');
+    Route::get('pre_approval_spi/{id}', 'SpiController@pre_approval_spi');
     Route::get('approvedStatus/{id}', 'SpiController@approvedStatus');
     Route::get('disapprovedStatus/{id}', 'SpiController@disapprovedStatus');
-    Route::get('preApproverSpi/{id}', 'SpiController@preApproverSpi');
+    Route::get('preApproverSpi/{id}', 'SpiController@preApproverSpi');  
 
     // user
     Route::get('/user', 'UserController@index');

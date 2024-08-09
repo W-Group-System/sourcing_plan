@@ -172,7 +172,8 @@
                                                             <th>Price + CTP (Budget in USD)</th>
                                                             <th>Remarks</th>
                                                             <th>Area</th>
-                                                            <!-- <th>Action</th> -->
+                                                            <th>Comments</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -208,12 +209,12 @@
                                                                 <td>{{$spi->price_ctp}}</td>
                                                                 <td>{{$spi->remarks}}</td>
                                                                 <td>{{$spi->area}}</td>
-                                                                <!-- <td align="center">
-                                                                    <a href="{{ route('spi.editApproved', ['id' => $spi->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
-                                                                    <a href="{{ route('spis.delete', ['id' => $spi->id]) }}">
-                                                                        <button type="button" class="btn btn-danger btn-outline" title="Delete SPI"><i class="fa fa fa-trash"></i></button>
+                                                                <td>{{$spi->comments}}</td>
+                                                                <td align="center">
+                                                                    <a href="{{ url('pre_approval_spi/'.$spi->id) }}">
+                                                                        <button type="button" class="btn btn-primary btn-outline" title="For Approval Spinossum"><i class="fa fa fa-undo"></i></button>
                                                                     </a>
-                                                                </td> -->
+                                                                </td>
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
@@ -273,6 +274,7 @@
                                                                 <th>Area</th>
                                                                 <th>Comments</th>
                                                                 <th>Pre Approved</th>
+                                                                <th>Date Created</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -314,6 +316,7 @@
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : ($spi->status == 0 ? 'pre-disapproved' : '') }}">{{$spi->area}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : ($spi->status == 0 ? 'pre-disapproved' : '') }}">{{$spi->comments}}</td>
                                                                     <td class="{{ $spi->status == 1 ? 'pre-approved' : ($spi->status == 0 ? 'pre-disapproved' : '') }}">{{$spi->pre_approved}}</td>
+                                                                    <td class="{{ $spi->status == 1 ? 'pre-approved' : ($spi->status == 0 ? 'pre-disapproved' : '') }}">{{date_format($spi->created_at, 'Y-m-d')}}</td>
                                                                     <!-- <td class="action">
                                                                         <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_spi{{$spi->id}}">
                                                                             <i class="fa fa-comments"></i>

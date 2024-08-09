@@ -339,4 +339,14 @@ class SpiController extends Controller
         Alert::success('Success Title', 'Success Message');
         return back();
     }
+
+    public function pre_approval_spi($id)
+    {
+        $spi = Spi::find($id);
+        $spi->approved = 0;
+        $spi->status = 2;
+        $spi->save();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
 }

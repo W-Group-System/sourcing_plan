@@ -341,4 +341,13 @@ class CottController extends Controller
         return back();
     }
     
+    public function pre_approval_cott($id)
+    {
+        $cott = Cott::find($id);
+        $cott->approved = 0;
+        $cott->status = 2;
+        $cott->save();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
 }

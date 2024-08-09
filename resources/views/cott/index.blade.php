@@ -175,7 +175,7 @@
                                                             <th>Area</th>
                                                             <th>Comments</th>
                                                             <!-- <th>Pre Approved</th> -->
-                                                            <!-- <th>Action</th> -->
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -212,6 +212,11 @@
                                                                 <td>{{$cott->remarks}}</td>
                                                                 <td>{{$cott->area}}</td>
                                                                 <td>{{$cott->comments}}</td>
+                                                                <td align="center">
+                                                                    <a href="{{ url('pre_approval_cott/'.$cott->id) }}">
+                                                                        <button type="button" class="btn btn-primary btn-outline" title="For Approval Cottonii"><i class="fa fa fa-undo"></i></button>
+                                                                    </a>
+                                                                </td>
                                                                 <!-- <td>{{$cott->pre_approved}}</td> -->
                                                                 <!-- <td class="action">
                                                                     <a href="{{ route('cott.edit', ['id' => $cott->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
@@ -290,6 +295,7 @@
                                                                 <th>Area</th>
                                                                 <th>Comments</th>
                                                                 <th>Pre Approved</th>
+                                                                <th>Date Created</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -329,6 +335,7 @@
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->area}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->comments}}</td>
                                                                     <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{$cott->pre_approved}}</td>
+                                                                    <td class="{{ $cott->status == 1 ? 'pre-approved' : ($cott->status == 0 ? 'pre-disapproved' : '') }}">{{date_format($cott->created_at, 'Y-m-d')}}</td>
                                                                     <td class="action">
                                                                         <a href="{{ route('cott.edit', ['id' => $cott->id]) }}" class="btn btn-warning btn-outline" title="Edit Cottonii"><i class="fa fa fa-pencil"></i></a>
                                                                         <button type="button" class="btn btn-primary btn-outline" data-toggle="modal" data-target="#add_comments_cott{{$cott->id}}" title="Add Comments">
@@ -383,7 +390,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ url('disapproved_comments', ['id' => $cott->id]) }}" method="POST">
+            <form action="{{ url('disapproved_comments_cott', ['id' => $cott->id]) }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
