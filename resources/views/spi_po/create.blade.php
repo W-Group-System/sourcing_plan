@@ -45,7 +45,7 @@
                                         </td>
                                         <td><input type="text" name="lot_code[]" id="lot_code" class="form-control adjust" placeholder="Enter Lot Code" required></td>
                                         <td><input type="text" name="quantity[]" id="quantity" class="form-control adjust" placeholder="Enter Quantity" required></td>
-                                        <td><input type="text" name="buying_price[]" id="buying_price" class="form-control adjust" placeholder="Enter Buying Price" required></td>
+                                        <td><input type="text" name="buying_price[]" id="buying_price" class="form-control adjust buying_price" placeholder="Enter Buying Price" required></td>
                                         <td><input type="text" name="expenses[]" id="expenses" class="form-control adjust expenses" placeholder="Enter Expenses" required></td>
                                         <td><input type="text" name="price_expenses[]" id="price_expenses" class="form-control adjust price_expense" placeholder="Enter Price Expenses" readonly></td>
                                         <td><input type="date" name="original_po_date[]" id="original_po_date" class="form-control adjust_date" required></td>
