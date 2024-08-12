@@ -49,7 +49,7 @@
                                         <td><input type="date" name="original_po_date" class="form-control adjust_date" value="{{$cott_po->original_po_date}}"></td>
                                         <td><input type="date" name="po_date" class="form-control adjust_date" value="{{$cott_po->po_date}}"></td>
                                         <td>
-                                            <select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area[]" id="area" title="Select Area" required>
+                                            <select class="form-control adjust selectpicker" data-live-search="true" data-live-search-placeholder="Search" name="area" id="area" title="Select Area" required>
                                                 <option value="" disabled selected>Select Area</option>
                                                 <option value="ZAMBO BS"{{ $cott_po->area == "ZAMBO BS" ? 'selected' : '' }}>ZAMBO BS</option>
                                                 <option value="PAL BS"{{ $cott_po->area == "PAL BS" ? 'selected' : '' }}>PAL BS</option>
