@@ -43,9 +43,9 @@
                                         </td>
                                         <td><input type="text" name="lot_code" class="form-control adjust" value="{{$cott_po->lot_code}}"></td>
                                         <td><input type="text" name="quantity" class="form-control adjust" value="{{$cott_po->quantity}}"></td>
-                                        <td><input type="text" name="buying_price" class="form-control adjust" value="{{$cott_po->buying_price}}"></td>
-                                        <td><input type="text" name="expenses" class="form-control adjust" value="{{$cott_po->expenses}}"></td>
-                                        <td><input type="text" name="price_expenses" class="form-control adjust" value="{{$cott_po->price_expenses}}" readonly></td>
+                                        <td><input type="text" name="buying_price" class="form-control adjust buying_price" value="{{$cott_po->buying_price}}"></td>
+                                        <td><input type="text" name="expenses" class="form-control adjust expenses" value="{{$cott_po->expenses}}"></td>
+                                        <td><input type="text" name="price_expenses" class="form-control adjust price_expense" value="{{$cott_po->price_expenses}}" readonly></td>
                                         <td><input type="date" name="original_po_date" class="form-control adjust_date" value="{{$cott_po->original_po_date}}"></td>
                                         <td><input type="date" name="po_date" class="form-control adjust_date" value="{{$cott_po->po_date}}"></td>
                                         <td>
@@ -82,4 +82,22 @@
         margin-top: 10px;
     }
 </style>
+<script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+<script>
+    // computation for price expenses
+    $("#tableEstimate tbody").on("input", ".buying_price, .expenses", function() {
+        var buying_price = parseFloat($(this).closest("tr").find(".buying_price").val()) || 0;
+        var expenses = parseFloat($(this).closest("tr").find(".expenses").val()) || 0;
+        var price_expense = $(this).closest("tr").find(".price_expense");
+        price_expense.val((buying_price + expenses).toFixed(2));
+        calc_total(); 
+    });
+
+    function calc_total() {
+        var sum = 0;
+        $('.price_expense').each(function () {
+            sum += parseFloat($(this).val());
+        });
+    }
+</script>
 @endsection
