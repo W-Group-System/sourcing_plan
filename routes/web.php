@@ -98,4 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update_spi_po/{id}', 'SpiPoController@update');
     Route::get('/spi_po/delete/{id}', 'SpiPoController@delete')->name('spi_po.delete');
 
+    // Demand and Supply
+    Route::get('/demand_supplies', 'DemandSupplyController@index');
+    Route::post('update_demand_supply/{id}', 'DemandSupplyController@update');
 });

@@ -100,6 +100,9 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="{{ url('/demand_supplies') }}"><i class="fa fa-industry"></i><span class="nav-label">Demand and Supply</span></a>
+                    </li>
+                    <li>
                         <a href="{{ url('/supplier') }}"><i class="fa fa-truck"></i><span class="nav-label">Suppliers</span></a>
                     </li>
                     <li>

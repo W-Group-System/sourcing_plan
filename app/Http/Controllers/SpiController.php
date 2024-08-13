@@ -136,7 +136,6 @@ class SpiController extends Controller
         return $pdf->stream('spi.pdf', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
-
     public function updateStatus(Request $request)
     {
         $request->validate([
@@ -239,6 +238,7 @@ class SpiController extends Controller
         // $suppliers = Supplier::all();
         return view('spi.editApproved', compact('spis'));  
     }
+    
     public function update(Request $request, $id)
     {
         $spis = Spi::find($id);
