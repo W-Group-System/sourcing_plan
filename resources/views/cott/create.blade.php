@@ -87,6 +87,7 @@
                                                 <option selected>Select</option>
                                                 <option value="42%">42%</option>
                                                 <option value="45%">45%</option>
+                                                <option value="38%">38%</option>
                                             </select>
                                             {{-- <input type="text" name="moisture_content[]" id="moisture_content" class="form-control adjust"> --}}
                                         </td>
@@ -187,6 +188,7 @@
                     '<option selected>Select</option>'+
                     '<option value="42%">42%</option>'+
                     '<option value="45%">45%</option>'+
+                    '<option value="38%">38%</option>'+
                 '</select>'+
                 // <input type="text" name="moisture_content[]" id="moisture_content" class="form-control adjust">
             '</td>'+
