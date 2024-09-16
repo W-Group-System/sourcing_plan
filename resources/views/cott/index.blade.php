@@ -362,7 +362,9 @@
                                                         </tbody>
                                                     </table>
                                                     <div align="right" class="mt-10">
+                                                        @if (@auth()->user()->position != 'Plant Manager')
                                                         <button type="submit" class="btn btn-info btn-submit" name="action" value="approved" disabled>Submit</button>
+                                                        @endif
                                                         <button type="submit" class="btn btn-primary btn-submit" name="action" value="approve" disabled>Approve All</button>
                                                         <button type="submit" class="btn btn-danger btn-submit" name="action" value="disapprove" disabled>Disapprove All</button>
                                                     </div>
