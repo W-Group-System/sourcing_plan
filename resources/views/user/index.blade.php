@@ -69,6 +69,7 @@
                         <div class="col-12 mb-10">
                             <label>Position</label>
                             <select name="position" id="position" class="form-control selectpicker" title="Select Position" required>
+                                <option value="Seaweeds Purchaser">Seaweeds Purchaser</option>
                                 <option value="Supervisor">Supervisor</option>
                                 <option value="Asst. Manager">Asst. Manager</option>
                                 <option value="Manager">Manager</option>
