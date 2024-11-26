@@ -46,32 +46,32 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><input type="text" name="name" class="form-control adjust" value="{{$spis->name}}" readonly></td>
-                                        <td><input type="text" name="destination" class="form-control adjust" value="{{$spis->destination}}" readonly></td>
+                                        <td><input type="text" name="name" class="form-control adjust" value="{{$spis->name}}"></td>
+                                        <td><input type="text" name="destination" class="form-control adjust" value="{{$spis->destination}}"></td>
                                         <td><input type="text" name="pes" class="form-control adjust" value="{{$spis->pes}}"></td>
                                         <td><input type="text" name="origin" class="form-control adjust" value="{{$spis->origin}}"></td>
                                         <td><input type="text" name="offer_quantity" class="form-control adjust" value="{{$spis->offer_quantity}}"></td>
                                         <td><input type="text" name="buying_quantity" class="form-control adjust" value="{{$spis->buying_quantity}}"></td>
-                                        <td><input type="text" name="uom" class="form-control adjust" value="MT" readonly></td>
+                                        <td><input type="text" name="uom" class="form-control adjust" value="MT"></td>
                                         <td><input type="text" name="original_price" class="form-control adjust" value="{{$spis->original_price}}"></td>
-                                        <td><input type="text" name="buying_price" class="form-control adjust buying_price" value="{{$spis->buying_price}}" readonly></td>
-                                        <td><input type="text" name="expenses" class="form-control adjust expenses" value="{{$spis->expenses}}" readonly></td>
-                                        <td><input type="text" name="price_expense" class="form-control adjust price_expense" value="{{$spis->price_expense}}" readonly></td>
-                                        <td> <input type="text" name="moisture_content" class="form-control adjust" value="{{$spis->moisture_content}}" readonly></td>
+                                        <td><input type="text" name="buying_price" class="form-control adjust buying_price" value="{{$spis->buying_price}}"></td>
+                                        <td><input type="text" name="expenses" class="form-control adjust expenses" value="{{$spis->expenses}}"></td>
+                                        <td><input type="text" name="price_expense" class="form-control adjust price_expense" value="{{$spis->price_expense}}"></td>
+                                        <td> <input type="text" name="moisture_content" class="form-control adjust" value="{{$spis->moisture_content}}"></td>
                                         <td><input type="text" name="delivery_schedule" class="form-control adjust" value="{{$spis->delivery_schedule}}"></td>
                                         <td><input type="text" name="terms_payment" class="form-control adjust" value="{{$spis->terms_payment}}"></td>
                                         <td><input type="text" name="potassium" class="form-control adjust" value="{{$spis->potassium}}"></td>
-                                        <td><input type="text" name="chips_yield" class="form-control adjust chips_yield" value="{{$spis->chips_yield}}" readonly></td>
+                                        <td><input type="text" name="chips_yield" class="form-control adjust chips_yield" value="{{$spis->chips_yield}}"></td>
                                         <td>
                                             <div class="input-group m-b">
-                                                <input type="text" name="powder_yield" class="form-control powder_yield" style="width: 80px" value="{{$spis->powder_yield}}" readonly><span class="input-group-addon">%</span> 
+                                                <input type="text" name="powder_yield" class="form-control powder_yield" style="width: 80px" value="{{$spis->powder_yield}}"><span class="input-group-addon">%</span> 
                                             </div>
                                         </td>
-                                        <td><input type="text" name="price_yield" class="form-control adjust price_yield" value="{{$spis->price_yield}}" readonly></td>
-                                        <td><input type="text" name="forex_rate" class="form-control adjust forex_rate" value="{{$spis->forex_rate}}" readonly></td>
-                                        <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$spis->price_usd}}" readonly></td>
-                                        <td><input type="text" name="cost_produc" class="form-control adjust cost_produce" value="{{$spis->cost_produce}}" readonly></td>
-                                        <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$spis->price_ctp}}" readonly></td>
+                                        <td><input type="text" name="price_yield" class="form-control adjust price_yield" value="{{$spis->price_yield}}"></td>
+                                        <td><input type="text" name="forex_rate" class="form-control adjust forex_rate" value="{{$spis->forex_rate}}"></td>
+                                        <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$spis->price_usd}}"></td>
+                                        <td><input type="text" name="cost_produc" class="form-control adjust cost_produce" value="{{$spis->cost_produce}}"></td>
+                                        <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$spis->price_ctp}}"></td>
                                         <td><input type="text" name="remarks" class="form-control adjust" value="{{$spis->remarks}}"></td>
                                         <td><select class="form-control adjust" name="area" id="area">
                                             <option value="" disabled selected>Select Area</option>
