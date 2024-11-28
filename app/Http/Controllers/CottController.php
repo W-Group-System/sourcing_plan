@@ -253,13 +253,27 @@ class CottController extends Controller
     public function update(Request $request, $id)
     {
         $cotts = Cott::find($id);
+        $cotts->name = $request->input('name');
+        $cotts->destination = $request->input('destination');
+        $cotts->food_grade = $request->input('food_grade');
         $cotts->origin = $request->input('origin');
         $cotts->offer_quantity = $request->input('offer_quantity');
         $cotts->buying_quantity = $request->input('buying_quantity');
         $cotts->original_price = $request->input('original_price');
+        $cotts->buying_price = $request->input('buying_price');
+        $cotts->expenses = $request->input('expenses');
+        $cotts->price_expense = $request->input('price_expense');
+        $cotts->moisture_content = $request->input('moisture_content');
         $cotts->delivery_schedule = $request->input('delivery_schedule');
         $cotts->terms_payment = $request->input('terms_payment');
         $cotts->potassium = $request->input('potassium');
+        $cotts->chips_yield = $request->input('chips_yield');
+        $cotts->powder_yield = $request->input('powder_yield');
+        $cotts->price_yield = $request->input('price_yield');
+        $cotts->forex_rate = $request->input('forex_rate');
+        $cotts->price_usd = $request->input('price_usd');
+        $cotts->cost_produce = $request->input('cost_produce');
+        $cotts->price_ctp = $request->input('price_ctp');
         $cotts->remarks = $request->input('remarks');
         $cotts->area = $request->input('area');
         $cotts->update();

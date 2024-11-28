@@ -52,7 +52,7 @@
                                         <td><input type="text" name="origin" class="form-control adjust" value="{{$spis->origin}}"></td>
                                         <td><input type="text" name="offer_quantity" class="form-control adjust" value="{{$spis->offer_quantity}}"></td>
                                         <td><input type="text" name="buying_quantity" class="form-control adjust" value="{{$spis->buying_quantity}}"></td>
-                                        <td><input type="text" name="uom" class="form-control adjust" value="MT"></td>
+                                        <td><input type="text" name="uom" class="form-control adjust" value="MT" readonly></td>
                                         <td><input type="text" name="original_price" class="form-control adjust" value="{{$spis->original_price}}"></td>
                                         <td><input type="text" name="buying_price" class="form-control adjust buying_price" value="{{$spis->buying_price}}"></td>
                                         <td><input type="text" name="expenses" class="form-control adjust expenses" value="{{$spis->expenses}}"></td>

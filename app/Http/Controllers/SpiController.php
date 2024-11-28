@@ -243,16 +243,27 @@ class SpiController extends Controller
     {
         $spis = Spi::find($id);
         $spis->pes = $request->input('pes');
+        $spis->destination = $request->input('destination');
         $spis->origin = $request->input('origin');
         $spis->offer_quantity = $request->input('offer_quantity');
         $spis->buying_quantity = $request->input('buying_quantity');
         $spis->original_price = $request->input('original_price');
+        $spis->buying_price = $request->input('buying_price');
+        $spis->expenses = $request->input('expenses');
+        $spis->price_expense = $request->input('price_expense');
+        $spis->moisture_content = $request->input('moisture_content');
         $spis->delivery_schedule = $request->input('delivery_schedule');
         $spis->terms_payment = $request->input('terms_payment');
         $spis->potassium = $request->input('potassium');
+        $spis->chips_yield = $request->input('chips_yield');
+        $spis->price_yield = $request->input('price_yield');
+        $spis->forex_rate = $request->input('forex_rate');
+        $spis->price_usd = $request->input('price_usd');
+        $spis->cost_produce = $request->input('cost_produce');
+        $spis->price_ctp = $request->input('price_ctp');
         $spis->remarks = $request->input('remarks');
-        $spis->area = $request->input('area');
-     
+        $spis->area = $request->input('area');   
+          
         $spis->update();
         Alert::success('Success Title', 'Success Message');
         return back();
