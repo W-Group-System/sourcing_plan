@@ -61,7 +61,7 @@
                                         <td><input type="text" name="uom[]" id="uom" class="form-control adjust" value="MT" readonly></td>
                                         <td><input type="text" name="original_price" class="form-control adjust" value="{{$cotts->original_price}}"></td>
                                         <td><input type="text" name="buying_price" class="form-control adjust buying_price" value="{{$cotts->buying_price}}"></td>
-                                        <td><input type="text" name="expenses" class="form-control adjust expenses" value="{{$cotts->expenses ? '0' : ''}}"></td>
+                                        <td><input type="text" name="expenses" class="form-control adjust expenses" value="{{$cotts->expenses}}"></td>
                                         <td><input type="text" name="price_expense" class="form-control adjust price_expense" value="{{$cotts->price_expense}}"></td>
                                         <td>
                                             <input type="text" name="moisture_content" class="form-control adjust" value="{{$cotts->moisture_content}}"> 
