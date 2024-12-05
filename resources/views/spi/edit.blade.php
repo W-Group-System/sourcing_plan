@@ -70,7 +70,7 @@
                                         <td><input type="text" name="price_yield" class="form-control adjust price_yield" value="{{$spis->price_yield}}"></td>
                                         <td><input type="text" name="forex_rate" class="form-control adjust forex_rate" value="{{$spis->forex_rate}}"></td>
                                         <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$spis->price_usd}}"></td>
-                                        <td><input type="text" name="cost_produc" class="form-control adjust cost_produce" value="{{$spis->cost_produce}}"></td>
+                                        <td><input type="text" name="cost_produce" class="form-control adjust cost_produce" value="{{$spis->cost_produce}}"></td>
                                         <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$spis->price_ctp}}"></td>
                                         <td><input type="text" name="remarks" class="form-control adjust" value="{{$spis->remarks}}"></td>
                                         <td><select class="form-control adjust" name="area" id="area">
