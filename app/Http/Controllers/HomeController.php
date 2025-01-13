@@ -429,11 +429,19 @@ public function index(Request $request)
     $totalSpiExpenses = []; 
     $weightedSpiPrices = []; 
 
-    foreach ($spinossum as $spiRecord) {
-        $date = new DateTime($spiRecord->created_at);
+    $mergedSpiRecords = array_merge($spinossum->toArray(), $spinossum_po->toArray());
+
+    usort($mergedSpiRecords, function ($a, $b) {
+        $dateA = new DateTime($a['po_date'] ?? $a['created_at']);
+        $dateB = new DateTime($b['po_date'] ?? $b['created_at']);
+        return $dateA <=> $dateB; 
+    });
+
+    foreach ($mergedSpiRecords as $spiRecord) {
+        $date = new DateTime($spiRecord['po_date'] ?? $spiRecord['created_at']);
         $date->modify('this week Monday');
         $week = $date->format("Y-W");
-        $spiArea = $spiRecord->area; 
+        $spiArea = $spiRecord['area'];
 
         if (!empty($spiArea)) {
             $area = $spiArea;
@@ -445,8 +453,9 @@ public function index(Request $request)
                 $weeklySpiQuantities[$week][$area] = 0;
             }
 
-            $buying_quantity = $spiRecord->buying_quantity;
-            $price_expense = $spiRecord->price_expense;
+            $buying_quantity = isset($spiRecord['buying_quantity']) ? $spiRecord['buying_quantity'] : $spiRecord['quantity'];
+            $price_expense = isset($spiRecord['price_expense']) ? $spiRecord['price_expense'] : $spiRecord['price_expenses'];
+
 
             if (!isset($totalSpiExpenses[$week])) {
                 $totalSpiExpenses[$week] = 0;
@@ -468,32 +477,32 @@ public function index(Request $request)
     //     }
     // }
     
-    foreach ($spinossum_po as $spiRecord) {
-        $date = new DateTime($spiRecord->po_date ?? $spiRecord->created_at);
-        $date->modify('this week Monday');
-        $week = $date->format("Y-W"); 
-        $spiArea = $spiRecord->area;
+    // foreach ($spinossum_po as $spiRecord) {
+    //     $date = new DateTime($spiRecord->po_date ?? $spiRecord->created_at);
+    //     $date->modify('this week Monday');
+    //     $week = $date->format("Y-W"); 
+    //     $spiArea = $spiRecord->area;
 
-        if (!empty($spiArea)) {
-            $area = $spiArea;
+    //     if (!empty($spiArea)) {
+    //         $area = $spiArea;
 
-            if (!isset($weeklySpiQuantities[$week])) {
-                $weeklySpiQuantities[$week] = [];
-            }
-            if (!isset($weeklySpiQuantities[$week][$area])) {
-                $weeklySpiQuantities[$week][$area] = 0;
-            }
+    //         if (!isset($weeklySpiQuantities[$week])) {
+    //             $weeklySpiQuantities[$week] = [];
+    //         }
+    //         if (!isset($weeklySpiQuantities[$week][$area])) {
+    //             $weeklySpiQuantities[$week][$area] = 0;
+    //         }
 
-            $buying_quantity = $spiRecord->quantity;
-            $price_expense = $spiRecord->price_expenses;
+    //         $buying_quantity = $spiRecord->quantity;
+    //         $price_expense = $spiRecord->price_expenses;
 
-            if (!isset($totalSpiExpenses[$week])) {
-                $totalSpiExpenses[$week] = 0;
-            }
-            $totalSpiExpenses[$week] += $buying_quantity * $price_expense;
-            $weeklySpiQuantities[$week][$area] += $buying_quantity;
-        }
-    }
+    //         if (!isset($totalSpiExpenses[$week])) {
+    //             $totalSpiExpenses[$week] = 0;
+    //         }
+    //         $totalSpiExpenses[$week] += $buying_quantity * $price_expense;
+    //         $weeklySpiQuantities[$week][$area] += $buying_quantity;
+    //     }
+    // }
 
     foreach ($totalSpiExpenses as $week => $totalExpense) {
         $totalQuantity = array_sum($weeklySpiQuantities[$week]);
