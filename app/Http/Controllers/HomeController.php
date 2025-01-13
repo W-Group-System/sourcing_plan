@@ -456,17 +456,17 @@ public function index(Request $request)
         }
     }
 
-    $filteredWeeklySpiQuantities = [];
-    $filteredTotalSpiExpenses = [];
+    // $filteredWeeklySpiQuantities = [];
+    // $filteredTotalSpiExpenses = [];
 
-    foreach ($filteredTotalSpiExpenses as $week => $totalExpense) {
-        $totalQuantity = array_sum($filteredWeeklySpiQuantities[$week]);
-        if ($totalQuantity > 0) {
-            $filteredWeightedSpiPrices[$week] = $totalExpense / $totalQuantity;
-        } else {
-            $filteredWeightedSpiPrices[$week] = 0;
-        }
-    }
+    // foreach ($filteredTotalSpiExpenses as $week => $totalExpense) {
+    //     $totalQuantity = array_sum($filteredWeeklySpiQuantities[$week]);
+    //     if ($totalQuantity > 0) {
+    //         $filteredWeightedSpiPrices[$week] = $totalExpense / $totalQuantity;
+    //     } else {
+    //         $filteredWeightedSpiPrices[$week] = 0;
+    //     }
+    // }
     
     foreach ($spinossum_po as $spiRecord) {
         $date = new DateTime($spiRecord->po_date ?? $spiRecord->created_at);
@@ -504,8 +504,30 @@ public function index(Request $request)
             $weightedSpiPrices[$week] = 0; 
         }
     }
+    $filteredWeeklySpiQuantities = [];
+    $filteredTotalSpiExpenses = [];
 
-    return view('home', compact('suppliers', 'cottonli', 'spinossum', 'filteredWeeklyQuantities', 'filteredWeightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices'));
+    foreach ($weeklySpiQuantities as $week => $areaQuantities) {
+        list($year, $weekNumber) = explode('-', $week);
+        $weekDate = new DateTime();
+        $weekDate->setISODate($year, $weekNumber);
+        if ($weekDate >= $startDate && $weekDate <= $endDate) {
+            $filteredWeeklySpiQuantities[$week] = $areaQuantities;
+            $filteredTotalSpiExpenses[$week] = $totalSpiExpenses[$week];
+        }
+    }
+
+    $filteredWeightedSpiPrices = [];
+    foreach ($filteredTotalSpiExpenses as $week => $totalSpiExpense) {
+        $totalQuantity = array_sum($filteredWeeklySpiQuantities[$week]);
+        if ($totalQuantity > 0) {
+            $filteredWeightedSpiPrices[$week] = $totalSpiExpense / $totalQuantity;
+        } else {
+            $filteredWeightedSpiPrices[$week] = 0;
+        }
+    }
+
+    return view('home', compact('suppliers', 'cottonli', 'spinossum', 'filteredWeeklyQuantities', 'filteredWeightedPrices', 'filteredWeeklySpiQuantities', 'filteredWeightedSpiPrices'));
 }
 
 

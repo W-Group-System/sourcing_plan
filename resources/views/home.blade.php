@@ -598,8 +598,8 @@ addDataLabels();
 
 
 
-    var spinossumWeeklyQuantities = @json($weeklySpiQuantities);
-    var spinossumWeightedPrices = @json($weightedSpiPrices);
+    var spinossumWeeklyQuantities = @json($filteredWeeklySpiQuantities);
+    var spinossumWeightedPrices = @json($filteredWeightedSpiPrices);
     var dataSets = {
         "ZAMBO BS": [],
         "PAL BS": [],
