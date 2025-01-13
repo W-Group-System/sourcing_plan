@@ -266,6 +266,9 @@
                             } elseif ($cott->destination == 'CAR/PBI') {     
                                 $totals['CAR'] += $cott->buying_quantity / 2;
                                 $totals['PBI'] += $cott->buying_quantity / 2;
+                            } elseif ($cott->destination == 'CCC/CAR') {     
+                                $totals['CAR'] += $cott->buying_quantity / 2;
+                                $totals['CCC'] += $cott->buying_quantity / 2;
                             }
                         @endphp
                     @endforeach  
@@ -326,7 +329,7 @@
         </thead>
         <tbody align="center">
             <tr>
-                <td style="padding-top: 0px;">KIARA BEATRIZ GALIMAO</td>
+                <td style="padding-top: 0px;">{{ auth()->user()->name }}</td>
                 <td style="padding-top: 0px;">YEANESA MAE SAJA</td>
                 <!-- <td style="padding-top: 20px;">MA MICHELLE PILOTON/JHANICE FABABAER</td> -->
                 <td style="padding-top: 0px;">JLW</td>

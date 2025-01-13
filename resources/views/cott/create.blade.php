@@ -64,6 +64,7 @@
                                                 <option value="CAR">CAR</option>
                                                 <option value="PBI">PBI</option>
                                                 <option value="CAR/PBI">CAR/PBI</option>
+                                                <option value="CCC/CAR">CCC/CAR</option>
                                             </select>
                                         </td>
                                         <td>
@@ -166,6 +167,7 @@
                     '<option value="CAR">CAR</option>'+
                     '<option value="PBI">PBI</option>'+
                     '<option value="CAR/PBI">CAR/PBI</option>'+
+                    '<option value="CCC/CAR">CCC/CAR</option>'+
                 '</select>'+
             '</td>'+
             '<td>'+

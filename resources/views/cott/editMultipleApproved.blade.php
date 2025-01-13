@@ -59,6 +59,7 @@
                                                 <option value="CAR" {{ $cott->destination == "CAR" ? 'selected' : '' }}>CAR</option>
                                                 <option value="PBI" {{ $cott->destination == "PBI" ? 'selected' : '' }}>PBI</option>
                                                 <option value="CAR/PBI" {{ $cott->destination == "CAR/PBI" ? 'selected' : '' }}>CAR/PBI</option>
+                                                <option value="CCC/CAR" {{ $cott->destination == "CCC/CAR" ? 'selected' : '' }}>CCC/CAR</option>
                                             </select>
                                         </td>
                                         <td>

@@ -259,6 +259,9 @@
                             } elseif ($cott->destination == 'CAR/PBI') {     
                                 $totals['CAR'] += $cott->buying_quantity / 2;
                                 $totals['PBI'] += $cott->buying_quantity / 2;
+                            } elseif ($cott->destination == 'CCC/CAR') {     
+                                $totals['CAR'] += $cott->buying_quantity / 2;
+                                $totals['CCC'] += $cott->buying_quantity / 2;
                             }
                         @endphp
                     @endforeach  
