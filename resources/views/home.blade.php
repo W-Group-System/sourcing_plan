@@ -74,19 +74,20 @@
         <div class="row">
             <div class="col-lg-12">
                 <form method="GET" action="{{ url('/') }}">
-                    <select name="year">
-                        @foreach ($years as $y)
-                            <option value="{{ $y }}" {{ $y == $year ? 'selected' : '' }}>{{ $y }}</option>
-                        @endforeach
-                    </select>
-                
-                    <select name="quarter">
-                        @for ($q = 1; $q <= 4; $q++)
-                            <option value="{{ $q }}" {{ $q == $quarter ? 'selected' : '' }}>Q{{ $q }}</option>
-                        @endfor
-                    </select>
-                
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                    @csrf
+                    <div class="row mt-10 mb-10">
+                        <div class="col-md-offset-5 col-md-3">
+                            <label>Start Date:</label>
+                            <input type="month"  name="filter_start" value="{{ request('filter_start') }}"  required>
+                        </div>
+                        <div class="col-md-3">
+                            <label>End Date:</label>
+                            <input type="month"  name="filter_end" value="{{ request('filter_end') }}" required>
+                        </div>
+                        <div class="col-md-1" style="margin-top: 22px">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -321,11 +322,12 @@
         white-space: nowrap;
         text-align: left;
     }
-    .dashboard-quarter-filter select {
-        margin-left: 0.5em;
-        display: inline-block;
-        width: auto;
-        vertical-align: middle;
+    .dashboard-quarter-filter input[type="month"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
     }
 </style>
 <script>
