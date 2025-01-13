@@ -291,13 +291,40 @@ class HomeController extends Controller
 //     return view('home', compact('suppliers', 'cottonli', 'spinossum', 'weeklyQuantities', 'weightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices'));
 // }
 
-public function index()
+public function index(Request $request)
 {
     $suppliers = Supplier::all();
-    $cottonli = Cott::where('approved', 1)->get();
-    $spinossum = Spi::where('approved', 1)->get();
-    $cottonii_po = CottPo::all();
-    $spinossum_po = SpiPo::all();
+    $currentYear = date('Y');
+    $currentQuarter = ceil(date('n') / 3);
+
+    $cottYears = Cott::selectRaw('YEAR(created_at) as year')->distinct()->pluck('year')->toArray();
+    $spiYears = Spi::selectRaw('YEAR(created_at) as year')->distinct()->pluck('year')->toArray();
+
+    $years = array_unique(array_merge($cottYears, $spiYears));
+    sort($years);
+
+    $year = $request->input('year', $currentYear);
+    $quarter = $request->input('quarter', $currentQuarter);
+
+    $quarterStart = new DateTime("$year-" . (($quarter - 1) * 3 + 1) . "-01");
+    $quarterEnd = clone $quarterStart;
+    $quarterEnd->modify('+3 months -1 day');
+
+    // dd($quarterStart, $quarterEnd);
+    $cottonli = Cott::where('approved', 1)
+        ->whereBetween('created_at', [$quarterStart, $quarterEnd])
+        ->get();
+        
+    $spinossum = Spi::where('approved', 1)
+        ->whereBetween('created_at', [$quarterStart, $quarterEnd])
+        ->get();
+
+    $cottonii_po = CottPo::whereBetween('po_date', [$quarterStart, $quarterEnd])
+        ->orWhereBetween('created_at', [$quarterStart, $quarterEnd])
+        ->get();
+    $spinossum_po = SpiPo::whereBetween('po_date', [$quarterStart, $quarterEnd])
+        ->orWhereBetween('created_at', [$quarterStart, $quarterEnd])
+        ->get();
     
     $weeklyQuantities = [];
     $totalExpenses = []; 
@@ -331,7 +358,7 @@ public function index()
         }
     }
 
-    // Process CottPo records
+   
     foreach ($cottonii_po as $record) {
         $date = new DateTime($record->po_date ?? $record->created_at);
         $date->modify('this week Monday');
@@ -364,6 +391,28 @@ public function index()
         $weightedPrices[$week] = $totalExpense / $totalQuantity;
     }
 
+    $filteredWeeklyQuantities = [];
+    $filteredTotalExpenses = [];
+
+    foreach ($weeklyQuantities as $week => $areaQuantities) {
+        list($year, $weekNumber) = explode('-', $week);
+        $weekDate = new DateTime();
+        $weekDate->setISODate($year, $weekNumber);
+        if ($weekDate >= $quarterStart && $weekDate <= $quarterEnd) {
+            $filteredWeeklyQuantities[$week] = $areaQuantities;
+            $filteredTotalExpenses[$week] = $totalExpenses[$week];
+        }
+    }
+
+    $filteredWeightedPrices = [];
+    foreach ($filteredTotalExpenses as $week => $totalExpense) {
+        $totalQuantity = array_sum($filteredWeeklyQuantities[$week]);
+        if ($totalQuantity > 0) {
+            $filteredWeightedPrices[$week] = $totalExpense / $totalQuantity;
+        } else {
+            $filteredWeightedPrices[$week] = 0;
+        }
+    }
     $weeklySpiQuantities = [];
     $totalSpiExpenses = []; 
     $weightedSpiPrices = []; 
@@ -395,6 +444,18 @@ public function index()
         }
     }
 
+    $filteredWeeklySpiQuantities = [];
+    $filteredTotalSpiExpenses = [];
+
+    foreach ($filteredTotalSpiExpenses as $week => $totalExpense) {
+        $totalQuantity = array_sum($filteredWeeklySpiQuantities[$week]);
+        if ($totalQuantity > 0) {
+            $filteredWeightedSpiPrices[$week] = $totalExpense / $totalQuantity;
+        } else {
+            $filteredWeightedSpiPrices[$week] = 0;
+        }
+    }
+    
     foreach ($spinossum_po as $spiRecord) {
         $date = new DateTime($spiRecord->po_date ?? $spiRecord->created_at);
         $date->modify('this week Monday');
@@ -433,7 +494,7 @@ public function index()
         }
     }
 
-    return view('home', compact('suppliers', 'cottonli', 'spinossum', 'weeklyQuantities', 'weightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices'));
+    return view('home', compact('suppliers', 'cottonli', 'spinossum', 'filteredWeeklyQuantities', 'filteredWeightedPrices', 'weeklySpiQuantities', 'weightedSpiPrices', 'year', 'quarter', 'years'));
 }
 
 

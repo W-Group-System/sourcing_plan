@@ -69,7 +69,29 @@
         </div>
     </div>
 </div>
-
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="dashboard-quarter-filter">
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="GET" action="{{ url('/') }}">
+                    <select name="year">
+                        @foreach ($years as $y)
+                            <option value="{{ $y }}" {{ $y == $year ? 'selected' : '' }}>{{ $y }}</option>
+                        @endforeach
+                    </select>
+                
+                    <select name="quarter">
+                        @for ($q = 1; $q <= 4; $q++)
+                            <option value="{{ $q }}" {{ $q == $quarter ? 'selected' : '' }}>Q{{ $q }}</option>
+                        @endfor
+                    </select>
+                
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -80,7 +102,7 @@
                 <div class="ibox-content">
                     <div class="wrapper wrapper-content animated fadeInRight">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12">              
                                 <div class="flot-chart">
                                     <div class="flot-chart-content" id="flot-dashboard-chart"></div>
                                 </div>
@@ -291,6 +313,20 @@
         float: none;
         padding: 0px;
     }
+    .dashboard-quarter-filter {
+        text-align: right;
+    }
+    .dashboard-quarter-filter label {
+        font-weight: normal;
+        white-space: nowrap;
+        text-align: left;
+    }
+    .dashboard-quarter-filter select {
+        margin-left: 0.5em;
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+    }
 </style>
 <script>
     $(document).ready(function(){
@@ -307,8 +343,8 @@
     });
 
     //    Jun Jihad Barroga Combograph
-    var weeklyQuantities = @json($weeklyQuantities);
-    var weightedPrices = @json($weightedPrices);
+    var filteredWeeklyQuantities = @json($filteredWeeklyQuantities);
+    var filteredWeightedPrices = @json($filteredWeightedPrices);
     var dataSets = {
         "ZAMBO BS": [],
         "PAL BS": [],
@@ -336,7 +372,7 @@
         return ISOweekStart;
     }
 
-    for (var week in weeklyQuantities) {
+    for (var week in filteredWeeklyQuantities) {
         var yearWeek = week.split('-');
         var year = parseInt(yearWeek[0]);
         var weekNum = parseInt(yearWeek[1]);
@@ -348,10 +384,10 @@
         var hasData = false;
 
         Object.keys(dataSets).forEach(area => {
-            if (weeklyQuantities[week].hasOwnProperty(area) && weeklyQuantities[week][area] > 0) {
+            if (filteredWeeklyQuantities[week].hasOwnProperty(area) && filteredWeeklyQuantities[week][area] > 0) {
                 hasData = true;
             }
-            var quantity = weeklyQuantities[week][area] || 0;
+            var quantity = filteredWeeklyQuantities[week][area] || 0;
             cumulativeQuantity[area] = (cumulativeQuantity[area] || 0) + quantity;
         });
 
@@ -363,7 +399,7 @@
     }
 
     var priceData = [];
-    for (var week in weightedPrices) {
+    for (var week in filteredWeightedPrices) {
         var yearWeek = week.split('-');
         var year = parseInt(yearWeek[0]);
         var weekNum = parseInt(yearWeek[1]);
@@ -371,7 +407,7 @@
 
         // console.log(`Price Week: ${week}, Monday: ${monday}`);
 
-        priceData.push([monday.getTime(), weightedPrices[week]]);
+        priceData.push([monday.getTime(), filteredWeightedPrices[week]]);
         
     }
 
