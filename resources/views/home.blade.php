@@ -719,6 +719,10 @@ addDataLabels();
     //     return barWidth;
     // }
 
+    // Has Minimum Y-axis
+    var prices = priceData.map(item => item[1]); 
+    var minPrice = Math.min(...prices); 
+    var rightYAxisMin = minPrice - (minPrice * 0.1); 
     dataset.push({
         label: "Price",
         data: priceData,
@@ -771,6 +775,7 @@ addDataLabels();
             axisLabelPadding: 3,
             // ticks: [0, 200, 400, 600, 800, 1000, 1200]
         }, {
+            min:rightYAxisMin,
             position: "right",
             color: "#d5d5d5",
             axisLabelUseCanvas: true,
