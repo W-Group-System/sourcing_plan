@@ -1,5 +1,9 @@
 <?php
+
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +17,29 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/menu', function (Request $request) {
+    // If the user is NOT logged in, but has a token, log them in
+    if (!Auth::check() && $request->has('token')) {
+        $user = User::where('api_token', $request->token)->first();
+
+        if ($user) {
+            Auth::login($user);
+        }
+    }
+
+    if (!Auth::check()) {
+        return redirect('/login');
+    }
+
+    return view('menu'); 
+})->name('system.menu');
+
+
 Route::group(['middleware' => 'auth'], function () {
+    
+
+    Route::get('/redirect/{system}', 'AuthController@redirectToSystem')->name('system.redirect');
+
     Route::get('/', 'HomeController@index');
     Route::get('/home','HomeController@index');
 
