@@ -47,7 +47,7 @@
                 <div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-content">
-                            <a href="{{ route('system.redirect', 'system2') }}" class="btn btn-success">
+                            <a href="#" class="btn btn-success" onclick="redirectToSystem2()">
                                 <div class="image text-center">
                                     <img src="{{ asset('/images/cm.png') }}" alt="Complete Monitoring" style="max-height: 400px;">
                                 </div>
@@ -70,7 +70,15 @@
     <!-- Custom and plugin javascript -->
     <script src="{{ asset('js/inspinia.js') }}"></script>
     <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
+    <script>
+        function redirectToSystem2() {
+            if (!sessionStorage.getItem('api_token')) {
+                sessionStorage.setItem('api_token', '{{ auth()->user()->api_token }}');
+            }
 
+            window.location.href = 'http://localhost/complete-monitoring/public/login-with-token';
+        }
+    </script>
 
 </body>
 

@@ -18,10 +18,17 @@ class AuthController extends Controller
     {
         $user = auth()->user();
 
+        // if ($system === 'system1') {
+        //     return redirect('/home');
+        // } elseif ($system === 'system2') {
+        //     return redirect("http://localhost/complete-monitoring/public/login-with-token?token={$user->api_token}");
+        // }
         if ($system === 'system1') {
             return redirect('/home');
-        } elseif ($system === 'system2') {
-            return redirect("http://localhost/complete-monitoring/public/login-with-token?token={$user->api_token}");
+        }
+    
+        if ($system === 'system2') {
+            return view('redirect-to-system2');
         }
 
         return redirect()->route('system.menu')->with('error', 'Invalid selection.');
@@ -33,7 +40,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        $cookie = cookie('shared_session_cookie', '', -1, '/', '.localhost', false, true);
+        $cookie = cookie('shared_session_cookie', '', -1, '/', 'localhost', false, true);
 
         return redirect('http://localhost/complete-monitoring/public/logout')->withCookie($cookie);
     }

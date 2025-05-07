@@ -86,7 +86,7 @@
         <div class="m-b-md mt-5">
             <img alt="image" src="{{URL::asset('/images/sourcing.png')}}" style='width:235px;'>
         </div>
-        <h3>Sourcing Plan</h3>
+        <h3>SEAWEEDS PORTAL</h3>
         <form method="POST" action="{{ route('login') }}"  aria-label="{{ __('Login') }}" onsubmit='show()'>
             @csrf
             <div class="form-group">
