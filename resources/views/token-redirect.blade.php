@@ -3,39 +3,26 @@
     <head>
         <title>Redirecting to Menu</title>
         <style>
-            /* Loader styles */
             .loader {
-                border: 16px solid #f3f3f3;
-                border-top: 16px solid #3498db;
-                border-radius: 50%;
-                width: 80px;
-                height: 80px;
-                animation: spin 2s linear infinite;
-                margin: 0 auto;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                position: fixed;
+                left: 0px;
+                top: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 9999;
+                background: url("{{ asset('/images/3.gif')}}") 50% 50% no-repeat rgb(249,249,249) ;
+                opacity: .8;
+                background-size:200px 120px;
             }
     
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
-    
-            .message {
-                text-align: center;
-                font-size: 18px;
-                position: absolute;
-                top: 60%;
-                left: 50%;
-                transform: translateX(-50%);
-            }
         </style>
     </head>
 <body>
     <div class="loader"></div>
-    <div class="message">Redirecting...</div>
     <script>
         const token = sessionStorage.getItem('api_token');
         if (token) {
