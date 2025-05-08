@@ -4679,6 +4679,12 @@ body.mini-navbar.fixed-sidebar .logo-element {
   width: 15%;
 }
 /* ERROR & LOGIN & LOCKSCREEN*/
+.menu-middle-box {
+  max-width: 1000px;
+  z-index: 100;
+  margin: 0 auto;
+  padding-top: 40px;
+}
 .middle-box {
   max-width: 400px;
   z-index: 100;

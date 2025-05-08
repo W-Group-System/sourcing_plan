@@ -1,5 +1,9 @@
 <?php
+
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +17,52 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// Route::get('/menu', function (Request $request) {
+//     // If the user is NOT logged in, but has a token, log them in
+//     if (!Auth::check() && $request->has('token')) {
+//         $user = User::where('api_token', $request->token)->first();
+
+//         if ($user) {
+//             Auth::login($user);
+//         }
+//     }
+
+//     if (!Auth::check()) {
+//         return redirect('/login');
+//     }
+
+//     return view('menu'); 
+// })->name('system.menu');
+
+// Route::get('/from-system2', function () {
+//     return view('token-redirect');
+// });
+Route::get('/menu', function (Request $request) {
+    if (!Auth::check() && $request->has('token')) {
+        $user = User::where('api_token', $request->token)->first();
+
+        if ($user) {
+            Auth::login($user);
+            return redirect()->route('system.menu');
+        }
+    }
+
+    if (!Auth::check()) {
+        return redirect('/login');
+    }
+
+    return view('menu');
+})->name('system.menu');
+
+Route::get('/go-to-menu', function () {
+    return view('token-redirect');
+});
+
 Route::group(['middleware' => 'auth'], function () {
+    
+   
+    Route::get('/redirect/{system}', 'AuthController@redirectToSystem')->name('system.redirect');
+
     Route::get('/', 'HomeController@index');
     Route::get('/home','HomeController@index');
 
