@@ -322,7 +322,7 @@
         </thead>
         <tbody align="center">
             <tr>
-                <td style="padding-top: 20px;">KIARA BEATRIZ GALIMAO</td>
+                <td style="padding-top: 20px;">{{ auth()->user()->name }}</td>
                 <td style="padding-top: 20px;">YEANESA MAE SAJA</td>
                 <!-- <td style="padding-top: 20px;">MA MICHELLE PILOTON/JHANICE FABABAER</td> -->
                 <td style="padding-top: 20px;">JLW</td>

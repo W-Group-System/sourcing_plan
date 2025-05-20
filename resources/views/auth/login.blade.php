@@ -1,5 +1,5 @@
 <title>@yield('title', 'Sourcing Plan')</title>
-<link rel="icon" type="image/x-icon" href="{{URL::asset('/images/sourcing.png')}}">
+<link rel="icon" type="image/x-icon" href="{{URL::asset('/images/menu3.png')}}">
 
 <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
@@ -84,7 +84,7 @@
 <div class="middle-box text-center loginscreen animated fadeInDown mt-5">
     <div>
         <div class="m-b-md mt-5">
-            <img alt="image" src="{{URL::asset('/images/sourcing.png')}}" style='width:235px;'>
+            <img alt="image" src="{{URL::asset('/images/menu3.png')}}" style='width:335px;'>
         </div>
         <h3>SEAWEEDS PORTAL</h3>
         <form method="POST" action="{{ route('login') }}"  aria-label="{{ __('Login') }}" onsubmit='show()'>
