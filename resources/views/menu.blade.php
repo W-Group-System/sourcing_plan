@@ -73,12 +73,17 @@
     <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
     <script>
         function redirectToSystem2() {
-            if (!sessionStorage.getItem('api_token')) {
-                sessionStorage.setItem('api_token', '{{ auth()->user()->api_token }}');
-            }
-
-            window.location.href = 'http://localhost/complete-monitoring/public/login-with-token';
+            const token = '{{ auth()->user()->api_token }}';
+            const targetUrl = `https://complete-monitoring.wsystem.online/login-with-token?token=${token}`;
+            window.location.href = targetUrl;
         }
+        // function redirectToSystem2() {
+        //     if (!sessionStorage.getItem('api_token')) {
+        //         sessionStorage.setItem('api_token', '{{ auth()->user()->api_token }}');
+        //     }
+
+        //     window.location.href = 'http://localhost/complete-monitoring/public/login-with-token';
+        // }
     </script>
 
 </body>
