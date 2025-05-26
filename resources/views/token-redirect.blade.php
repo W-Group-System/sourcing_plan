@@ -24,12 +24,22 @@
 <body>
     <div class="loader"></div>
     <script>
-        const token = sessionStorage.getItem('api_token');
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
         if (token) {
-            window.location.href = `/sourcing_plan/public/menu?token=${token}`;
+            sessionStorage.setItem('api_token', token);
+
+            window.location.href = `/menu?token=${token}`;
         } else {
-            window.location.href = `/sourcing_plan/public/login`;
+            window.location.href = `/login`;
         }
+        // const token = sessionStorage.getItem('api_token');
+        // if (token) {
+        //     window.location.href = `/sourcing_plan/public/menu?token=${token}`;
+        // } else {
+        //     window.location.href = `/sourcing_plan/public/login`;
+        // }
     </script>
 </body>
 </html>
