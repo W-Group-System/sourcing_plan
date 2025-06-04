@@ -12,4 +12,8 @@ class Cott extends Model
     public $timestamps = true;
     protected $connection = 'mysql';
     protected $table = 'cotts';
+
+    public function delete_requests() {
+        return $this->hasOne(DeletionRequest::class, 'item_id', 'id')->where('type', 'Cott');
+    }
 }

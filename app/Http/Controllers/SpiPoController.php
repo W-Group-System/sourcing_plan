@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\DeletionRequest;
+use App\Spi;
 use App\SpiPo;
 use App\Supplier;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -88,4 +90,46 @@ class SpiPoController extends Controller
 
         return back();
     }
+
+    public function delete_approval(Request $request,$id)
+    {
+        $data = SpiPo::findOrFail($id);
+        $filteredData = $data->toArray();
+        unset($filteredData['created_at'], $filteredData['updated_at'], $filteredData['deleted_at']);
+
+        $for_approval = new DeletionRequest();
+        $for_approval->item_id = $id;
+        $for_approval->requestor_id = auth()->user()->id;
+        $for_approval->status = "Pending Approval";
+        $for_approval->reason = $request->reason;
+        $for_approval->data = json_encode($filteredData);
+        $for_approval->type = "Spi Po";
+        $for_approval->save();
+
+        return back();
+    }
+
+    public function approve_deletion($id)
+    {
+        $request = DeletionRequest::findOrFail($id);
+        $item = SpiPo::findOrFail($request->item_id);
+
+        $item->delete();
+
+        $request->approved_by_id = auth()->user()->id;
+        $request->approved_at = now();
+        $request->status = "Approved";
+        $request->save();
+
+        return back();
+    }
+    public function disapprove_deletion($id)
+    {
+        $request = DeletionRequest::findOrFail($id);
+
+        $request->delete();
+
+        return back();
+    }
+
 }

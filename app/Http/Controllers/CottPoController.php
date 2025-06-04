@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CottPo;
+use App\DeletionRequest;
 use App\Supplier;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
@@ -92,6 +93,46 @@ class CottPoController extends Controller
         } else {
             Alert::error('Error Title', 'Record not found');
         }
+
+        return back();
+    }
+
+    public function delete_approval(Request $request,$id)
+    {
+        $data = CottPo::findOrFail($id);
+        $filteredData = $data->toArray();
+        unset($filteredData['created_at'], $filteredData['updated_at'], $filteredData['deleted_at']);
+
+        $for_approval = new DeletionRequest();
+        $for_approval->item_id = $id;
+        $for_approval->requestor_id = auth()->user()->id;
+        $for_approval->status = "Pending Approval";
+        $for_approval->reason = $request->reason;
+        $for_approval->data = json_encode($filteredData);
+        $for_approval->type = "Cott Po";
+        $for_approval->save();
+
+        return back();
+    }
+    public function approve_deletion($id)
+    {
+        $request = DeletionRequest::findOrFail($id);
+        $item = CottPo::findOrFail($request->item_id);
+
+        $item->delete();
+
+        $request->approved_by_id = auth()->user()->id;
+        $request->approved_at = now();
+        $request->status = "Approved";
+        $request->save();
+
+        return back();
+    }
+    public function disapprove_deletion($id)
+    {
+        $request = DeletionRequest::findOrFail($id);
+
+        $request->delete();
 
         return back();
     }

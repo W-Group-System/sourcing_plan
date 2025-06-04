@@ -17,4 +17,8 @@ class CottPo extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_name', 'id');
     }
+    
+    public function delete_requests() {
+        return $this->hasOne(DeletionRequest::class, 'item_id', 'id')->where('type', 'Cott Po');
+    }
 }
