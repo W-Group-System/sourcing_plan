@@ -150,4 +150,23 @@ Route::group(['middleware' => 'auth'], function () {
     // Demand and Supply
     Route::get('/demand_supplies', 'DemandSupplyController@index');
     Route::post('update_demand_supply/{id}', 'DemandSupplyController@update');
+
+    // Delete Requests
+    Route::get('/delete_requests', 'DeleteRequestController@index');
+    Route::post('cotts/cott_delete_request/{id}', 'CottController@delete_approval');
+    Route::post('cotts/approve_deletion/{id}', 'CottController@approve_deletion');
+    Route::post('cotts/disapprove_deletion/{id}', 'CottController@disapprove_deletion');
+
+    Route::post('spis/spi_delete_request/{id}', 'SpiController@delete_approval');
+    Route::post('spis/approve_deletion/{id}', 'SpiController@approve_deletion');
+    Route::post('spis/disapprove_deletion/{id}', 'SpiController@disapprove_deletion');
+
+    Route::post('spi_po/spi_po_delete_request/{id}', 'SpiPoController@delete_approval');
+    Route::post('spi_po/approve_deletion/{id}', 'SpiPoController@approve_deletion');
+    Route::post('spi_po/disapprove_deletion/{id}', 'SpiPoController@disapprove_deletion');
+
+    Route::post('cott_po/cott_po_delete_request/{id}', 'CottPoController@delete_approval');
+    Route::post('cott_po/approve_deletion/{id}', 'CottPoController@approve_deletion');
+    Route::post('cott_po/disapprove_deletion/{id}', 'CottPoController@disapprove_deletion');
+
 });
