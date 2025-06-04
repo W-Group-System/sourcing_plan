@@ -17,4 +17,8 @@ class SpiPo extends Model
     {
         return $this->belongsTo(Supplier::class, 'supplier_name');
     }
+
+    public function delete_requests() {
+        return $this->hasOne(DeletionRequest::class, 'item_id', 'id')->where('type', 'Spi Po');
+    }
 }

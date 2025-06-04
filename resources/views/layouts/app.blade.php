@@ -77,6 +77,11 @@
                     <li>
                         <a href="{{ url('/') }}"><i class="fa fa-th-large"></i><span class="nav-label">Dashboards</span></a>
                     </li>
+                    @if (auth()->user()->position == "Asst. Manager")
+                    <li>
+                        <a href="{{ url('/delete_requests') }}"><i class="fa fa-trash"></i><span class="nav-label">Delete Requests</span></a>
+                    </li>
+                    @endif
                     <li>
                         <a href="#"><i class="fa fa-search"></i> <span class="nav-label">Sourcing Plan </span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">

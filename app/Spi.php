@@ -11,4 +11,7 @@ class Spi extends Model
     //
     protected $connection = 'mysql';
     protected $table = 'spis';
+    public function delete_requests() {
+        return $this->hasOne(DeletionRequest::class, 'item_id', 'id')->where('type', 'Spi');
+    }
 }

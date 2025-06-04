@@ -49,13 +49,29 @@
                                         <td>{{$po_spi->remarks}}</td>
                                         <td align="center" style="width: 100px;">
                                             <a href="{{ route('spi_po.edit', ['id' => $po_spi->id]) }}" class="btn btn-warning btn-outline" title="Edit PO Cottonii"><i class="fa fa-pencil"></i></a>
-                                            <button type="button" class="btn btn-danger btn-outline" title="Delete PO Cottonii" onclick="confirmDelete({{ $po_spi->id }})">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                            <form id="delete-form-{{ $po_spi->id }}" action="{{ route('spi_po.delete', ['id' => $po_spi->id]) }}" method="GET" style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+                                            @if (auth()->user()->position == "Asst. Manager")
+                                                <button type="button" class="btn btn-danger btn-outline" title="Delete PO Cottonii" onclick="confirmDelete({{ $po_spi->id }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                                <form id="delete-form-{{ $po_spi->id }}" action="{{ route('spi_po.delete', ['id' => $po_spi->id]) }}" method="GET" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                             @else
+                                                @if ($po_spi->delete_requests)
+                                                                            
+                                                @else
+                                                    <button type="button" class="btn btn-danger btn-outline" data-toggle="modal" data-target="#delete_request{{ $po_spi->id }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                    {{-- <form action="{{ url('spi_po/spi_po_delete_request/' . $po_spi->id) }}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-danger btn-outline" title="Delete SPI PO">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form> --}}
+                                                @endif
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -68,6 +84,35 @@
         </div>
     </div>
 </div>
+@foreach ($po_spis as $po_spi)
+    <div class="modal fade" id="delete_request{{ $po_spi->id }}" tabindex="-1" aria-hidden="true">
+        <form action="{{ url('spi_po/spi_po_delete_request/' . $po_spi->id) }}" method="POST">
+            @csrf
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="demandSupply">Request Deletion</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -20px">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-10">
+                                <label>Reason</label>
+                                <input name="reason" class="form-control" type="text" placeholder="Enter Reason">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+@endforeach
 @endsection
 
 @section('footer')
