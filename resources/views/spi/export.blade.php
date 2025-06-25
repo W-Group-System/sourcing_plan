@@ -105,7 +105,7 @@
                             <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->delivery_schedule}}</td>
                             <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->terms_payment}}</td>
                             <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->potassium}}</td>
-                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{ number_format($spi->chips_yield, 2)}}%</td>
+                            <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{($spi->chips_yield)}}%</td>
                             <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->powder_yield}}%</td>
                             <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->price_yield}}</td>
                             <td class="{{ $spi->status == 1 ? 'status' : '' }}">{{$spi->forex_rate}}</td>
