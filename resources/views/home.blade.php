@@ -438,6 +438,10 @@
         "INDO": "#002060",
         "OTHERS": "#000000",
     };
+    Object.keys(dataSets).forEach(area => {
+        dataSets[area].sort((a, b) => a[0] - b[0]);
+    });
+    priceData.sort((a, b) => a[0] - b[0]);
 
     var dataset = Object.keys(dataSets).map(area => ({
         label: area,
