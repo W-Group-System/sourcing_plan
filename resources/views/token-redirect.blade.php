@@ -29,7 +29,6 @@
 
         if (token) {
             sessionStorage.setItem('api_token', token);
-             alert('Token received: ' + token); 
 
             window.location.href = `/menu?token=${token}`;
         } else {
