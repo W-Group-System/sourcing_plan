@@ -78,6 +78,16 @@ class SpiController extends Controller
                     ->get();
     }
 
+    public function dateFilterTwo($start_date, $end_date) 
+    {
+        return SPI::whereDate('created_at','>=',$start_date)
+                    ->whereDate('created_at','<=',$end_date)
+                    ->where('approved', 0)
+                    ->orderBy('status', 'desc')
+                    ->orderBy('price_yield','asc')
+                    ->get();
+    }
+
     public function filterSpi(Request $request) 
     {
         $start_date = Carbon::parse($request->start_date)->startOfDay();
@@ -119,7 +129,7 @@ class SpiController extends Controller
         $end_date = Carbon::parse($request->end_date)->endOfDay();
 
         // Ensure dateFilter returns a query builder and use orderBy to sort by price_yield
-        $spis = $this->dateFilter($start_date, $end_date)->sortBy('price_yield');
+        $spis = $this->dateFilterTwo($start_date, $end_date)->sortBy('price_yield');
 
         $demandSupplies = DemandSupply::whereDate('from', '>=', $start_date)
             ->whereDate('to', '<=', $end_date)

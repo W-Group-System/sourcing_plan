@@ -33,42 +33,55 @@
 
        <div class="row">
             <div class="col-lg-12">
-                <div class="col-lg-6">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                            <a href="{{ route('system.redirect', 'system1') }}" class="btn btn-primary">
-                                <div class="image text-center">
-                                    <img src="{{ asset('/images/sp.png') }}" alt="Sourcing Plan" style="max-height: 400px;">
-                                </div>
-                                <h2 class="text-center mt-2">Sourcing Plan</h2>
-                            </a>
+                @if (@auth()->user()->position != 'Plant Analyst')
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <a href="{{ route('system.redirect', 'system1') }}" class="btn btn-primary">
+                                    <div class="image text-center">
+                                        <img src="{{ asset('/images/sp.png') }}" alt="Sourcing Plan" style="max-height: 400px;">
+                                    </div>
+                                    <h2 class="text-center mt-2">Sourcing Plan</h2>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                            <a href="#" class="btn btn-success" onclick="redirectToSystem2()">
-                                <div class="image text-center">
-                                    <img src="{{ asset('/images/cm.png') }}" alt="Complete Monitoring" style="max-height: 400px;">
-                                </div>
-                                <h2 class="text-center mt-2">Complete Monitoring</h2>
-                            </a>
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <a href="#" class="btn btn-success" onclick="redirectToSystem2()">
+                                    <div class="image text-center">
+                                        <img src="{{ asset('/images/cm.png') }}" alt="Complete Monitoring" style="max-height: 400px;">
+                                    </div>
+                                    <h2 class="text-center mt-2">Complete Monitoring</h2>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    @else
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <a href="#" class="btn btn-success" onclick="redirectToSystem2()">
+                                    <div class="image text-center">
+                                        <img src="{{ asset('/images/cm.png') }}" alt="Complete Monitoring" style="max-height: 400px;">
+                                    </div>
+                                    <h2 class="text-center mt-2">Complete Monitoring</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
        </div>
     </div>
 
 
-    <!-- Mainly scripts -->
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
     <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
-    <!-- Custom and plugin javascript -->
     <script src="{{ asset('js/inspinia.js') }}"></script>
     <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
     <script>
@@ -77,6 +90,11 @@
             const targetUrl = `https://complete-monitoring.wsystem.online/login-with-token?token=${token}`;
             window.location.href = targetUrl;
         }
+        // function redirectToSystem2() {
+        //     const token = '{{ auth()->user()->api_token }}';
+        //     const targetUrl = `http://localhost/complete-monitoring/public/login-with-token?token=${token}`;
+        //     window.location.href = targetUrl;
+        // }
         // function redirectToSystem2() {
         //     if (!sessionStorage.getItem('api_token')) {
         //         sessionStorage.setItem('api_token', '{{ auth()->user()->api_token }}');

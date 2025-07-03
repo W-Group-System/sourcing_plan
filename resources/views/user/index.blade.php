@@ -74,6 +74,7 @@
                                 <option value="Asst. Manager">Asst. Manager</option>
                                 <option value="Manager">Manager</option>
                                 <option value="Plant Manager">Plant Manager</option>
+                                <option value="Plant Analyst">Plant Analyst</option>
                                 <option value="President">President</option>
                             </select>
                         </div>
