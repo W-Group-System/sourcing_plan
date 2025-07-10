@@ -33,7 +33,7 @@
 
        <div class="row">
             <div class="col-lg-12">
-                @if (@auth()->user()->position != 'Plant Analyst')
+                @if ((@auth()->user()->position != 'Plant Analyst') || (@auth()->user()->position != 'QC Senior Supervisor'))
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
@@ -85,16 +85,16 @@
     <script src="{{ asset('js/inspinia.js') }}"></script>
     <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
     <script>
-        function redirectToSystem2() {
-            const token = '{{ auth()->user()->api_token }}';
-            const targetUrl = `https://complete-monitoring.wsystem.online/login-with-token?token=${token}`;
-            window.location.href = targetUrl;
-        }
         // function redirectToSystem2() {
         //     const token = '{{ auth()->user()->api_token }}';
-        //     const targetUrl = `http://localhost/complete-monitoring/public/login-with-token?token=${token}`;
+        //     const targetUrl = `https://complete-monitoring.wsystem.online/login-with-token?token=${token}`;
         //     window.location.href = targetUrl;
         // }
+        function redirectToSystem2() {
+            const token = '{{ auth()->user()->api_token }}';
+            const targetUrl = `http://localhost/complete-monitoring/public/login-with-token?token=${token}`;
+            window.location.href = targetUrl;
+        }
         // function redirectToSystem2() {
         //     if (!sessionStorage.getItem('api_token')) {
         //         sessionStorage.setItem('api_token', '{{ auth()->user()->api_token }}');
