@@ -75,6 +75,7 @@
                                 <option value="Manager">Manager</option>
                                 <option value="Plant Manager">Plant Manager</option>
                                 <option value="Plant Analyst">Plant Analyst</option>
+                                <option value="QC Senior Supervisor">QC Senior Supervisor</option>
                                 <option value="President">President</option>
                             </select>
                         </div>
