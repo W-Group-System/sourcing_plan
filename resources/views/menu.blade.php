@@ -33,7 +33,7 @@
 
        <div class="row">
             <div class="col-lg-12">
-                @if ((@auth()->user()->position != 'Plant Analyst') || (@auth()->user()->position != 'QC Senior Supervisor'))
+                @if (auth()->user()->position != "Plant Analyst" && auth()->user()->position != "QC Senior Supervisor")
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
