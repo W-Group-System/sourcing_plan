@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('change_password','HomeController@changePassword')->name('change_password');
     Route::post('change_password','HomeController@updatePassword')->name('update_password');
 
-    Route::middleware(['can:Access Sourcing Plan'])->group(function () {
+    Route::middleware(['can:access sourcing plan'])->group(function () {
         // supplier
         Route::get('/supplier', 'SupplierController@index');
         Route::post('new_supplier', 'SupplierController@create');
