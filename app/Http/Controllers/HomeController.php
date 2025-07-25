@@ -371,32 +371,32 @@ public function index(Request $request)
     }
 
    
-    foreach ($cottonii_po as $record) {
-        $date = new DateTime($record->po_date ?? $record->created_at);
-        $date->modify('this week Monday');
-        $week = $date->format("Y-W"); 
-        $cottArea = $record->area;
+    // foreach ($cottonii_po as $record) {
+    //     $date = new DateTime($record->po_date ?? $record->created_at);
+    //     $date->modify('this week Monday');
+    //     $week = $date->format("Y-W"); 
+    //     $cottArea = $record->area;
 
-        if (!empty($cottArea)) {
-            $area = $cottArea;
+    //     if (!empty($cottArea)) {
+    //         $area = $cottArea;
 
-            if (!isset($weeklyQuantities[$week])) {
-                $weeklyQuantities[$week] = [];
-            }
-            if (!isset($weeklyQuantities[$week][$area])) {
-                $weeklyQuantities[$week][$area] = 0;
-            }
+    //         if (!isset($weeklyQuantities[$week])) {
+    //             $weeklyQuantities[$week] = [];
+    //         }
+    //         if (!isset($weeklyQuantities[$week][$area])) {
+    //             $weeklyQuantities[$week][$area] = 0;
+    //         }
 
-            $buying_quantity = $record->quantity;
-            $price_expense = $record->price_expenses;
+    //         $buying_quantity = $record->quantity;
+    //         $price_expense = $record->price_expenses;
 
-            if (!isset($totalExpenses[$week])) {
-                $totalExpenses[$week] = 0;
-            }
-            $totalExpenses[$week] += $buying_quantity * $price_expense;
-            $weeklyQuantities[$week][$area] += $buying_quantity;
-        }
-    }
+    //         if (!isset($totalExpenses[$week])) {
+    //             $totalExpenses[$week] = 0;
+    //         }
+    //         $totalExpenses[$week] += $buying_quantity * $price_expense;
+    //         $weeklyQuantities[$week][$area] += $buying_quantity;
+    //     }
+    // }
 
     foreach ($totalExpenses as $week => $totalExpense) {
         $totalQuantity = array_sum($weeklyQuantities[$week]);
