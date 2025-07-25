@@ -77,7 +77,7 @@
                     <li>
                         <a href="{{ url('/') }}"><i class="fa fa-th-large"></i><span class="nav-label">Dashboards</span></a>
                     </li>
-                   
+                    @can('access sourcing plan')
                     <li>
                         <a href="#"><i class="fa fa-search"></i> <span class="nav-label">Sourcing Plan </span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
@@ -109,11 +109,16 @@
                     <li>
                         <a href="{{ url('/upload') }}"><i class="fa fa-upload"></i><span class="nav-label">Signed Documents</span></a>
                     </li>
-                    @if (@auth()->user()->position == 'Administrator')
+                    @endcan
+                    
+                    @can('access users')
                     <li>
                         <a href="{{ url('/user') }}"><i class="fa fa-users" aria-hidden="true"></i><span class="nav-label">Users</span></a>
                     </li>
-                    @endif
+                    <li>
+                        <a href="{{ url('/accesss_permissions') }}"><i class="fa fa-lock" aria-hidden="true"></i><span class="nav-label">Permissions</span></a>
+                    </li>
+                    @endcan
                     @if (auth()->user()->position == "Asst. Manager")
                     <li>
                         <a href="{{ url('/delete_requests') }}"><i class="fa fa-trash"></i><span class="nav-label">Delete Requests</span></a>

@@ -5,6 +5,7 @@ use App\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Collection;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -12,7 +13,8 @@ class UserController extends Controller
     public function index()
     {   
         $users = User::all();
-        return view('user.index', compact('users'));  
+        $permissions = Permission::all();
+        return view('user.index', compact('users', 'permissions'));  
     }
 
     // store
@@ -58,5 +60,19 @@ class UserController extends Controller
         }
 
         return back();
+    }
+
+    public function get_users() {
+        return response()->json(User::all());
+    }
+    public function store(Request $request) {
+        $user = new User();
+        $user->name = $request->name;
+        $user->position = $request->position;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password); // Hash the password
+        $user->save();
+        
+        return response()->json($user, 201);
     }
 }

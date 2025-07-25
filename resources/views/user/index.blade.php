@@ -36,6 +36,14 @@
                                                 <a href="{{ route('users.delete', ['id' => $user->id]) }}">
                                                 <button type="button" class="btn btn-danger btn-outline" title="Delete User"><i class="fa fa fa-ban"></i></button>
                                                 </a>
+                                                <button class="btn btn-primary" data-toggle="modal" data-target="#assign_permissions{{ $user->id }}">
+                                                        <i class="fa fa-sliders"></i></button>
+                                                {{-- <a href="{{ url('users/' . $user->id . '/permissions') }}">
+                                                    <button type="button" class="btn btn-primary btn-outline" title="Assign Modules">
+                                                        <i class="fa fa-sliders"></i>
+                                                    </button>
+                                                    
+                                                </a> --}}
                                             </td>
                                         </tr>
                                         @endforeach
@@ -158,6 +166,9 @@
         margin-bottom: 10px;
     }
 </style>
+@foreach ($users as $user)
+    @include('permissions.edit_modal')
+@endforeach
 <script>
     $(document).ready(function(){
 
