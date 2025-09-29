@@ -5,6 +5,8 @@ use App\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
+use GuzzleHttp\Client;
+use Spatie\Permission\PermissionRegistrar;
 
 class UserPermissionController extends Controller
 {
@@ -21,7 +23,17 @@ class UserPermissionController extends Controller
         $user = User::findOrFail($id);
 
         $user->syncPermissions($request->input('permissions', []));
+         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
+        $client = new Client();
+
+        $client->post('http://localhost/complete-monitoring/public/api/refresh-permissions', [
+            'headers' => [
+                'X-Secret-Key' => env('SYSTEM_SYNC_KEY'),
+                'Accept' => 'application/json',
+            ],
+        ]);
+        
         return redirect()->back()->with('success', 'Permissions updated.');
     }
     public function accessList()
