@@ -21,6 +21,7 @@
                                             <th>Position</th>
                                             <!-- <th>Role</th> -->
                                             <th>Email</th>
+                                            <th>Company</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -30,14 +31,17 @@
                                             <td width="30%">{{$user->name}}</td>
                                             <td width="30%">{{$user->position}}</td>
                                             <!-- <td width="22%">{{$user->role ? $user->role : 'N/A'}}</td> -->
+                                            <td width="30%">{{$user->company}}</td>
                                             <td width="30%">{{$user->email}}</td>
                                             <td width="10%" align="center">
                                                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=""><i class="fa fa fa-pencil"></i><a href=""></a></button> -->
                                                 <a href="{{ route('users.delete', ['id' => $user->id]) }}">
                                                 <button type="button" class="btn btn-danger btn-outline" title="Delete User"><i class="fa fa fa-ban"></i></button>
                                                 </a>
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#assign_permissions{{ $user->id }}">
+                                                <button class="btn btn-warning btn-outline" data-toggle="modal" data-target="#assign_permissions{{ $user->id }}">
                                                         <i class="fa fa-sliders"></i></button>
+                                                <button class="btn btn-primary btn-outline" data-toggle="modal" data-target="#editUser{{ $user->id }}">
+                                                        <i class="fa fa-pencil"></i></button>
                                                 {{-- <a href="{{ url('users/' . $user->id . '/permissions') }}">
                                                     <button type="button" class="btn btn-primary btn-outline" title="Assign Modules">
                                                         <i class="fa fa-sliders"></i>
@@ -98,6 +102,14 @@
                         <div class="col-12 mb-10">
                             <label>Email Address</label>
                             <input name="email" class="form-control" type="text" placeholder="Enter Email Address" required>
+                        </div>
+                        <div class="col-12 mb-10">
+                            <label>Company</label>
+                            <select name="company" id="company" class="form-control selectpicker" title="Select Company" required>
+                                <option value="ALL">ALL</option>
+                                <option value="WHI">WHI</option>
+                                <option value="CCC">CCC</option>
+                            </select>
                         </div>
                         <div class="col-12 mb-10">
                             <label>Password</label>
@@ -168,6 +180,7 @@
 </style>
 @foreach ($users as $user)
     @include('permissions.edit_modal')
+    @include('user.edit')
 @endforeach
 <script>
     $(document).ready(function(){
