@@ -128,6 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/user', 'UserController@index');
         Route::get('/accesss_permissions', 'UserPermissionController@accessList');
         Route::post('new_user', 'UserController@create');
+        Route::post('userUpdate/{id}', 'UserController@update');
         Route::post('new_permission_access', 'UserPermissionController@addPermission');
         Route::get('users/delete/{id}', 'UserController@delete')->name('users.delete');
         Route::get('users/{id}/permissions', 'UserPermissionController@edit')->name('users.permissions.edit');

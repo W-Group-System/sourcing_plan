@@ -26,8 +26,20 @@ class UserController extends Controller
         $new_user->position = $request->position;
         // $new_user->role = $request->role;
         $new_user->email = $request->email;
+        $new_user->company = $request->company;
         $new_user->password = bcrypt($request->password);
         $new_user->save();
+        Alert::success('Success Title', 'Success Message');
+        return back();
+    }
+    public function update(Request $request, $id)
+    {   
+        $update = User::findOrFail($id);
+        $update->name = $request->name;
+        $update->position = $request->position;
+        $update->email = $request->email;
+        $update->company = $request->company;
+        $update->save();
         Alert::success('Success Title', 'Success Message');
         return back();
     }
