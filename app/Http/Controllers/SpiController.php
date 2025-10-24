@@ -129,7 +129,6 @@ class SpiController extends Controller
         $end_date = Carbon::parse($request->end_date)->endOfDay();
 
         // Ensure dateFilter returns a query builder and use orderBy to sort by price_yield
-        $spis = $this->dateFilterTwo($start_date, $end_date)->sortBy('price_yield');
 
         $demandSupplies = DemandSupply::whereDate('from', '>=', $start_date)
             ->whereDate('to', '<=', $end_date)
@@ -137,6 +136,9 @@ class SpiController extends Controller
             ->get();
 
         View::share('demandSupplies', $demandSupplies);
+
+        $spis = $this->dateFilter($start_date, $end_date)->sortBy('price_yield');
+
 
         $pdf = PDF::loadView('spi.for_approval', [
             'spis' => $spis,
