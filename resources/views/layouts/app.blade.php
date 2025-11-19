@@ -119,7 +119,7 @@
                         <a href="{{ url('/accesss_permissions') }}"><i class="fa fa-lock" aria-hidden="true"></i><span class="nav-label">Permissions</span></a>
                     </li>
                     @endcan
-                    @if (auth()->user()->position == "Asst. Manager")
+                    @if (auth()->user()->position == "Asst. Manager" || auth()->user()->position == "Manager")
                     <li>
                         <a href="{{ url('/delete_requests') }}"><i class="fa fa-trash"></i><span class="nav-label">Delete Requests</span></a>
                     </li>
