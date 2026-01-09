@@ -25,7 +25,30 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Requestor</th>
-                                                            <th>Data</th>
+                                                            <th>Seller's Name</th>
+                                                            <th>Destination (Plant)</th>
+                                                            <th>Food Grade/ Pet Food</th>
+                                                            <th>Origin</th>
+                                                            <th>Offer Quantity</th>
+                                                            <th>Buying Quantity</th>
+                                                            <th>UOM</th>
+                                                            <th>Original Price</th>
+                                                            <th>Buying Price</th>
+                                                            <th>Expenses</th>
+                                                            <th>Price + Expenses</th>
+                                                            <th>Agreed Moisture Content</th>
+                                                            <th>Delivery Schedule</th>
+                                                            <th>Terms of Payment</th>
+                                                            <th>Potassium Gel Strength (KGS)</th>
+                                                            <th>Chips Yield</th>
+                                                            <th>Powder Yield</th>
+                                                            <th>Price/ Yield</th>
+                                                            <th>FX Rate</th>
+                                                            <th>Price in USD</th>
+                                                            <th>Cost to Produce (Powder in USD)</th>
+                                                            <th>Price + CTP (Budget in USD)</th>
+                                                            <th>Remarks</th>
+                                                            <th>Area</th>
                                                             <th>Reason</th>
                                                             <th>Status</th>
                                                             <th>Approved By</th>
@@ -37,7 +60,36 @@
                                                         @foreach($delete_requests->where('type', 'Cott') as $cott)
                                                             <tr>
                                                                 <td>{{$cott->requestor->name}}</td>
-                                                                <td>{{ json_encode(json_decode($cott->data, true), JSON_PRETTY_PRINT) }}</td>
+                                                                <td>{{$cott->cotts->name}}</td>
+                                                                <td>{{$cott->cotts->destination}}</td>
+                                                                <td>{{$cott->cotts->food_grade}}</td>
+                                                                <td>{{$cott->cotts->origin}}</td>
+                                                                <td>{{$cott->cotts->offer_quantity}}</td>
+                                                                <td>{{$cott->cotts->buying_quantity}}</td>
+                                                                <td>{{$cott->cotts->uom}}</td>
+                                                                <td>{{$cott->cotts->original_price ?$cott->cotts->original_price : 'Non-nego'}}</td>
+                                                                <td>{{$cott->cotts->buying_price}}</td>
+                                                                <td>{{$cott->cotts->expenses ? $cott->cotts->expenses : '-'}}</td>
+                                                                <td>{{$cott->cotts->price_expense}}</td>
+                                                                <td>{{$cott->cotts->moisture_content}}</td>
+                                                                <td>{{$cott->cotts->delivery_schedule}}</td>
+                                                                <td>{{$cott->cotts->terms_payment}}</td>
+                                                                <td>{{$cott->cotts->potassium}}</td>
+                                                                <td>
+                                                                    @if (is_numeric($cott->cotts->chips_yield))
+                                                                        {{ number_format($cott->cotts->chips_yield, 2) }}%
+                                                                    @else
+                                                                        {{ $cott->cotts->chips_yield }}
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{$cott->cotts->powder_yield}}%</td>
+                                                                <td>{{$cott->cotts->price_yield}}</td>
+                                                                <td>{{$cott->cotts->forex_rate}}</td>
+                                                                <td>{{$cott->cotts->price_usd}}</td>
+                                                                <td>{{$cott->cotts->cost_produce}}</td>
+                                                                <td>{{$cott->cotts->price_ctp}}</td>
+                                                                <td>{{$cott->cotts->remarks}}</td>
+                                                                <td>{{$cott->cotts->area}}</td>
                                                                 <td>{{$cott->reason}}</td>
                                                                 <td>{{$cott->status}}</td>
                                                                 <td>{{optional($cott->approvedBy)->name}}</td>
@@ -73,7 +125,30 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Requestor</th>
-                                                            <th>Data</th>
+                                                            <th>Seller's Name</th>
+                                                            <th>Destination (Plant)</th>
+                                                            <th>PES</th>
+                                                            <th>Origin</th>
+                                                            <th>Offer Quantity</th>
+                                                            <th>Buying Quantity</th>
+                                                            <th>UOM</th>
+                                                            <th>Original Price</th>
+                                                            <th>Buying Price</th>
+                                                            <th>Expenses</th>
+                                                            <th>Price + Expenses</th>
+                                                            <th>Agreed Moisture Content</th>
+                                                            <th>Delivery Schedule</th>
+                                                            <th>Terms of Payment</th>
+                                                            <th>Calcium Gel Strength (CaGS)</th>
+                                                            <th>Chips Yield</th>
+                                                            <th>Powder Yield</th>
+                                                            <th>Price/ Yield</th>
+                                                            <th>FX Rate</th>
+                                                            <th>Price in USD</th>
+                                                            <th>Cost to Produce (Powder in USD)</th>
+                                                            <th>Price + CTP (Budget in USD)</th>
+                                                            <th>Remarks</th>
+                                                            <th>Area</th>
                                                             <th>Reason</th>
                                                             <th>Status</th>
                                                             <th>Approved By</th>
@@ -85,7 +160,36 @@
                                                         @foreach($delete_requests->where('type', 'Spi') as $spi)
                                                             <tr>
                                                                 <td>{{$spi->requestor->name}}</td>
-                                                                <td>{{ json_encode(json_decode($spi->data, true), JSON_PRETTY_PRINT) }}</td>
+                                                                <td>{{$spi->spis->name}}</td>
+                                                                <td>{{$spi->spis->destination}}</td>
+                                                                <td>{{$spi->spis->pes}}</td>
+                                                                <td>{{$spi->spis->origin}}</td>
+                                                                <td>{{$spi->spis->offer_quantity}}</td>
+                                                                <td>{{$spi->spis->buying_quantity}}</td>
+                                                                <td>{{$spi->spis->uom}}</td>
+                                                                <td>{{$spi->spis->original_price ?$spi->spis->original_price : 'Non-nego'}}</td>
+                                                                <td>{{$spi->spis->buying_price}}</td>
+                                                                <td>{{$spi->spis->expenses ? $spi->spis->expenses : '-'}}</td>
+                                                                <td>{{$spi->spis->price_expense}}</td>
+                                                                <td>{{$spi->spis->moisture_content}}</td>
+                                                                <td>{{$spi->spis->delivery_schedule}}</td>
+                                                                <td>{{$spi->spis->terms_payment}}</td>
+                                                                <td>{{$spi->spis->potassium}}</td>
+                                                                <td> 
+                                                                    @if (is_numeric($spi->spis->chips_yield))
+                                                                        {{ number_format($spi->spis->chips_yield, 2) }}%
+                                                                    @else
+                                                                        {{ $spi->spis->chips_yield }}
+                                                                    @endif
+                                                                </td>
+                                                                <td>{{$spi->spis->powder_yield}}%</td>
+                                                                <td>{{$spi->spis->price_yield}}</td>
+                                                                <td>{{$spi->spis->forex_rate}}</td>
+                                                                <td>{{$spi->spis->price_usd}}</td>
+                                                                <td>{{$spi->spis->cost_produce}}</td>
+                                                                <td>{{$spi->spis->price_ctp}}</td>
+                                                                <td>{{$spi->spis->remarks}}</td>
+                                                                <td>{{$spi->spis->area}}</td>
                                                                 <td>{{$spi->reason}}</td>
                                                                 <td>{{$spi->status}}</td>
                                                                 <td>{{optional($spi->approvedBy)->name}}</td>
@@ -121,7 +225,15 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Requestor</th>
-                                                            <th>Data</th>
+                                                            <th>Supplier Name</th>
+                                                            <th>Lot Code</th>
+                                                            <th>Quantity</th>                                            
+                                                            <th>Buying Price</th>
+                                                            <th>Expenses</th>
+                                                            <th>Price + Expenses</th>
+                                                            <th>Original PO Date</th>
+                                                            <th>PO Date</th>
+                                                            <th>Area</th>
                                                             <th>Reason</th>
                                                             <th>Status</th>
                                                             <th>Approved By</th>
@@ -133,7 +245,15 @@
                                                         @foreach($delete_requests->where('type', 'Cott Po') as $po_cott)
                                                         <tr>
                                                             <td>{{$po_cott->requestor->name}}</td>
-                                                            <td>{{ json_encode(json_decode($spi->data, true), JSON_PRETTY_PRINT) }}</td>
+                                                            <td>{{$po_cott->po_cotts->supplier->name }}</td>
+                                                            <td>{{$po_cott->po_cotts->lot_code}}</td>
+                                                            <td>{{$po_cott->po_cotts->quantity}}</td>
+                                                            <td>{{$po_cott->po_cotts->buying_price}}</td>
+                                                            <td>{{$po_cott->po_cotts->expenses}}</td>
+                                                            <td>{{$po_cott->po_cotts->price_expenses}}</td>
+                                                            <td>{{$po_cott->po_cotts->original_po_date}}</td>
+                                                            <td>{{$po_cott->po_cotts->po_date}}</td>
+                                                            <td>{{$po_cott->po_cotts->area}}</td>
                                                             <td>{{$po_cott->reason}}</td>
                                                             <td>{{$po_cott->status}}</td>
                                                             <td>{{optional($po_cott->approvedBy)->name}}</td>
@@ -169,7 +289,15 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Requestor</th>
-                                                            <th>Data</th>
+                                                            <th>Supplier Name</th>
+                                                            <th>Lot Code</th>
+                                                            <th>Quantity</th>                                            
+                                                            <th>Buying Price</th>
+                                                            <th>Expenses</th>
+                                                            <th>Price + Expenses</th>
+                                                            <th>Original PO Date</th>
+                                                            <th>PO Date</th>
+                                                            <th>Area</th>
                                                             <th>Reason</th>
                                                             <th>Status</th>
                                                             <th>Approved By</th>
@@ -181,7 +309,15 @@
                                                         @foreach($delete_requests->where('type', 'Spi Po') as $po_spi)
                                                         <tr>
                                                             <td>{{$po_spi->requestor->name}}</td>
-                                                            <td>{{ json_encode(json_decode($po_spi->data, true), JSON_PRETTY_PRINT) }}</td>
+                                                            <td>{{$po_spi->po_spis->supplier->name }}</td>
+                                                            <td>{{$po_spi->po_spis->lot_code}}</td>
+                                                            <td>{{$po_spi->po_spis->quantity}}</td>
+                                                            <td>{{$po_spi->po_spis->buying_price}}</td>
+                                                            <td>{{$po_spi->po_spis->expenses}}</td>
+                                                            <td>{{$po_spi->po_spis->price_expenses}}</td>
+                                                            <td>{{$po_spi->po_spis->original_po_date}}</td>
+                                                            <td>{{$po_spi->po_spis->po_date}}</td>
+                                                            <td>{{$po_spi->po_spis->area}}</td>
                                                             <td>{{$po_spi->reason}}</td>
                                                             <td>{{$po_spi->status}}</td>
                                                             <td>{{optional($po_spi->approvedBy)->name}}</td>
