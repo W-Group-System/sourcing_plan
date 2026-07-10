@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="wrapper wrapper-content">
+{{-- <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-3">
             <div class="ibox float-e-margins">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="dashboard-quarter-filter">
         <div class="row">
