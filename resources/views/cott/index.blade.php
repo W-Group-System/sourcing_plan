@@ -34,13 +34,13 @@
                                     </div>
                                 </form>
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#tab-1">Approved List</a></li>
-                                    <li><a data-toggle="tab" href="#tab-2">Disapproved List</a></li>
-                                    <li><a data-toggle="tab" href="#tab-3
+                                    <li class="active"><a data-toggle="tab" href="#tab-3
                                         ">For Approval</a></li>
+                                    <li><a data-toggle="tab" href="#tab-1">Approved List</a></li>
+                                    <li><a data-toggle="tab" href="#tab-2">Disapproved List</a></li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div id="tab-1" class="tab-pane active">
+                                    <div id="tab-1" class="tab-pane">
                                         <div class="panel-body">
                                             <div align="right">
                                                 @if(isset($start_date))
@@ -259,7 +259,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="tab-3" class="tab-pane">
+                                    <div id="tab-3" class="tab-pane active">
                                         <div class="panel-body">
                                             <div align="right">
                                                 @if(isset($start_date))
