@@ -249,7 +249,9 @@
     $("#tableEstimate tbody").on("input", ".chips_yield", function() {
         var chips_yield = parseFloat($(this).val()) || 0;
         var powder_yield = $(this).closest("tr").find(".powder_yield");
-        var calculatedPowderYield = chips_yield * 0.9;
+        // var calculatedPowderYield = chips_yield * 0.9;
+        // change computation to 88 percent
+        var calculatedPowderYield = chips_yield * 0.88;
         powder_yield.val(calculatedPowderYield.toFixed(2));
     });
     

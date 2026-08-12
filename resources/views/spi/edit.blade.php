@@ -64,14 +64,14 @@
                                         <td><input type="text" name="chips_yield" class="form-control adjust chips_yield" value="{{$spis->chips_yield}}"></td>
                                         <td>
                                             <div class="input-group m-b">
-                                                <input type="text" name="powder_yield" class="form-control powder_yield" style="width: 80px" value="{{$spis->powder_yield}}"><span class="input-group-addon">%</span> 
+                                                <input type="text" name="powder_yield" class="form-control powder_yield" style="width: 80px" value="{{$spis->powder_yield}}" readonly><span class="input-group-addon">%</span> 
                                             </div>
                                         </td>
-                                        <td><input type="text" name="price_yield" class="form-control adjust price_yield" value="{{$spis->price_yield}}"></td>
+                                        <td><input type="text" name="price_yield" class="form-control adjust price_yield" value="{{$spis->price_yield}}" readonly></td>
                                         <td><input type="text" name="forex_rate" class="form-control adjust forex_rate" value="{{$spis->forex_rate}}"></td>
-                                        <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$spis->price_usd}}"></td>
+                                        <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$spis->price_usd}}" readonly></td>
                                         <td><input type="text" name="cost_produce" class="form-control adjust cost_produce" value="{{$spis->cost_produce}}"></td>
-                                        <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$spis->price_ctp}}"></td>
+                                        <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$spis->price_ctp}}" readonly></td>
                                         <td><input type="text" name="remarks" class="form-control adjust" value="{{$spis->remarks}}"></td>
                                         <td><select class="form-control adjust" name="area" id="area">
                                             <option value="" disabled selected>Select Area</option>
@@ -96,4 +96,68 @@
         </div>
     </div>
 </div>
+<script>
+    function calculateYield(row) {
+
+        var price_expense = parseFloat(row.find(".price_expense").val()) || 0;
+        var chips_yield = parseFloat(row.find(".chips_yield").val()) || 0;
+
+        var powder_yield = row.find(".powder_yield");
+        var price_yield = row.find(".price_yield");
+
+      
+        var calculatedPowderYield = chips_yield * 0.88;
+
+        powder_yield.val(calculatedPowderYield.toFixed(2));
+
+        var powder_yield_value = calculatedPowderYield / 100;
+
+        var calculatedValue = 0;
+
+        if (powder_yield_value > 0) {
+            calculatedValue = (price_expense / powder_yield_value).toFixed(2);
+        }
+
+        price_yield.val(calculatedValue);
+    }
+
+    function calculatePriceUsd(row) {
+        var price_yield = parseFloat(row.find(".price_yield").val()) || 0;
+        var forex_rate = parseFloat(row.find(".forex_rate").val()) || 0;
+        var price_usd = row.find(".price_usd");
+        price_usd.val((price_yield / forex_rate).toFixed(2));
+
+    }
+
+    function calculatePriceCtp(row) {
+        var price_usd = parseFloat(row.find(".price_usd").val()) || 0;
+        var cost_produce = parseFloat(row.find(".cost_produce").val()) || 0;
+        var price_ctp = row.find(".price_ctp");
+        price_ctp.val((price_usd + cost_produce).toFixed(2));
+
+    }
+
+
+    $("#tableEstimate tbody").on("input", ".chips_yield, .price_expense, .forex_rate, .cost_produce", function() {
+
+        var row = $(this).closest("tr");
+
+        calculateYield(row);
+        calculatePriceUsd(row);
+        calculatePriceCtp(row);
+
+    });
+
+
+    $(document).ready(function() {
+
+        $("#tableEstimate tbody tr").each(function() {
+
+            calculateYield($(this));
+            calculatePriceUsd(this);
+
+        });
+
+    });
+</script>
 @endsection
