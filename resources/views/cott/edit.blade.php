@@ -146,14 +146,31 @@
 
     }
 
+    function calculatePriceExpense(row) {
+        var buying_price = parseFloat(row.find(".buying_price").val()) || 0;
+        var expenses = parseFloat(row.find(".expenses").val()) || 0;
+        var price_expense = row.find(".price_expense");
+        price_expense.val((buying_price + expenses).toFixed(2));
+        calc_total(); 
 
-    $("#tableEstimate tbody").on("input", ".chips_yield, .price_expense, .forex_rate, .cost_produce", function() {
+    }
+
+    function calc_total() {
+        var sum = 0;
+        $('.price_expense').each(function () {
+            sum += parseFloat($(this).val());
+        });
+    }
+
+
+    $("#tableEstimate tbody").on("input", ".chips_yield, .price_expense, .forex_rate, .cost_produce, .buying_price, .expenses", function() {
 
         var row = $(this).closest("tr");
 
         calculateYield(row);
         calculatePriceUsd(row);
         calculatePriceCtp(row);
+        calculatePriceExpense(row);
 
     });
 
@@ -164,6 +181,8 @@
 
             calculateYield($(this));
             calculatePriceUsd(this);
+            calculatePriceCtp(this);
+            calculatePriceExpense(this);
 
         });
 
