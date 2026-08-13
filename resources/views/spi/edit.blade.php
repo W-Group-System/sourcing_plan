@@ -137,6 +137,22 @@
 
     }
 
+    function calculatePriceExpense(row) {
+        var buying_price = parseFloat(row.find(".buying_price").val()) || 0;
+        var expenses = parseFloat(row.find(".expenses").val()) || 0;
+        var price_expense = row.find(".price_expense");
+        price_expense.val((buying_price + expenses).toFixed(2));
+        calc_total(); 
+
+    }
+
+    function calc_total() {
+        var sum = 0;
+        $('.price_expense').each(function () {
+            sum += parseFloat($(this).val());
+        });
+    }
+
 
     $("#tableEstimate tbody").on("input", ".chips_yield, .price_expense, .forex_rate, .cost_produce", function() {
 
@@ -145,6 +161,7 @@
         calculateYield(row);
         calculatePriceUsd(row);
         calculatePriceCtp(row);
+        calculatePriceExpense(row);
 
     });
 
@@ -155,6 +172,8 @@
 
             calculateYield($(this));
             calculatePriceUsd(this);
+            calculatePriceCtp(this);
+            calculatePriceExpense(this);
 
         });
 
