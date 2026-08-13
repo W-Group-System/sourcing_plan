@@ -77,7 +77,7 @@
                                             </div>
                                         </td>
                                         <td><input type="text" name="price_yield" class="form-control adjust price_yield" value="{{$cotts->price_yield}}" readonly></td>
-                                        <td><input type="text" name="forex_rate" class="form-control adjust forex_rate" value="{{$cotts->price_yield}}"></td>
+                                        <td><input type="text" name="forex_rate" class="form-control adjust forex_rate" value="{{$cotts->forex_rate}}"></td>
                                         <td><input type="text" name="price_usd" class="form-control adjust price_usd" value="{{$cotts->price_usd}}" readonly></td>
                                         <td><input type="text" name="cost_produce" class="form-control adjust cost_produce" value="{{$cotts->cost_produce}}"></td>
                                         <td><input type="text" name="price_ctp" class="form-control adjust price_ctp" value="{{$cotts->price_ctp}}" readonly></td>
