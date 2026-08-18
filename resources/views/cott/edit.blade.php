@@ -119,7 +119,7 @@
 
         powder_yield.val(calculatedPowderYield.toFixed(2));
 
-        var powder_yield_value = calculatedPowderYield / 100;
+        var powder_yield_value =  parseFloat(calculatedPowderYield.toFixed(2)) / 100
 
         var calculatedValue = 0;
 
