@@ -162,6 +162,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/demand_supplies', 'DemandSupplyController@index');
     Route::post('update_demand_supply/{id}', 'DemandSupplyController@update');
 
+    // Onhand Seaweed
+    Route::get('/onhand_seaweed', 'OnhandSeaweedController@index');
+    Route::get('onhand_seaweed/create', 'OnhandSeaweedController@create');
+    Route::post('onhand_seaweed_store', 'OnhandSeaweedController@store_onhand');
+    Route::post('update_onhand_seaweed/{id}', 'OnhandSeaweedController@edit_onhand');
+    // Plant
+    Route::get('/plant_setup', 'SetupController@plants');
+    Route::post('/new_plant', 'SetupController@add_plant');
+
+    // Inventory
+    Route::get('/inventory_setup', 'SetupController@inventories');
+    Route::post('/new_inventory', 'SetupController@add_inventory');
+
     // Delete Requests
     Route::get('/delete_requests', 'DeleteRequestController@index');
     Route::post('cotts/cott_delete_request/{id}', 'CottController@delete_approval');

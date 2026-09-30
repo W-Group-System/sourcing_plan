@@ -5,6 +5,7 @@ use App\Cott;
 use App\DeletionRequest;
 use App\Supplier;
 use App\DemandSupply;
+use App\OnhandSeaweed;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
@@ -142,14 +143,20 @@ class CottController extends Controller
         View::share('demandSupplies', $demandSupplies);
 
         $cotts = $this->dateFilter($start_date, $end_date);
+        $onhand_seaweeds = OnhandSeaweed::whereBetween('date_updated', [
+            $start_date,
+            $end_date
+        ])
+        ->get();
         // $cotts = Cott::all();
         $pdf = PDF::loadView('cott.export', [
             'cotts' => $cotts,
+            'onhand_seaweeds' => $onhand_seaweeds,
             'start_date' => $start_date,
             'end_date' => $end_date,
         ])->setPaper('legal', 'landscape');
 
-        return $pdf->stream('cott.pdf', ['cotts' => $cotts, 'start_date' => $start_date, 'end_date' => $end_date]);
+        return $pdf->stream('cott.pdf', ['cotts' => $cotts, 'onhand_seaweeds' => $onhand_seaweeds, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
     public function for_approval_pdf(Request $request)
