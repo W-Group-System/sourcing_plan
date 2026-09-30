@@ -172,15 +172,20 @@ class CottController extends Controller
         View::share('demandSupplies', $demandSupplies);
 
         $cotts = $this->dateFilter($start_date, $end_date)->sortBy('price_yield');
-        
+        $onhand_seaweeds = OnhandSeaweed::whereBetween('date_updated', [
+            $start_date,
+            $end_date
+        ])
+        ->get();
         // $cotts = Cott::all();
         $pdf = PDF::loadView('cott.for_approval', [
             'cotts' => $cotts,
+            'onhand_seaweeds' => $onhand_seaweeds,
             'start_date' => $start_date,
             'end_date' => $end_date,
         ])->setPaper('legal', 'landscape');
 
-        return $pdf->stream('cott.pdf', ['cotts' => $cotts, 'start_date' => $start_date, 'end_date' => $end_date]);
+        return $pdf->stream('cott.pdf', ['cotts' => $cotts, 'onhand_seaweeds' => $onhand_seaweeds, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
     public function delete($id)
