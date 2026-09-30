@@ -29,6 +29,10 @@
         font-size: 7px;
         padding: 0px
     }
+    #onhand-table th, #onhand-table td {
+        font-size: 7px;
+        padding: 1px 8px;
+    }
     #table-spis1 th, #table-spis1 td {
             border: 1px solid #DDD;
             padding: 1px;
@@ -150,7 +154,7 @@
     <table class="table table-borderless">
         <tbody>
             <tr>
-                <td style="width: 20%; padding:0%;">
+                <td style="width: 25%; padding:0%;">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="table-spis1">
                             <thead>
@@ -198,7 +202,7 @@
                         </table>
                     </div> 
                 </td>
-                <td style="width: 20%; padding:0%;">
+                <td style="width: 25%; padding:0%;">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="table-spis1">
                             <thead>
@@ -241,7 +245,7 @@
                         </table>
                     </div> 
                 </td>
-                <td style="width: 60%; padding-left: 80px; border: 0px solid #FFF">
+                <td style="width: 50%; padding-left: 80px; border: 0px solid #FFF">
                     @php
                         $totals = [
                             'CAR' => 0,
@@ -300,6 +304,100 @@
                     <div class="box-container">
                         <label>Recommendation:</label>
                     </div>
+                </td>
+                <td style="width: 30%; border: 0px solid #FFF">
+
+                    <div>
+                        <p>ONHAND SEAWEEDS (PLANT STOCKS + CY STOCKS + IN-TRANSIT)</p>
+                        <p>UPDATED AS OF {{ $end_date->format('F d') }}</p>
+                    </div>
+
+                    <table id="onhand-table">
+                        <thead>
+                            <tr>
+                                <th>PLANT</th>
+                                <th>QUANTITY</th>
+                                <th># OF DAYS</th>
+                                <th>UNTIL</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach($onhand_seaweeds as $onhand)
+                                <tr>
+                                    <td>{{ $onhand->plants->name }}</td>
+
+                                    <td>
+                                        {{ !empty($onhand->quantity)
+                                            ? number_format($onhand->quantity / 1000, 2) . ' MT'
+                                            : '' }}
+                                    </td>
+
+                                    <td style="text-align:center">
+                                        {{ $onhand->no_of_days }}
+                                    </td>
+
+                                    <td>
+                                        @if($onhand->date_updated && is_numeric($onhand->no_of_days))
+
+                                            @if($onhand->plants->name == 'CAR - SPI')
+
+                                                @php
+                                                    $cott = $onhand_seaweeds->first(function ($item) use ($onhand) {
+                                                        return $item->plants
+                                                            && $item->plants->name == 'CAR - COTT'
+                                                            && $item->date_updated == $onhand->date_updated;
+                                                    });
+                                                @endphp
+
+                                                @if(
+                                                    $cott &&
+                                                    $cott->date_updated &&
+                                                    is_numeric($cott->no_of_days) &&
+                                                    is_numeric($onhand->no_of_days)
+                                                )
+                                                    {{ \Carbon\Carbon::parse($cott->date_updated)
+                                                        ->addDays((int) $cott->no_of_days)
+                                                        ->addDays((int) $onhand->no_of_days)
+                                                        ->format('Y-m-d') }}
+                                                @endif
+
+                                            @elseif($onhand->plants->name == 'CCC - SPI')
+
+                                                @php
+                                                    $cott = $onhand_seaweeds->first(function ($item) use ($onhand) {
+                                                        return $item->plants
+                                                            && $item->plants->name == 'CCC - COTT'
+                                                            && $item->date_updated == $onhand->date_updated;
+                                                    });
+                                                @endphp
+
+                                                @if(
+                                                    $cott &&
+                                                    $cott->date_updated &&
+                                                    is_numeric($cott->no_of_days)
+                                                )
+                                                    {{ \Carbon\Carbon::parse($cott->date_updated)
+                                                        ->addDays((int) $cott->no_of_days - 1)
+                                                        ->addDays((int) $onhand->no_of_days)
+                                                        ->format('Y-m-d') }}
+                                                @endif
+
+                                            @else
+
+                                                {{ \Carbon\Carbon::parse($onhand->date_updated)
+                                                    ->addDays((int) $onhand->no_of_days - 1)
+                                                    ->format('Y-m-d') }}
+
+                                            @endif
+
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
                 </td>
             </tr>
         </tbody>
