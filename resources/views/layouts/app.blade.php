@@ -104,6 +104,9 @@
                         <a href="{{ url('/demand_supplies') }}"><i class="fa fa-industry"></i><span class="nav-label">Demand and Supply</span></a>
                     </li>
                     <li>
+                        <a href="{{ url('/onhand_seaweed') }}"><i class="fa fa-clipboard"></i><span class="nav-label">Onhand Seaweed</span></a>
+                    </li>
+                    <li>
                         <a href="{{ url('/supplier') }}"><i class="fa fa-truck"></i><span class="nav-label">Supplier Setup</span></a>
                     </li>
                     <li>
@@ -118,6 +121,12 @@
                     <li>
                         <a href="{{ url('/accesss_permissions') }}"><i class="fa fa-lock" aria-hidden="true"></i><span class="nav-label">Permissions</span></a>
                     </li>
+                    <li>
+                        <a href="{{ url('/plant_setup') }}"><i class="fa fa-cog" aria-hidden="true"></i><span class="nav-label">Plants</span></a>
+                    </li>
+                    {{-- <li>
+                        <a href="{{ url('/inventory_setup') }}"><i class="fa fa-cogs" aria-hidden="true"></i><span class="nav-label">Inventories</span></a>
+                    </li> --}}
                     @endcan
                     @if (auth()->user()->position == "Asst. Manager" || auth()->user()->position == "Manager")
                     <li>

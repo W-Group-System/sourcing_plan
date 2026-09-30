@@ -5,6 +5,7 @@ use App\DeletionRequest;
 use App\Spi;
 use App\Supplier;
 use App\DemandSupply;
+use App\OnhandSeaweed;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
@@ -113,14 +114,20 @@ class SpiController extends Controller
 
         View::share('demandSupplies', $demandSupplies);
 
+        $onhand_seaweeds = OnhandSeaweed::whereBetween('date_updated', [
+            $start_date,
+            $end_date
+        ])
+        ->get();
         // $spis = SPI::all();
         $pdf = PDF::loadView('spi.export', [
             'spis' => $spis,
+            'onhand_seaweeds' => $onhand_seaweeds,
             'start_date' => $start_date,
             'end_date' => $end_date,
         ])->setPaper('legal', 'landscape');
 
-        return $pdf->stream('spi.pdf', ['spis' => $spis, 'start_date' => $start_date, 'end_date' => $end_date]);
+        return $pdf->stream('spi.pdf', ['spis' => $spis, 'onhand_seaweeds' => $onhand_seaweeds, 'start_date' => $start_date, 'end_date' => $end_date]);
     }
 
     public function for_approval_spi(Request $request)
