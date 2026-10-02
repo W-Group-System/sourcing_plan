@@ -7,6 +7,7 @@ use App\OnhandSeaweed;
 use App\Plant;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Carbon\Carbon;
 
 class OnhandSeaweedController extends Controller
 {
@@ -24,9 +25,14 @@ class OnhandSeaweedController extends Controller
             $query->whereDate('date_updated', '<=', $request->end_date);
         }
 
-        $onhands = $query->get();
+        $onhands = $query->orderBy('date_updated')->get();
+        $weeklyOnhands = $onhands->groupBy(function ($item) {
+            $date = \Carbon\Carbon::parse($item->date_updated);
 
-        return view('onhand_seaweed.index', compact('onhands','plants'));  
+            return $date->format('Y-W');
+        });
+
+        return view('onhand_seaweed.index', compact('onhands','weeklyOnhands','plants'));  
     }
 
     public function create()
@@ -38,34 +44,99 @@ class OnhandSeaweedController extends Controller
 
     public function store_onhand(Request $request)
     {   
-        foreach($request->plant as $key=>$plant) {
+        $dateUpdated = Carbon::parse($request->date_updated);
 
-            
+        $weekStart = $dateUpdated->copy()->startOfWeek(Carbon::MONDAY);
+        $weekEnd = $dateUpdated->copy()->endOfWeek(Carbon::SUNDAY);
+
+        $existingRecord = OnhandSeaweed::whereBetween(
+            'date_updated',
+            [
+                $weekStart->format('Y-m-d'),
+                $weekEnd->format('Y-m-d')
+            ]
+        )->first();
+
+        if ($existingRecord) {
+
+            Alert::error(
+                'Duplicate Week',
+                'There is already an On-Hand record for this calendar week (' .
+                $weekStart->format('F d') . ' - ' .
+                $weekEnd->format('F d, Y') . ').'
+            );
+
+            return back()->withInput();
+        }
+        foreach ($request->plants as $plant) {
+
             $data = new OnhandSeaweed();
-            $data->plant_id = $plant;
-            // $data->inventory_id = $request->inventory[$key];
-            $data->quantity = $request->quantity[$key];
-            $data->plant_consumption = $request->plant_consumption[$key];
-            $data->no_of_days = $request->no_of_days[$key];
-            $data->date_updated = $request->date_updated[$key];
+
+            $data->plant_id = $plant['plant_id'];
+            $data->quantity = $plant['quantity'];
+            $data->plant_consumption = $plant['plant_consumption'];
+            $data->no_of_days = $plant['no_of_days'];
+
+            $data->date_updated = $request->date_updated;
+
             $data->save();
         }
 
-        Alert::success('Success Title', 'Records Successfully Added');
+        Alert::success('Onhand Seaweeds', 'Records Successfully Added');
         return back();
     }
 
-    public function edit_onhand(Request $request, $id)
+    public function edit_onhand(Request $request)
     {   
-        $data = OnhandSeaweed::find($id);
-        $data->plant_id = $request->plant;
-        $data->quantity = $request->quantity;
-        $data->plant_consumption = $request->plant_consumption;
-        $data->no_of_days = $request->no_of_days;
-        $data->date_updated = $request->date_updated;
-        $data->save();
+        $dateUpdated = Carbon::parse($request->date_updated);
 
-        Alert::success('Success Title', 'Records Successfully Added');
+        $weekStart = $dateUpdated->copy()->startOfWeek(Carbon::MONDAY);
+        $weekEnd = $dateUpdated->copy()->endOfWeek(Carbon::SUNDAY);
+
+        $editingIds = collect($request->plants)
+            ->pluck('id')
+            ->filter()
+            ->toArray();
+
+        $existingRecord = OnhandSeaweed::whereBetween(
+            'date_updated',
+            [
+                $weekStart->format('Y-m-d'),
+                $weekEnd->format('Y-m-d')
+            ]
+        )
+        ->whereNotIn('id', $editingIds)
+        ->first();
+
+        if ($existingRecord) {
+
+            Alert::error(
+                'Duplicate Week',
+                'There is already an On-Hand record for this calendar week (' .
+                $weekStart->format('F d') . ' - ' .
+                $weekEnd->format('F d, Y') . ').'
+            );
+
+            return back()->withInput();
+        }
+
+        foreach ($request->plants as $plant) {
+
+            $data = OnhandSeaweed::find($plant['id']);
+
+            if ($data) {
+
+                $data->plant_id = $plant['plant_id'];
+                $data->quantity = $plant['quantity'];
+                $data->plant_consumption = $plant['plant_consumption'];
+                $data->no_of_days = $plant['no_of_days'];
+                $data->date_updated = $request->date_updated;
+
+                $data->save();
+            }
+        }
+
+        Alert::success('Onhand Seaweeds', 'Records Successfully Added');
         return back();
     }
 }

@@ -167,6 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('onhand_seaweed/create', 'OnhandSeaweedController@create');
     Route::post('onhand_seaweed_store', 'OnhandSeaweedController@store_onhand');
     Route::post('update_onhand_seaweed/{id}', 'OnhandSeaweedController@edit_onhand');
+    Route::post('onhand_seaweed_update', 'OnhandSeaweedController@edit_onhand');
     // Plant
     Route::get('/plant_setup', 'SetupController@plants');
     Route::post('/new_plant', 'SetupController@add_plant');
