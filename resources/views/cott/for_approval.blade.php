@@ -336,7 +336,7 @@
 
                                     <td>
                                         {{ !empty($onhand->quantity)
-                                            ? number_format($onhand->quantity / 1000, 2) . ' MT'
+                                            ? number_format($onhand->quantity / 1000, 0) . ' MT'
                                             : '' }}
                                     </td>
 
@@ -366,7 +366,7 @@
                                                     {{ \Carbon\Carbon::parse($cott->date_updated)
                                                         ->addDays((int) $cott->no_of_days)
                                                         ->addDays((int) $onhand->no_of_days)
-                                                        ->format('Y-m-d') }}
+                                                        ->format('m-d-Y') }}
                                                 @endif
 
                                             @elseif($onhand->plants->name == 'CCC - SPI')
@@ -387,14 +387,14 @@
                                                     {{ \Carbon\Carbon::parse($cott->date_updated)
                                                         ->addDays((int) $cott->no_of_days - 1)
                                                         ->addDays((int) $onhand->no_of_days)
-                                                        ->format('Y-m-d') }}
+                                                        ->format('m-d-Y') }}
                                                 @endif
 
                                             @else
 
                                                 {{ \Carbon\Carbon::parse($onhand->date_updated)
                                                     ->addDays((int) $onhand->no_of_days - 1)
-                                                    ->format('Y-m-d') }}
+                                                    ->format('m-d-Y') }}
 
                                             @endif
 
